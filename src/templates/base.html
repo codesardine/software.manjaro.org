@@ -26,14 +26,13 @@
             <li class="nav-item">
                 <a class="nav-link" href="https://wiki.manjaro.org">Wiki</a>
             </li>
-
         </ul>
     </div>
 </header>
 <nav id="sidebar">
     <ul class="list-unstyled components mb-5">
         <form class="form-inline my-4">
-            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
         </form>
         {% for item in nav %}
         <li>
@@ -42,7 +41,6 @@
         </li>
     </ul>
 </nav>
-
 {% block content %}
 {% endblock %}
 </body>
@@ -55,4 +53,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/search.js') }}"></script>
 </html>
