@@ -1,0 +1,16 @@
+#!/usr/bin/env python
+from JAK.Application import JWebApp
+import subprocess
+
+subprocess.Popen("python /usr/share/webapps/manjaro-application-discovery-jak/server.py", shell=True)
+
+def mad():
+    # v2.0.3
+    start = "localhost:5000"
+
+    webapp = JWebApp(title="Manjaro Application Descovery", web_contents=start)
+
+    return webapp
+
+
+mad().run()
