@@ -57,6 +57,6 @@ docs/_build/
 target/
 
 # Testing
-/static/icons
+src/static/icons
 test.py
 .idea/
