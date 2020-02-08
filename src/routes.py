@@ -8,8 +8,8 @@ def get_categories():
            {'title': 'Music & Audio', 'href': 'music_and_audio'},\
            {'title': 'Productivity', 'href': 'productivity'},\
            {'title': 'Communication & News', 'href': 'communication_and_news'},\
-           {'title': 'Games', 'href': 'games'},\
            {'title': 'Education & Science', 'href': 'education_and_science'},\
+           {'title': 'Games', 'href': 'games'},\
            {'title': 'Utilities', 'href': 'utilities'},\
            {'title': 'Development', 'href': 'development'}
 
@@ -20,7 +20,11 @@ def get_appstream_app_list(category):
 
 
 def template(category):
-    return render_template("apps.html", apps=get_appstream_app_list(category), nav=get_categories(), title=category)
+    if category == "Featured":
+        template = "featured.html"
+    else:
+        template = "apps.html"
+    return render_template(template, apps=get_appstream_app_list(category), nav=get_categories(), title=category)
 
 
 @app.route("/")
