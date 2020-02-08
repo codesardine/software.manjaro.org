@@ -14,24 +14,28 @@
 
 <header class="navbar navbar-expand-sm fixed-top">
     <a href="/" class="logo navbar-brand"><img src="/static/images/logo.svg"></a>
-    <h1 class="" href="#">Manjaro Application Discovery</h1>
+    <h1 class="" href="#">Discover Software</h1>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link" href="https://manjaro.org">manjaro.org</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="https://forum.manjaro.org">Forum</a>
+                <a class="nav-link" href="https://forum.manjaro.org">forum</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="https://wiki.manjaro.org">Wiki</a>
+                <a class="nav-link" href="https://wiki.manjaro.org">wiki</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://gitlab.manjaro.org">gitlab</a>
             </li>
         </ul>
     </div>
 </header>
 <nav id="sidebar">
+    <h2>{{ title }}</h2>
     <ul class="list-unstyled components mb-5">
-        <form class="form-inline my-4">
+        <form class="form-inline">
             <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
         </form>
         {% for item in nav %}

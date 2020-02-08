@@ -3,18 +3,34 @@
     position: absolute;
 }
 
+header {
+    height: 38px;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
+}
+
+#search {
+    margin-top: 5px;
+}
+
 .navbar-nav a {
     color: white;
 }
 
 h1 {
-    font-size: 1.2rem !important;
+    font-size: 1rem !important;
     color: white;
+    margin-top: 6px !important;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 10px !important;
+    font-size: 1.1rem !important;
+    color: #ececec;
 }
 
 .logo img {
-    height: 40px;
-    width:40px;
+    width: 20px;
 }
 
 .navbar {
@@ -26,15 +42,21 @@ h1 {
     width: 200px !important;
 }
 
+.form-control:focus {
+    border-color: #ffffff !important;
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25) !important;
+}
+
 img {
     float: left;
     margin-right: 10px;
 }
 
 #sidebar {
+    border-bottom-right-radius: 80%;
     min-width: 240px;
     max-width: 240px;
-    background: #32373d;
+    background: #0d5f4f;
     color: #fff;
     -webkit-transition: all .3s;
     -o-transition: all .3s;
@@ -42,29 +64,33 @@ img {
     position: relative;
     min-height: 100vh;
     position: fixed;
-    top: 56px;
+    top: 38px;
+}
+
+#sidebar ul {
+    margin-left: -5px;
 }
 
 main {
     margin-left: 240px;
-    margin-top: 66px;
+    margin-top: 38px;
 }
 
 #sidebar ul li {
-    font-size: 16px;
-}
-
-#sidebar ul li.active>a {
-    background: 0 0;
-    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 #sidebar ul li a {
     padding: 15px 30px;
     display: block;
-    color: rgba(255, 255, 255, .6);
+    color: #d8d6d6;
     border-bottom: 1px solid rgba(255, 255, 255, .05);
+}
 
+.navbar .nav-link:hover {
+    color: #212529 !important;
+    background: white !important;
 }
 
 .app {
@@ -73,8 +99,13 @@ main {
 
 .app .description {
     font-size: 0.8rem;
+    color: #504f4f;
+}
+
+.app .title {
+    color: #272727;
 }
 
 h3 {
-    font-size: 1.35rem !important;
+    font-size: 1.2rem !important;
 }
