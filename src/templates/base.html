@@ -10,7 +10,7 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     {% endblock %}
 </head>
-<body>
+<body class="{{ title.lower() | replace(' & ', '-') }}">
 
 <header class="navbar navbar-expand-sm fixed-top">
     <a href="/" class="logo navbar-brand"><img src="/static/images/logo.svg"></a>
@@ -19,6 +19,9 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link" href="https://manjaro.org">manjaro.org</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://manjaro.org/download/">downloads</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="https://forum.manjaro.org">forum</a>
