@@ -1,6 +1,8 @@
 from flask import Flask, render_template
 app = Flask(__name__)
 
+import pamac
+get = pamac.Get ()
 
 def get_categories():
     return {'title': 'Featured', 'href': '/'},\
@@ -15,8 +17,7 @@ def get_categories():
 
 
 def get_appstream_app_list(category):
-    import pamac
-    return pamac.Get().category(category)
+    return get.category(category)
 
 
 def template(category):
