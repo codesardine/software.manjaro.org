@@ -11,7 +11,8 @@ def get_categories():
            {'title': 'Education & Science', 'href': 'education_and_science'},\
            {'title': 'Games', 'href': 'games'},\
            {'title': 'Utilities', 'href': 'utilities'},\
-           {'title': 'Development', 'href': 'development'}
+           {'title': 'Development', 'href': 'development'}, \
+           {'title': 'Manjaro', 'href': 'manjaro'}
 
 
 def get_appstream_app_list(category):
@@ -24,7 +25,8 @@ def template(category):
         template = "featured.html"
     else:
         template = "apps.html"
-    return render_template(template, apps=get_appstream_app_list(category), nav=get_categories(), title=category)
+    apps = get_appstream_app_list(category)
+    return render_template(template, apps=apps, nav=get_categories(), title=category, count=len(apps))
 
 
 @app.route("/")
@@ -70,4 +72,8 @@ def utilities():
 @app.route("/development")
 def development():
     return template(get_categories()[8].get("title"))
+
+@app.route("/manjaro")
+def manjaro():
+    return template(get_categories()[9].get("title"))
 
