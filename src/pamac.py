@@ -11,5 +11,8 @@ class Get:
         database.enable_appstream()
         self.database = database
 
-    def category(self, category):
+    def appstream_category(self, category):
         return self.database.get_category_pkgs(category)
+
+    def repo(self, repo):
+        return self.database.get_repo_pkgs(repo)
