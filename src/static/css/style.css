@@ -6,8 +6,8 @@
 body {
     background-image: url("/static/images/tux.svg");
     background-repeat: no-repeat;
-    background-position: bottom -34px left 126px;
-    background-size: 100px;
+    background-position: bottom -28px left 130px;
+    background-size: 75px;
     background-attachment: fixed;
 }
 
