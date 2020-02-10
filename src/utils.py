@@ -1,5 +1,6 @@
 from flask import render_template
 import pamac
+get = pamac.Get()
 
 def get_categories():
     return {'title': 'Featured', 'href': '/'},\
@@ -18,11 +19,11 @@ def get_categories():
 
 
 def get_appstream_app_list(category):
-    return pamac.Get().appstream_category(category)
+    return get.appstream_category(category)
 
 
 def get_repo_pkg_list(repo):
-    return pamac.Get().repo(repo)
+    return get.repo(repo)
 
 
 def appstream_template(category):
@@ -38,5 +39,5 @@ def repository_template(repo):
     return render_template("repository.html", pkgs=get_repo_pkg_list(repo), title=repo)
 
 def manjaro_template(category):
-    apps = pamac.Get().manjaro_category(category)
+    apps = get.manjaro_category(category)
     return render_template("manjaro.html", apps=apps, nav=get_categories(), title=category, count=len(apps))
