@@ -106,9 +106,14 @@ img {
     color: #3e3d3e;
 }
 
-main {
+.featured main {
     margin-left: 240px;
     margin-top: -20px !important;
+}
+
+main {
+    margin-left: 240px;
+    margin-top: 38px;
 }
 
 #sidebar ul li {
