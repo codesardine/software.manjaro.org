@@ -1,3 +1,6 @@
+$(function() {
+  $("form").submit(function() { return false; });
+});
 function debounce( fn, threshold ) {
   var timeout;
   threshold = threshold || 100;
