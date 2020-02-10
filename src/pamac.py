@@ -14,18 +14,21 @@ class Get:
     def appstream_category(self, category):
         return self.database.get_category_pkgs(category)
 
-    def repo(self, repo):
+    def individual_repo_pkgs(self, repo):
         return self.database.get_repo_pkgs(repo)
 
-    def manjaro_category(self, category):
-        if category == "Manjaro":
+    def all_repo_pkgs(self, pkgs_name):
+        if pkgs_name == pkgs_name and isinstance(pkgs_name, str):
             pkgs = []
-            for r in self.database.get_repos_names():
-                print(r)
-                for p in self.database.get_repo_pkgs(r):
-                    if "manjaro" in p.get_packager() and "manjaro" in p.get_url(): # TODO FIX: only apps ?
-                        pkgs.append(p)
+            for repository in self.database.get_repos_names():
+                for package in self.database.get_repo_pkgs(repository):
+                    if pkgs_name == "Packages":
+                        pkgs.append(package)
+                    else:
+                        name = pkgs_name.lower()
+                        if name in package.get_packager() and name in package.get_url(): # TODO FIX: only apps ?
+                            pkgs.append(package)
             pkgs.sort(key=methodcaller("get_name"))
             return pkgs
         else:
-            return self.database.get_category_pkgs(category)
+            return self.database.get_category_pkgs(name)

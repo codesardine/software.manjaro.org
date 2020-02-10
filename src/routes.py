@@ -14,7 +14,11 @@ def community():
 
 #@app.route("/manjaro")
 def manjaro():
-    return utils.manjaro_template(utils.get_categories()[9].get("title"))
+    return utils.pkgs_template(utils.get_categories()[9].get("title"))
+
+@app.route("/packages")
+def packages():
+    return utils.pkgs_template(utils.get_categories()[9].get("title"))
 
 
 # appstream

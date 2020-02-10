@@ -11,7 +11,8 @@ def get_categories():
            {'title': 'Education & Science', 'href': 'education_and_science'},\
            {'title': 'Games', 'href': 'games'},\
            {'title': 'Utilities', 'href': 'utilities'},\
-           {'title': 'Development', 'href': 'development'}#,\
+           {'title': 'Development', 'href': 'development'},\
+           {'title': 'Packages', 'href': 'packages'}
            #{'title': 'Manjaro', 'href': 'manjaro'}
            #{'title': 'Extra', 'href': 'extra'},\
            #{'title': 'Community', 'href': 'communnity'}
@@ -23,7 +24,7 @@ def get_appstream_app_list(category):
 
 
 def get_repo_pkg_list(repo):
-    return get.repo(repo)
+    return get.individual_repo_pkgs(repo)
 
 
 def appstream_template(category):
@@ -38,6 +39,6 @@ def appstream_template(category):
 def repository_template(repo):
     return render_template("repository.html", pkgs=get_repo_pkg_list(repo), title=repo)
 
-def manjaro_template(category):
-    apps = get.manjaro_category(category)
-    return render_template("manjaro.html", apps=apps, nav=get_categories(), title=category, count=len(apps))
+def pkgs_template(pkgs_name):
+    apps = get.all_repo_pkgs(pkgs_name)
+    return render_template("manjaro.html", apps=apps, nav=get_categories(), title=pkgs_name, count=len(apps))
