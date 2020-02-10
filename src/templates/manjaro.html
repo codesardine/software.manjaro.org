@@ -16,7 +16,7 @@
                 {% set ico = "/static/images/logo.svg"  %}
             {% endif %}
             <img src="{{ ico | replace('/usr/share/app-info', '/static') }}" class="img64" alt="Responsive image">
-            <h3 class="name">{{ name }}</h3>
+            <h4 class="name">{{ name }}</h4>
             <p class="description">{{ app.get_desc() }} - <a href="{{ app.get_url() }}" target="_blank" class="website">website</a></p>
             <!--<a href="{{ app.get_url() }}" class="website">Website</a>-->
         </div>

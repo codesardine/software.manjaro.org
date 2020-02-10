@@ -4,17 +4,74 @@
 {% endblock %}
 {% block content %}
 <main class="p-4 p-md-5 pt-5">
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col">
+                <h3 class="display-4">Pamac</h3>
+                <p class="lead">All in one, Software-Center and package-management tool. Supports Operating System native packages, Snaps
+                    and Flatpaks.</p>
+                <hr class="my-4">
+                <p>Multiple interfaces for your favorit Desktop, a CLI for shell lovers and built in support for AUR
+                    packages, Included by default on any flavour.
+                </p>
+                <hr class="my-4">
+                    <p>Software discovery is still under construction, there is applications still missing in this list.</p>
+            </div>
+            <div class="col text-center"><img class="rounded" src="static/images/pamac.jpg"></div>
+        </div>
+
+    </div>
     <div class="row">
         {% for app in apps %}
         <div class="col-xl-3 col-md-6 col-sm-12 app">
-            <img src="{{ app.get_icon() | replace('/usr/share/app-info', '/static') }}" class="img64" alt="Responsive image">
-            <h3 class="name">{{ app.get_app_name() }}</h3>
+            <img src="{{ app.get_icon() | replace('/usr/share/app-info', '/static') }}" class="img64"
+                alt="Responsive image">
+            <h4 class="name">{{ app.get_app_name() }}</h4>
             <p class="description">{{ app.get_desc() }}</p>
             <!--<a href="{{ app.get_url() }}" class="upstream">Website</a>-->
         </div>
+        {%if loop.index == 4 %}
+        <div class="jumbotron col-12">
+            <div class="row">
+                <div class="col">
+                    <h3 class="display-4">Multiple office software</h3>
+                    <p class="lead">Struggling with your Office suite? we are packed with Office choices, you will
+                        definitely find something thats suits you.</p>
+                    <hr class="my-4">
+                    <p>From the best Open Source software has to offer and also some proprietary choices.</p>
+                </div>
+                <div class="col text-center"><img class="rounded" src="static/images/office.jpg"></div>
+            </div>
+        </div>
+        {% endif %}
+        {%if loop.index == 8 %}
+        <div class="jumbotron col-12">
+            <div class="row">
+                <div class="col">
+                    <h3 class="display-4">Layout Switcher</h3>
+                    <p class="lead">If you love Gnome, now you can change your layout in one click.</p>
+                    <hr class="my-4">
+                    <p>This is still being worked on, so you may still find some bugs, use at your own risk, and please
+                        report them.</p>
+                </div>
+                <div class="col text-center"><img class="rounded" src="static/images/layout.jpg"></div>
+            </div>
+        </div>
+        {% endif %}
+        {%if loop.index == 12 %}
+        <div class="jumbotron col-12">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="display-4">Manjaro Settings Manager</h3>
+                        <p class="lead">No more messing around with config files, manage your configurations with ease.</p>
+                        <hr class="my-4">
+                        <p>Besides doing all the basics, you can also change your Kernel or Graphic drivers between proprietary and Open Source, It also integrates with your desktop of choice.</p>
+                    </div>
+                    <div class="col text-center"><img class="rounded" src="static/images/msn.jpg"></div>
+                </div>
+            </div>
+
+        {% endif %}
         {% endfor %}
-    </div>
 </main>
 {% endblock %}
-
-      
