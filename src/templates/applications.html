@@ -15,7 +15,7 @@
             {%if not ico %}
                 {% set ico = "/static/images/logo.svg"  %}
             {% endif %}
-            <img src="{{ ico | replace('/usr/share/app-info', '/static') }}" class="img64" alt="Responsive image">
+            <img data-src="{{ ico | replace('/usr/share/app-info', '/static') }}" class="img64 lazyload" alt="{{ app }} image" loading="lazy">
             <h4 class="name">{{ name }}</h4>
             <p class="description">{{ app.get_desc() }} - <a href="{{ app.get_url() }}" target="_blank" class="website">website</a></p>
             <!--<a href="{{ app.get_url() }}" class="website">Website</a>-->

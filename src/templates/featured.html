@@ -17,15 +17,14 @@
                 <hr class="my-4">
                     <p>Software discovery is still under construction, there are applications still missing in this list.</p>
             </div>
-            <div class="col text-center"><img class="rounded" src="static/images/pamac.jpg"></div>
+            <div class="col text-center"><img class="rounded" src="static/images/pamac.jpg" alt="Pamac image" loading="lazy"></div>
         </div>
 
     </div>
     <div class="row">
         {% for app in apps %}
         <div class="col-xl-3 col-md-6 col-sm-12 app">
-            <img src="{{ app.get_icon() | replace('/usr/share/app-info', '/static') }}" class="img64"
-                alt="Responsive image">
+            <img data-src="{{ app.get_icon() | replace('/usr/share/app-info', '/static') }}" class="img64 lazyload" alt="{{ app }} image" loading="lazy">
             <h4 class="name">{{ app.get_app_name() }}</h4>
             <p class="description">{{ app.get_desc() }}</p>
             <!--<a href="{{ app.get_url() }}" class="upstream">Website</a>-->
@@ -40,7 +39,7 @@
                     <hr class="my-4">
                     <p>From the best Open Source software has to offer and also some proprietary choices.</p>
                 </div>
-                <div class="col text-center"><img class="rounded" src="static/images/office.jpg"></div>
+                <div class="col text-center"><img class="rounded lazyload" data-src="static/images/office.jpg" alt="Office image" loading="lazy"></div>
             </div>
         </div>
         {% endif %}
@@ -54,7 +53,7 @@
                     <p>This is still being worked on, so you may still find some bugs, use at your own risk, and please
                         report them.</p>
                 </div>
-                <div class="col text-center"><img class="rounded" src="static/images/layout.jpg"></div>
+                <div class="col text-center"><img class="rounded lazyload" data-src="static/images/layout.jpg" alt="Layout image" loading="lazy"></div>
             </div>
         </div>
         {% endif %}
@@ -67,7 +66,7 @@
                         <hr class="my-4">
                         <p>Besides doing all the basics, you can also change your Kernel or Graphic drivers between proprietary and Open Source, It also integrates with your desktop of choice.</p>
                     </div>
-                    <div class="col text-center"><img class="rounded" src="static/images/msn.jpg"></div>
+                    <div class="col text-center"><img class="rounded lazyload" data-src="static/images/msn.jpg" alt="MSN image" loading="lazy"></div>
                 </div>
             </div>
 
