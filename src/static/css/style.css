@@ -111,6 +111,10 @@ img {
     margin-top: -20px !important;
 }
 
+.featured #search {
+    visibility: hidden;
+}
+
 main {
     margin-left: 240px;
     margin-top: 38px;
