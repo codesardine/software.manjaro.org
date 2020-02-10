@@ -6,7 +6,7 @@ $(function () {
 
 function debounce(fn, threshold) {
   var timeout;
-  threshold = threshold || 500;
+  threshold = threshold || 1400;
   return function debounced() {
     clearTimeout(timeout);
     var args = arguments;
@@ -36,4 +36,4 @@ $('#search').keyup(debounce(function () {
   //app.hide();
   let searchValue = $('#search').val().toLocaleLowerCase()
   matchApp('.app', searchValue)
-}, 600));
+}, 2000));

@@ -7,12 +7,20 @@
     <div class="row">
         {% for app in apps %}
         <div class="col-xl-3 col-md-6 col-sm-12 app">
-            <img src="{{ app.get_icon() | replace('/usr/share/app-info', '/static') }}" class="img64" alt="Responsive image">
-            <h4 class="name">{{ app.get_app_name() }}</h4>
-            <p class="description">{{ app.get_desc() }}<a href="{{ app.get_url() }}" target="_blank" class="website">/website</a></p>
+            {% set name=app.get_app_name() %}
+            {%if not name %}
+                {% set name = app.get_name()  %}
+            {% endif %}
+            {% set ico=app.get_icon() %}
+            {%if not ico %}
+                {% set ico = "/static/images/logo.svg"  %}
+            {% endif %}
+            <img src="{{ ico | replace('/usr/share/app-info', '/static') }}" class="img64" alt="Responsive image">
+            <h4 class="name">{{ name }}</h4>
+            <p class="description">{{ app.get_desc() }} - <a href="{{ app.get_url() }}" target="_blank" class="website">website</a></p>
             <!--<a href="{{ app.get_url() }}" class="website">Website</a>-->
         </div>
         {% endfor %}
     </div>
 </main>
-{% endblock %}      
+{% endblock %}

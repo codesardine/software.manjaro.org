@@ -4,15 +4,17 @@ get = pamac.Get()
 
 def get_categories():
     return {'title': 'Featured', 'href': '/'},\
-           {'title': 'Photo & Video', 'href': 'photo_and_video'},\
-           {'title': 'Music & Audio', 'href': 'music_and_audio'},\
-           {'title': 'Productivity', 'href': 'productivity'},\
-           {'title': 'Communication & News', 'href': 'communication_and_news'},\
-           {'title': 'Education & Science', 'href': 'education_and_science'},\
-           {'title': 'Games', 'href': 'games'},\
-           {'title': 'Utilities', 'href': 'utilities'},\
-           {'title': 'Development', 'href': 'development'},\
-           {'title': 'Packages', 'href': 'packages'}
+           {'title': 'Applications', 'href': 'applications'},\
+           {'title': 'Packages', 'href': 'packages'} 
+
+           #{'title': 'Photo & Video', 'href': 'photo_and_video'},\
+           #{'title': 'Music & Audio', 'href': 'music_and_audio'},\
+           #{'title': 'Productivity', 'href': 'productivity'},\
+           #{'title': 'Communication & News', 'href': 'communication_and_news'},\
+           #{'title': 'Education & Science', 'href': 'education_and_science'},\
+           #{'title': 'Games', 'href': 'games'},\
+           #{'title': 'Utilities', 'href': 'utilities'},\
+           #{'title': 'Development', 'href': 'development'},\                     
            #{'title': 'Manjaro', 'href': 'manjaro'}
            #{'title': 'Extra', 'href': 'extra'},\
            #{'title': 'Community', 'href': 'communnity'}
@@ -31,7 +33,7 @@ def appstream_template(category):
     if category == "Featured":
         template = "featured.html"
     else:
-        template = "applications.html"
+        template = "appstream.html"
     apps = get_appstream_app_list(category)
     return render_template(template, apps=apps, nav=get_categories(), title=category)
 
@@ -40,5 +42,9 @@ def repository_template(repo):
     return render_template("repository.html", pkgs=get_repo_pkg_list(repo), title=repo)
 
 def pkgs_template(pkgs_name):
+    if pkgs_name == "Applications":
+        template = "applications.html"
+    else:
+        template = "packages.html"
     apps = get.all_repo_pkgs(pkgs_name)
-    return render_template("manjaro.html", apps=apps, nav=get_categories(), title=pkgs_name, count=len(apps))
+    return render_template(template, apps=apps, nav=get_categories(), title=pkgs_name, count=len(apps))

@@ -18,50 +18,55 @@ def manjaro():
 
 @app.route("/packages")
 def packages():
-    return utils.pkgs_template(utils.get_categories()[9].get("title"))
+    return utils.pkgs_template(utils.get_categories()[2].get("title"))
 
 
-# appstream
+@app.route("/applications")
+def applications():
+    return utils.pkgs_template(utils.get_categories()[1].get("title"))
+
+
+#appstream
 @app.route("/")
 def featured():
     return utils.appstream_template(utils.get_categories()[0].get("title"))
 
 
-@app.route("/photo_and_video")
+#@app.route("/photo_and_video")
 def photo_and_video():
     return utils.appstream_template(utils.get_categories()[1].get("title"))
 
 
-@app.route("/music_and_audio")
+#@app.route("/music_and_audio")
 def music_and_audio():
     return utils.appstream_template(utils.get_categories()[2].get("title"))
 
 
-@app.route("/productivity")
+#@app.route("/productivity")
 def productivity():
     return utils.appstream_template(utils.get_categories()[3].get("title"))
 
 
-@app.route("/communication_and_news")
+#@app.route("/communication_and_news")
 def communication_and_news():
     return utils.appstream_template(utils.get_categories()[4].get("title"))
 
 
-@app.route("/education_and_science")
+#@app.route("/education_and_science")
 def education_and_science():
     return utils.appstream_template(utils.get_categories()[5].get("title"))
 
 
-@app.route("/games")
+#@app.route("/games")
 def games():
     return utils.appstream_template(utils.get_categories()[6].get("title"))
 
 
-@app.route("/utilities")
+#@app.route("/utilities")
 def utilities():
     return utils.appstream_template(utils.get_categories()[7].get("title"))
 
 
-@app.route("/development")
+#@app.route("/development")
 def development():
     return utils.appstream_template(utils.get_categories()[8].get("title"))

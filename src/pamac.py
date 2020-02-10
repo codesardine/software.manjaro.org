@@ -22,7 +22,10 @@ class Get:
             pkgs = []
             for repository in self.database.get_repos_names():
                 for package in self.database.get_repo_pkgs(repository):
-                    if pkgs_name == "Packages":
+                    icon = package.get_icon()
+                    if not icon and pkgs_name == "Packages":
+                        pkgs.append(package)
+                    elif icon and pkgs_name == "Applications":
                         pkgs.append(package)
                     else:
                         name = pkgs_name.lower()
