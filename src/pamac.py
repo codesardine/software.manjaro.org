@@ -2,6 +2,7 @@ import gi
 gi.require_version('Pamac', '9.0')
 from gi.repository import Pamac
 from operator import methodcaller
+from functools import lru_cache as cache
 
 
 class Get:
@@ -11,13 +12,16 @@ class Get:
         database = Pamac.Database(config=self.config)
         database.enable_appstream()
         self.database = database
-
+    
+    @cache(maxsize=128)
     def appstream_category(self, category):
         return self.database.get_category_pkgs(category)
 
+    @cache(maxsize=128)
     def individual_repo_pkgs(self, repo):
         return self.database.get_repo_pkgs(repo)
 
+    @cache(maxsize=128)
     def all_repo_pkgs(self, pkgs_name):
         if pkgs_name == pkgs_name and isinstance(pkgs_name, str):
             pkgs = []
