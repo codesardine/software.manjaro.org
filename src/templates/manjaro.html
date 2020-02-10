@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ title }}
+{% endblock %}
+{% block content %}
+<main class="p-4 p-md-5 pt-5">
+    <div class="row">
+        {% for app in apps %}
+        <div class="col-xl-3 col-md-6 col-sm-12 app">
+            {% set name=app.get_app_name() %}
+            {%if not name %}
+                {% set name = app.get_name()  %}
+            {% endif %}
+            {% set ico=app.get_icon() %}
+            {%if not ico %}
+                {% set ico = "/static/images/logo.svg"  %}
+            {% endif %}
+            <img src="{{ ico | replace('/usr/share/app-info', '/static') }}" class="img64" alt="Responsive image">
+            <h3 class="name">{{ name }}</h3>
+            <p class="description">{{ app.get_desc() }} - <a href="{{ app.get_url() }}" target="_blank" class="website">website</a></p>
+            <!--<a href="{{ app.get_url() }}" class="website">Website</a>-->
+        </div>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

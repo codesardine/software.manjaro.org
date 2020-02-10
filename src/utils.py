@@ -11,8 +11,10 @@ def get_categories():
            {'title': 'Games', 'href': 'games'},\
            {'title': 'Utilities', 'href': 'utilities'},\
            {'title': 'Development', 'href': 'development'}#,\
+           #{'title': 'Manjaro', 'href': 'manjaro'}
            #{'title': 'Extra', 'href': 'extra'},\
            #{'title': 'Community', 'href': 'communnity'}
+           
 
 
 def get_appstream_app_list(category):
@@ -28,8 +30,13 @@ def appstream_template(category):
         template = "featured.html"
     else:
         template = "applications.html"
-    return render_template(template, apps=get_appstream_app_list(category), nav=get_categories(), title=category)
+    apps = get_appstream_app_list(category)
+    return render_template(template, apps=apps, nav=get_categories(), title=category)
 
 
 def repository_template(repo):
     return render_template("repository.html", pkgs=get_repo_pkg_list(repo), title=repo)
+
+def manjaro_template(category):
+    apps = pamac.Get().manjaro_category(category)
+    return render_template("manjaro.html", apps=apps, nav=get_categories(), title=category, count=len(apps))

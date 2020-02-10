@@ -5,12 +5,16 @@ app = Flask(__name__)
 # Repositorys
 #@app.route("/extra")
 def extra():
-    return utils.repository_template(utils.get_categories()[9].get("title"))
+    return utils.repository_template(utils.get_categories()[10].get("title"))
 
 
 #@app.route("/community")
 def community():
-    return utils.repository_template(utils.get_categories()[9].get("title"))
+    return utils.repository_template(utils.get_categories()[11].get("title"))
+
+#@app.route("/manjaro")
+def manjaro():
+    return utils.manjaro_template(utils.get_categories()[9].get("title"))
 
 
 # appstream
@@ -57,4 +61,3 @@ def utilities():
 @app.route("/development")
 def development():
     return utils.appstream_template(utils.get_categories()[8].get("title"))
-
