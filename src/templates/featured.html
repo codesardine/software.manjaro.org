@@ -17,14 +17,14 @@
                 <hr class="my-4">
                     <p>Software discovery is still under construction, there are applications still missing in this list.</p>
             </div>
-            <div class="col text-center"><img class="rounded" src="static/images/pamac.jpg" alt="Pamac image" loading="lazy"></div>
+            <div class="col text-center"><img class="rounded" src="static/images/pamac.jpg" alt="Pamac image"></div>
         </div>
 
     </div>
     <div class="row">
         {% for app in apps %}
         <div class="col-xl-3 col-md-6 col-sm-12 app">
-            <img data-src="{{ app.get_icon() | replace('/usr/share/app-info', '/static') }}" class="img64 lazyload" alt="{{ app }} image" loading="lazy">
+            <img data-src="{{ app.get_icon() | replace('/usr/share/app-info', '/static') }}" class="img64 lazyload" alt="application image" loading="lazy">
             <h4 class="name">{{ app.get_app_name() }}</h4>
             <p class="description">{{ app.get_desc() }}</p>
             <!--<a href="{{ app.get_url() }}" class="upstream">Website</a>-->

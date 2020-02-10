@@ -3,6 +3,7 @@ gi.require_version('Pamac', '9.0')
 from gi.repository import Pamac
 from operator import methodcaller
 
+
 class Get:
 
     def __init__(self):
