@@ -35,9 +35,11 @@ header img {
 
 h1,
 h2 {
-    font-size: 1rem !important;
+    font-size: 0.9rem !important;
     color: white;
+    color: rgba(255, 255, 255, 0.9);
     margin-top: 6px !important;
+    font-weight: bold !important;
 }
 
 h1 span,
@@ -54,7 +56,7 @@ h3 {
 }
 
 .navbar {
-    background-color: #32373d;
+    background-color: #212121;
 }
 
 .form-control {
@@ -76,7 +78,7 @@ img {
     border-radius: 5px;
     min-width: 200px;
     max-width: 200px;
-    background: #292929;
+    background: #263238;
     color: #fff;
     -webkit-transition: all .3s;
     -o-transition: all .3s;
