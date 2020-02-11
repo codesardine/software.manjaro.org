@@ -9,20 +9,25 @@
         <div class="col-xl-3 col-md-6 col-sm-12 app">
             {% set name=app.get_app_name() %}
             {%if not name %}
-                {% set name = app.get_name()  %}
+            {% set name = app.get_name()  %}
             {% endif %}
             {% set ico=app.get_icon() %}
             {%if not ico %}
-                {% set ico = "/static/images/logo.svg"  %}
+            {% set ico = "/static/images/logo.svg"  %}
             {% endif %}
             {%if loop.index <= 25 %}
-            <img src="{{ ico | replace('/usr/share/app-info', '/static') }}" class="img64" alt="application image" loading="lazy">
+            <img src="{{ ico | replace('/usr/share/app-info', '/static') }}" class="img64" alt="application image"
+                loading="lazy">
             {% endif %}
             {%if loop.index > 25 %}
-            <img data-src="{{ ico | replace('/usr/share/app-info', '/static') }}" class="img64 lazyload" alt="application image" loading="lazy">
+            <img data-src="{{ ico | replace('/usr/share/app-info', '/static') }}" class="img64 lazyload"
+                alt="application image" loading="lazy">
             {% endif %}
-            <h4 class="name">{{ name }}</h4>
-            <p class="description">{{ app.get_desc() }} - <a href="{{ app.get_url() }}" target="_blank" class="website">website</a></p>
+            <div class="content">
+                <h4 class="name">{{ name }}</h4>
+                <p class="description">{{ app.get_desc() }} - <a href="{{ app.get_url() }}" target="_blank"
+                        class="website">website</a></p>
+            </div>
             <!--<a href="{{ app.get_url() }}" class="website">Website</a>-->
         </div>
         {% endfor %}

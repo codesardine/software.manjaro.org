@@ -8,7 +8,8 @@
         <div class="row">
             <div class="col">
                 <h3 class="display-4">Pamac</h3>
-                <p class="lead">All in one, Software-Center and package-management tool. Supports Operating System native packages, Snaps
+                <p class="lead">All in one, Software-Center and package-management tool. Supports Operating System
+                    native packages, Snaps
                     and Flatpaks.</p>
                 <hr class="my-4">
                 <p>Multiple interfaces for your favorit Desktop, a CLI for shell lovers and built in support for AUR
@@ -22,9 +23,12 @@
     <div class="row">
         {% for app in apps %}
         <div class="col-xl-3 col-md-6 col-sm-12 app">
-            <img data-src="{{ app.get_icon() | replace('/usr/share/app-info', '/static') }}" class="img64 lazyload" alt="application image" loading="lazy">
-            <h4 class="name">{{ app.get_app_name() }}</h4>
-            <p class="description">{{ app.get_desc() }}</p>
+            <img data-src="{{ app.get_icon() | replace('/usr/share/app-info', '/static') }}" class="img64 lazyload"
+                alt="application image" loading="lazy">
+            <div class="content">
+                <h4 class="name">{{ app.get_app_name() }}</h4>
+                <p class="description">{{ app.get_desc() }}</p>
+            </div>
             <!--<a href="{{ app.get_url() }}" class="upstream">Website</a>-->
         </div>
         {%if loop.index == 4 %}
@@ -37,7 +41,8 @@
                     <hr class="my-4">
                     <p>From the best Open Source software has to offer and also some proprietary choices.</p>
                 </div>
-                <div class="col text-center"><img class="rounded lazyload" data-src="static/images/office.jpg" alt="Office image" loading="lazy"></div>
+                <div class="col text-center"><img class="rounded lazyload" data-src="static/images/office.jpg"
+                        alt="Office image" loading="lazy"></div>
             </div>
         </div>
         {% endif %}
@@ -51,22 +56,25 @@
                     <p>This is still being worked on, so you may still find some bugs, use at your own risk, and please
                         report them.</p>
                 </div>
-                <div class="col text-center"><img class="rounded lazyload" data-src="static/images/layout.jpg" alt="Layout image" loading="lazy"></div>
+                <div class="col text-center"><img class="rounded lazyload" data-src="static/images/layout.jpg"
+                        alt="Layout image" loading="lazy"></div>
             </div>
         </div>
         {% endif %}
         {%if loop.index == 12 %}
         <div class="jumbotron col-12">
-                <div class="row">
-                    <div class="col">
-                        <h3 class="display-4">Manjaro Settings Manager</h3>
-                        <p class="lead">No more messing around with config files, manage your configurations with ease.</p>
-                        <hr class="my-4">
-                        <p>Besides doing all the basics, you can also change your Kernel or Graphic drivers between proprietary and Open Source, It also integrates with your desktop of choice.</p>
-                    </div>
-                    <div class="col text-center"><img class="rounded lazyload" data-src="static/images/msn.jpg" alt="MSN image" loading="lazy"></div>
+            <div class="row">
+                <div class="col">
+                    <h3 class="display-4">Manjaro Settings Manager</h3>
+                    <p class="lead">No more messing around with config files, manage your configurations with ease.</p>
+                    <hr class="my-4">
+                    <p>Besides doing all the basics, you can also change your Kernel or Graphic drivers between
+                        proprietary and Open Source, It also integrates with your desktop of choice.</p>
                 </div>
+                <div class="col text-center"><img class="rounded lazyload" data-src="static/images/msn.jpg"
+                        alt="MSN image" loading="lazy"></div>
             </div>
+        </div>
 
         {% endif %}
         {% endfor %}

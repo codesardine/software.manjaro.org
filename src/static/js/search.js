@@ -6,7 +6,7 @@ $(function () {
 
 function debounce(fn, threshold) {
   var timeout;
-  threshold = threshold || 1400;
+  threshold = threshold || 600;
   return function debounced() {
     clearTimeout(timeout);
     var args = arguments;
@@ -19,13 +19,15 @@ function debounce(fn, threshold) {
   };
 }
 
-function matchApp(elem, searchValue) {
+function matchApp(app, searchValue) {
   if (searchValue == "") {
-    $(".app").show()
+    $(app).each(function () {
+      $(this).show()
+    })
   } else {
-    $(elem).hide()
-    $(elem).each(function () {
-      if ($(this).text().toLocaleLowerCase().includes(searchValue)) {
+    $(app).hide()
+    $(app).each(function () {
+      if ($(this).find(".content").text().toLocaleLowerCase().includes(searchValue)) {
         $(this).show()
       }
     })
@@ -35,5 +37,9 @@ function matchApp(elem, searchValue) {
 $('#search').keyup(debounce(function () {
   //app.hide();
   let searchValue = $('#search').val().toLocaleLowerCase()
-  matchApp('.app', searchValue)
-}, 2000));
+  matchApp(app, searchValue)
+}, 1200));
+
+$( document ).ready(function() {
+  app = $("main div .app");
+});
