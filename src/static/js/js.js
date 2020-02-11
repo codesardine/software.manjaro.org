@@ -32,7 +32,8 @@ function matchApp(app, searchValue) {
     $(app).hide()
     $(app).each(function () {
       if ($(this).find(".content").text().toLocaleLowerCase().includes(searchValue)) {
-        $(this).attr('src', $(this).attr('data-src'));
+        let image = $(this).find("img").attr('data-src')
+        $(this).find("img").attr('src', image);
         $(this).show()
       }
     })
