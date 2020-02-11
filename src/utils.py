@@ -47,4 +47,4 @@ def pkgs_template(pkgs_name):
     else:
         template = "packages.html"
     apps = get.all_repo_pkgs(pkgs_name)
-    return render_template(template, apps=apps, nav=get_categories(), title=pkgs_name, count=len(apps))
+    return render_template(template, apps=apps, nav=get_categories(), title=pkgs_name, total=len(apps))
