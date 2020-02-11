@@ -13,7 +13,7 @@
             {% endif %}
             {% set ico=app.get_icon() %}
             {%if not ico %}
-            {% set ico = "/static/images/logo.svg"  %}
+            {% set ico = "/static/images/system-software-install.svg"  %}
             {% endif %}
             <img src="{{ ico | replace('/usr/share/app-info', '/static') }}" class="img64" alt="package image">
             <div class="content">

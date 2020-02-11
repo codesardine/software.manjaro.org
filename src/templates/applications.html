@@ -15,12 +15,12 @@
             {%if not ico %}
             {% set ico = "/static/images/logo.svg"  %}
             {% endif %}
-            {%if loop.index <= 25 %}
+            {%if loop.index <= 20 %}
             <img src="{{ ico | replace('/usr/share/app-info', '/static') }}" class="img64" alt="application image"
                 loading="lazy">
             {% endif %}
-            {%if loop.index > 25 %}
-            <img data-src="{{ ico | replace('/usr/share/app-info', '/static') }}" class="img64 lazyload"
+            {%if loop.index > 20 %}
+            <img src="static/images/logo.svg" data-src="{{ ico | replace('/usr/share/app-info', '/static') }}" class="img64 lazyload"
                 alt="application image" loading="lazy">
             {% endif %}
             <div class="content">
