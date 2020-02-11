@@ -11,10 +11,7 @@
             {%if not name %}
             {% set name = app.get_name()  %}
             {% endif %}
-            {% set ico=app.get_icon() %}
-            {%if not ico %}
             {% set ico = "/static/images/system-software-install.svg"  %}
-            {% endif %}
             <img src="{{ ico | replace('/usr/share/app-info', '/static') }}" class="img64" alt="package image">
             <div class="content">
                 <h4 class="name">{{ name }}</h4>

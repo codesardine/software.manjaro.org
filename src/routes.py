@@ -26,6 +26,11 @@ def applications():
     return utils.pkgs_template(utils.get_categories()[1].get("title"))
 
 
+@app.route("/snaps")
+def snaps():
+    return utils.snaps_template(utils.get_categories()[3].get("title"))
+
+
 #appstream
 @app.route("/")
 def featured():

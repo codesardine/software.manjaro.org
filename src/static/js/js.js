@@ -32,6 +32,7 @@ function matchApp(app, searchValue) {
     $(app).hide()
     $(app).each(function () {
       if ($(this).find(".content").text().toLocaleLowerCase().includes(searchValue)) {
+        $(this).attr('src', $(this).attr('data-src'));
         $(this).show()
       }
     })
@@ -39,7 +40,6 @@ function matchApp(app, searchValue) {
 }
 
 $('#search').keyup(debounce(function () {
-  //app.hide();
   let searchValue = $('#search').val().toLocaleLowerCase()
   matchApp(app, searchValue)
 }, 1200));
