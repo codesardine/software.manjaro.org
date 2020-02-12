@@ -102,20 +102,89 @@ img {
     font-weight: bold;
 }
 
-#sidebar ul li a:hover {
-    color: #e91e63 !important;
-}
-
 #sidebar ul li a {
     padding: 15px 30px;
     display: block;
     color: #d8d6d6;
     border-bottom: 1px solid rgba(255, 255, 255, .05);
     text-shadow: 0px 1px 1px black;
+    margin-left: 15px !important;    
 }
 
-#sidebar ul li:nth-child(5) a {
+#sidebar ul li:nth-child(5) {
     border-bottom: 1px solid #d8d6d6;
+}
+
+#sidebar ul li a:before {
+    content: "";
+    width: 32px;
+    display: inline-block;
+    height: 22px;
+    background-size: 22px !important;
+    background-repeat: no-repeat !important;
+    position: absolute;
+    margin-left: -38px;
+}
+
+#sidebar ul li:nth-child(5) a:before {
+    background: url("/static/images/snapcraft.svg");
+}
+
+#sidebar ul li:nth-child(4) a:before {
+    background: url("/static/images/package.svg");
+}
+
+#sidebar ul li:nth-child(3) a:before {
+    background: url("/static/images/applications.svg");
+}
+
+#sidebar ul li:nth-child(2) a:before {
+    background: url("/static/images/featured.svg");
+}
+
+#sidebar ul li:nth-child(2) {
+    margin-top: 10px;
+}
+
+#sidebar ul li:nth-child(6) a:before, #sidebar ul li:nth-child(7) a:before,
+#sidebar ul li:nth-child(8) a:before, #sidebar ul li:nth-child(9) a:before,
+#sidebar ul li:nth-child(10) a:before {
+    border-radius: 100%;
+    background-color: #d72263;
+    width: 6px;
+    height: 6px;
+    margin-top:8px; 
+    margin-left: -27px;
+}
+
+#sidebar ul li:hover {
+    background-color: #eeeeee;
+}
+
+#sidebar ul li a:hover {
+    color: #3e464e;
+    text-shadow: none !important;
+    text-decoration: none;
+}
+
+#sidebar ul li:nth-child(6) a:before {
+    background-color: #4db6ac;
+}
+
+#sidebar ul li:nth-child(7) a:before {
+    background-color: #ff8a65;
+}
+
+#sidebar ul li:nth-child(9) a:before {
+    background-color: #64b5f6;
+}
+
+#sidebar ul li:nth-child(8) a:before {
+    background-color: #ffee58;
+}
+
+#sidebar ul li:nth-child(10) a:before {
+    background-color: #ef5350;
 }
 
 .featured .jumbotron:first-child {
@@ -165,7 +234,15 @@ img {
 }
 
 .featured #search {
-    visibility: hidden;
+    display: none;
+}
+
+.featured #sidebar ul li:nth-child(2) {
+    margin-top: 0;
+}
+
+.featured #sidebar ul {
+    padding-top: 0;
 }
 
 main {

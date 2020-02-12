@@ -10,7 +10,7 @@
         {% for app in cat %}
         {% set icon=app.get_icon() %}
             {%if not icon %}
-            {% set icon = "/static/images/Snapcraft-logo-bird.png"  %}
+            {% set icon = "/static/images/snapcraft.svg"  %}
             {% endif %}
         <div class="col-xl-3 col-md-6 col-sm-12 app">
             {%if loop.index <= 30 %}
@@ -18,7 +18,7 @@
                 loading="lazy">
             {% endif %}
             {%if loop.index > 30 %}
-            <img src="/static/images/Snapcraft-logo-bird.png" data-src="{{ icon }}" class="img64 lazyload"
+            <img src="/static/images/snapcraft.svg" data-src="{{ icon }}" class="img64 lazyload"
                 alt="application image" loading="lazy">
             {% endif %}
             <div class="content">
