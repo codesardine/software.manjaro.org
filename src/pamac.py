@@ -43,8 +43,8 @@ class Get:
 
     @cache(maxsize=128)
     def all_snaps(self):
-        snap_categories = "Development", "Games", "Social", "Productivity", "Utilities", "Photo and Video",\
-            "Server and Cloud", "Security", "Devices and IoT", "Music and Audio", "Entertainment",\
-            "Art and Design", "Finance", "News and Weather", "Science", "Health and Fitness", \
-            "Education", "Personalisation", "Books and Reference"
+        snap_categories = "Development", "Games", "Social", "Productivity", "Utilities", "Photo & Video",\
+            "Server & Cloud", "Security", "Devices & IoT", "Music & Audio", "Entertainment",\
+            "Art & Design", "Finance", "News & Weather", "Science", "Health & Fitness", \
+            "Education", "Personalisation", "Books & Reference"
         return snap_categories, self.database
