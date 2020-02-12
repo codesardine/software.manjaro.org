@@ -2,7 +2,23 @@ from flask import Flask
 import pamac
 import utils
 app = Flask(__name__)
+
 # Repositorys
+@app.route("/applications")
+def applications():
+    return utils.pkgs_template(utils.get_categories()[1].get("title"))
+    
+
+@app.route("/packages")
+def packages():
+    return utils.pkgs_template(utils.get_categories()[2].get("title"))
+
+
+@app.route("/snaps")
+def snaps():
+    return utils.snaps_template(utils.get_categories()[3].get("title"))
+
+
 #@app.route("/extra")
 def extra():
     return utils.repository_template(utils.get_categories()[10].get("title"))
@@ -16,22 +32,8 @@ def community():
 def manjaro():
     return utils.pkgs_template(utils.get_categories()[9].get("title"))
 
-@app.route("/packages")
-def packages():
-    return utils.pkgs_template(utils.get_categories()[2].get("title"))
 
-
-@app.route("/applications")
-def applications():
-    return utils.pkgs_template(utils.get_categories()[1].get("title"))
-
-
-@app.route("/snaps")
-def snaps():
-    return utils.snaps_template(utils.get_categories()[3].get("title"))
-
-
-#appstream
+#APPSTREAM
 @app.route("/")
 def featured():
     return utils.appstream_template(utils.get_categories()[0].get("title"))

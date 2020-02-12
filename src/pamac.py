@@ -1,8 +1,8 @@
 from functools import lru_cache as cache
 from operator import methodcaller
-from gi.repository import Pamac
 import gi
 gi.require_version('Pamac', '9.0')
+from gi.repository import Pamac
 
 
 class Get:
@@ -43,8 +43,6 @@ class Get:
 
     @cache(maxsize=128)
     def all_snaps(self):
-        snap_categories = "Development", "Games", "Social", "Productivity", "Utilities", "Photo & Video",\
-            "Server & Cloud", "Security", "Devices & IoT", "Music & Audio", "Entertainment",\
-            "Art & Design", "Finance", "News & Weather", "Science", "Health & Fitness", \
-            "Education", "Personalisation", "Books & Reference"
+        # FIXME some unknown categories are missing
+        snap_categories = self.database.get_categories_names ()
         return snap_categories, self.database
