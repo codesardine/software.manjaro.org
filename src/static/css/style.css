@@ -225,7 +225,7 @@ img {
     float: none;
 }
 
-.featured .jumbotron .row .col {
+.featured .jumbotron .row div {
     color: white;
 }
 
@@ -280,7 +280,7 @@ h4 {
     font-size: 1.2rem !important;
 }
 
-@media (max-width: 575px) {
+@media (max-width: 767px) {
     main {
         margin-left: 0;
     }
