@@ -236,6 +236,7 @@ img {
 .featured .jumbotron img {
     width: 80%;
     float: none;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
 }
 
 .featured .jumbotron .row div {
