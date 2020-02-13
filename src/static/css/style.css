@@ -124,6 +124,7 @@ img {
     background-repeat: no-repeat !important;
     position: absolute;
     margin-left: -38px;
+    filter: drop-shadow(1px 1px 1px black);
 }
 
 #sidebar ul li:nth-child(5) a:before {
