@@ -9,6 +9,7 @@ body {
     background-position: bottom -24px left 80px;
     background-size: 75px;
     background-attachment: fixed;
+    background-color: #fafafa !important;
 }
 
 .img64 {
@@ -163,7 +164,7 @@ img {
     background-color: #eeeeee;
 }
 
-#sidebar ul li:nth-child(2):hover {
+.featured #sidebar ul li:nth-child(2):hover {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
