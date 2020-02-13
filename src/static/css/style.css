@@ -162,6 +162,16 @@ img {
     background-color: #eeeeee;
 }
 
+#sidebar ul li:nth-child(2):hover {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+#sidebar ul li:last-child:hover {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
 #sidebar ul li a:hover {
     color: #3e464e;
     text-shadow: none !important;
