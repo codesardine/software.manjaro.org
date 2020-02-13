@@ -255,14 +255,6 @@ main {
     background: white !important;
 }
 
-.app {
-    margin-bottom: 80px;
-}
-
-.featured .app {
-    margin-top: 80px;
-}
-
 .app .description {
     font-size: 0.8rem;
     color: #504f4f;
@@ -280,6 +272,16 @@ h4 {
     font-size: 1.2rem !important;
 }
 
+@media (min-width: 1200px) {
+    .app {
+        margin-bottom: 80px;
+    }
+    
+    .featured .app {
+        margin-top: 80px;
+    }
+}
+
 @media (max-width: 767px) {
     main {
         margin-left: 0;
@@ -289,5 +291,18 @@ h4 {
     }
     body {
         background-image: none;
+    }
+}
+@media (max-width: 991px) {
+    .featured .jumbotron img {
+        margin-top: 20px;
+    }
+    .app {
+        margin-bottom: 2rem;
+    }
+}
+@media (max-width: 1199px) {
+    .app {
+        margin-bottom: 2rem;
     }
 }
