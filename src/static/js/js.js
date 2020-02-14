@@ -31,7 +31,7 @@ function matchApp(app, searchValue) {
   } else {
     $(app).hide()
     $(app).each(function () {
-      if ($(this).find(".content").text().toLocaleLowerCase().includes(searchValue)) {
+      if ($(this).find("div.content").text().toLocaleLowerCase().includes(searchValue)) {
         let image = $(this).find("img").attr('data-src')
         $(this).find("img").attr('src', image);
         $(this).show()
@@ -46,7 +46,7 @@ $('#search').keyup(debounce(function () {
 }, 1200));
 
 $(document).ready(function () {
-  app = $("main div .app");
+  app = $("#search-items .app");
   let lazyImages = [].slice.call(document.querySelectorAll("img.lazyload"));
   let active = false;
 
