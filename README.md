@@ -1,6 +1,10 @@
-# Manjaro Application Discovery
+# Manjaro Software Discover:service
 
-Usage:
+running localy:
 ```
-python server.py
+cd manjaro-applications-discovery/src
+mkdir static/icons
+cp -vr /usr/share/app-info/icons/* static/icons
+pamac install python-flask
+discover.py
 ```
