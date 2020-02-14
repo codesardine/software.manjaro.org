@@ -6,7 +6,7 @@
 body {
     background-image: url("/static/images/tux.svg");
     background-repeat: no-repeat;
-    background-position: bottom -24px left 80px;
+    background-position: bottom 0 left 80px;
     background-size: 75px;
     background-attachment: fixed;
     background-color: #fafafa !important;

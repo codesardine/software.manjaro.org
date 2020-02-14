@@ -10,12 +10,12 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    id="svg2"
-   viewBox="0 0 369.49509 336.15557"
+   viewBox="0 0 359.70902 235.14152"
    version="1.0"
    inkscape:version="0.92.4 5da689c313, 2019-01-14"
-   sodipodi:docname="flat-lemmling-Cartoon-penguin.svg"
-   width="369.49509"
-   height="336.15558">
+   sodipodi:docname="tux.svg"
+   width="359.70901"
+   height="235.14153">
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -33,13 +33,21 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:zoom="0.63766549"
-     inkscape:cx="183.17431"
-     inkscape:cy="166.77999"
+     inkscape:zoom="1.275331"
+     inkscape:cx="308.37515"
+     inkscape:cy="65.778611"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg2" />
+     inkscape:current-layer="svg2"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <sodipodi:guide
+       position="380.71455,-74.341632"
+       orientation="0,1"
+       id="guide912"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
   <defs
      id="defs4">
     <linearGradient
@@ -47,7 +55,7 @@
        y2="537.40997"
        gradientUnits="userSpaceOnUse"
        x2="352.31"
-       gradientTransform="translate(-167.52356,-581.47797)"
+       gradientTransform="translate(-180.40479,-368.20487)"
        y1="537.40997"
        x1="351.79001">
       <stop
@@ -61,63 +69,63 @@
     </linearGradient>
   </defs>
   <g
-     id="g4626"
-     transform="translate(-3.1089018,213.28577)">
+     id="g948"
+     transform="matrix(1,0,0,1.0269668,0,-0.27360632)">
     <path
+       inkscape:connector-curvature="0"
        id="path2385"
-       d="m 349.31644,-45.20797 a 165.565,165.565 0 1 1 -331.129999,0 165.565,165.565 0 1 1 331.129999,0 z"
-       style="fill:#1c1c1c;stroke:#080808;stroke-width:5;stroke-linecap:round"
-       inkscape:connector-curvature="0" />
+       d="M 184.32958,2.5720103 A 165.565,165.565 0 0 0 13.931149,168.06615 165.565,165.565 0 0 0 27.257321,232.64037 H 331.94286 A 165.565,165.565 0 0 0 345.06005,168.06615 165.565,165.565 0 0 0 184.32958,2.5720103 Z"
+       style="fill:#1c1c1c;stroke:#080808;stroke-width:5;stroke-linecap:round" />
     <path
        id="path2387"
-       d="m 149.75644,-155.38797 c -22.935,0 -41.562,21.434 -41.562,47.844 0,26.41 18.628,47.844 41.562,47.844 13.478,0 25.439,-7.4105 33.031,-18.875 7.5922,11.473 19.579,18.875 33.062,18.875 22.935,0 41.562,-21.434 41.562,-47.844 0,-26.41 -18.628,-47.844 -41.562,-47.844 -13.482,0 -25.47,7.4045 -33.062,18.875 -7.5928,-11.462 -19.555,-18.875 -33.031,-18.875 z"
+       d="m 136.87521,57.885131 c -22.935,0 -41.561996,21.434 -41.561996,47.843999 0,26.41 18.627996,47.844 41.561996,47.844 13.478,0 25.439,-7.4105 33.031,-18.875 7.5922,11.473 19.579,18.875 33.062,18.875 22.935,0 41.562,-21.434 41.562,-47.844 0,-26.409999 -18.628,-47.843999 -41.562,-47.843999 -13.482,0 -25.47,7.4045 -33.062,18.875 -7.5928,-11.462 -19.555,-18.875 -33.031,-18.875 z"
        style="fill:#ffffff;stroke:#080808;stroke-width:5;stroke-linecap:round"
        inkscape:connector-curvature="0" />
     <path
+       inkscape:connector-curvature="0"
        id="path3167"
-       d="m 265.57082,37.54659 a 80.261439,80.261439 0 1 1 -160.52061,0 80.261439,80.261439 0 1 1 160.52061,0 z"
-       style="fill:#ffffff;stroke:#080808;stroke-width:4.99989271;stroke-linecap:round"
-       inkscape:connector-curvature="0" />
+       d="M 176.69928,168.58708 A 80.261439,80.261439 0 0 0 96.252014,232.43864 L 252.98834,231.11052 A 80.261439,80.261439 0 0 0 176.69928,168.58708 Z"
+       style="fill:#ffffff;stroke:#080808;stroke-width:4.99989271;stroke-linecap:round" />
     <path
        id="path3393"
-       d="m 184.77644,-72.86797 c -14.479,0 -30.217,13.186 -29.588,21.514 0.62952,8.3281 25.81,43.029 31.476,43.029 5.6657,0 27.699,-34.006 27.069,-43.723 -0.62952,-9.7161 -19.515,-21.514 -28.958,-20.82 z"
+       d="m 171.89521,140.40513 c -14.479,0 -30.217,13.186 -29.588,21.514 0.62952,8.3281 25.81,43.029 31.476,43.029 5.6657,0 27.699,-34.006 27.069,-43.723 -0.62952,-9.7161 -19.515,-21.514 -28.958,-20.82 z"
        style="fill:#000000;fill-opacity:0.31373004;fill-rule:evenodd"
        inkscape:connector-curvature="0" />
     <path
        id="path2391"
-       d="m 182.48644,-81.20797 c -14.479,0 -30.217,11.961 -29.588,19.515 0.62952,7.5543 25.81,39.03 31.476,39.03 5.6657,0 27.699,-30.847 27.069,-39.66 -0.62952,-8.8133 -19.515,-19.515 -28.958,-18.886 z"
+       d="m 169.60521,132.06513 c -14.479,0 -30.217,11.961 -29.588,19.515 0.62952,7.5543 25.81,39.03 31.476,39.03 5.6657,0 27.699,-30.847 27.069,-39.66 -0.62952,-8.8133 -19.515,-19.515 -28.958,-18.886 z"
        style="fill:url(#linearGradient3211);fill-rule:evenodd;stroke:#080808;stroke-width:5"
        inkscape:connector-curvature="0" />
     <path
        id="path3163"
-       d="m 175.52374,-121.10797 a 10.387,10.387 0 1 1 -20.774,0 10.387,10.387 0 1 1 20.774,0 z"
+       d="m 162.64251,92.165131 a 10.387,10.387 0 1 1 -20.774,0 10.387,10.387 0 1 1 20.774,0 z"
        style="fill:#000000;stroke:#000000;stroke-width:5;stroke-linecap:round"
        inkscape:connector-curvature="0" />
     <path
        id="path3165"
-       d="m 244.70644,-119.10797 a 10.387,10.387 0 1 1 -20.774,0 10.387,10.387 0 1 1 20.774,0 z"
+       d="m 231.82521,94.165131 a 10.387,10.387 0 1 1 -20.774,0 10.387,10.387 0 1 1 20.774,0 z"
        style="fill:#000000;stroke:#000000;stroke-width:5;stroke-linecap:round"
        inkscape:connector-curvature="0" />
     <path
+       inkscape:connector-curvature="0"
        id="path3169"
-       d="m 58.876441,-82.22797 c 48.110999,17.3 -14.163,94.143 37.819,161.19 9.608399,12.393 -57.868,2.0908 -81.723,-66.585 -23.198,-66.786 -1.1324,-107.54 43.904,-94.607 z"
-       style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:5"
-       inkscape:connector-curvature="0" />
+       d="m 39.984652,127.0888 c -34.0772024,0.0496 -48.4349686,38.55639 -28.136718,96.99414 1.045861,3.01091 2.273178,5.76908 3.476562,8.55859 h 56.59375 C 68.249959,184.71643 90.164074,141.85341 55.752231,129.47942 v -0.002 c -5.62955,-1.61662 -10.899407,-2.39575 -15.767579,-2.38867 z"
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:5" />
     <path
+       inkscape:connector-curvature="0"
        id="path3793"
-       d="m 58.876441,-82.22797 c 48.110999,17.3 -42.588,102.12 37.819,161.19 22.625999,16.622 -57.868,2.0908 -81.723,-66.585 -23.198,-66.786 -1.1324,-107.54 43.904,-94.607 z"
-       style="fill:#1c1c1c;fill-rule:evenodd;stroke:#080808;stroke-width:5"
-       inkscape:connector-curvature="0" />
+       d="m 39.981103,127.12248 c -34.0413294,0.0511 -48.38398,39.7103 -28.107097,99.89695 0.65927,1.95683 1.510981,3.71218 2.253484,5.58414 H 58.844037 C 56.854109,186.23513 88.508381,141.73604 55.732083,129.58465 v -0.002 c -5.623624,-1.665 -10.887933,-2.46745 -15.75098,-2.46016 z"
+       style="fill:#1c1c1c;fill-rule:evenodd;stroke:#080808;stroke-width:5.07159615" />
     <path
+       inkscape:connector-curvature="0"
        id="path3800"
-       d="m 316.83644,-82.22797 c -48.111,17.3 14.163,94.143 -37.819,161.19 -9.6084,12.393 57.868,2.0908 81.723,-66.585 23.198,-66.786 1.1324,-107.54 -43.904,-94.607 z"
-       style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:5"
-       inkscape:connector-curvature="0" />
+       d="m 319.7239,128.6553 c -4.86817,-0.007 -10.13998,0.77205 -15.76953,2.38867 v 0.002 c -34.03673,12.23911 -12.952,54.30378 -16.03515,101.59375 h 57.10156 c 0.9605,-2.31105 1.9837,-4.53112 2.83789,-6.99023 20.29825,-58.43775 5.94244,-96.94458 -28.13477,-96.99414 z"
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:5" />
     <path
+       inkscape:connector-curvature="0"
        id="path3802"
-       d="m 316.83644,-82.22797 c -48.111,17.3 42.588,102.12 -37.819,161.19 -22.626,16.622 57.868,2.0908 81.723,-66.585 23.198,-66.786 1.1324,-107.54 -43.904,-94.607 z"
-       style="fill:#1c1c1c;fill-rule:evenodd;stroke:#080808;stroke-width:5"
-       inkscape:connector-curvature="0" />
+       d="m 319.72585,128.82126 c -4.86817,-0.007 -10.13998,0.77205 -15.76953,2.38867 v 0.002 c -33.15258,11.92118 -0.40299,55.90271 -3.13672,101.42774 h 44.20118 c 0.96129,-2.26111 2.00915,-4.43277 2.83984,-6.82422 20.29825,-58.43775 5.94244,-96.94458 -28.13477,-96.99414 z"
+       style="fill:#1c1c1c;fill-rule:evenodd;stroke:#080808;stroke-width:5" />
   </g>
   <metadata
      id="metadata21">
@@ -134,7 +142,7 @@
             <dc:title>Openclipart</dc:title>
           </cc:Agent>
         </dc:publisher>
-        <dc:title>Cute round cartoon penguin (flat colors)</dc:title>
+        <dc:title></dc:title>
         <dc:date>2010-05-19T15:24:42</dc:date>
         <dc:description>I don't like gradients but I like penguins, so there you go :)</dc:description>
         <dc:source>https://openclipart.org/detail/61207/cute-round-cartoon-penguin-by-qubodup</dc:source>
