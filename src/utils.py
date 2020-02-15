@@ -6,41 +6,18 @@ def get_categories():
     return {'title': 'Featured', 'href': '/'},\
            {'title': 'Applications', 'href': 'applications'},\
            {'title': 'Packages', 'href': 'packages'},\
-           {'title': 'Snaps', 'href': 'snaps'}
-
-           #{'title': 'Photo & Video', 'href': 'photo_and_video'},\
-           #{'title': 'Music & Audio', 'href': 'music_and_audio'},\
-           #{'title': 'Productivity', 'href': 'productivity'},\
-           #{'title': 'Communication & News', 'href': 'communication_and_news'},\
-           #{'title': 'Education & Science', 'href': 'education_and_science'},\
-           #{'title': 'Games', 'href': 'games'},\
-           #{'title': 'Utilities', 'href': 'utilities'},\
-           #{'title': 'Development', 'href': 'development'},\                     
-           #{'title': 'Manjaro', 'href': 'manjaro'}
-           #{'title': 'Extra', 'href': 'extra'},\
-           #{'title': 'Community', 'href': 'communnity'}
-           
+           {'title': 'Snaps', 'href': 'snaps'}         
 
 
 def get_appstream_app_list(category):
     return get.appstream_category(category)
 
 
-def get_repo_pkg_list(repo):
-    return get.individual_repo_pkgs(repo)
-
-
 def appstream_template(category):
-    if category == "Featured":
-        template = "featured.html"
-    else:
-        template = "appstream.html"
+    template = "featured.html"
     apps = get_appstream_app_list(category)
     return render_template(template, apps=apps, nav=get_categories(), title=category)
 
-
-def repository_template(repo):
-    return render_template("repository.html", pkgs=get_repo_pkg_list(repo), title=repo)
 
 def pkgs_template(title):
     if title == "Applications":

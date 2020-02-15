@@ -44,5 +44,5 @@ class Get:
     @cache(maxsize=128)
     def all_snaps(self):
         # FIXME some unknown categories are missing
-        snap_categories = self.database.get_categories_names ()
+        snap_categories = self.database.get_categories_names()
         return snap_categories, self.database
