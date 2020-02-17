@@ -1,0 +1,7 @@
+#!/bin/bash
+rm -r /opt/manjaro/tools/manjaro-applications-discovery/
+rmdir /opt/manjaro/tools/manjaro-applications-discovery/
+cd /opt/manjaro/tools/
+git clone https://gitlab.manjaro.org/codesardine/manjaro-applications-discovery
+mkdir /opt/manjaro/tools/manjaro-applications-discovery/src/static/icons
+ln -s /usr/share/app-info/icons/* /opt/manjaro/tools/manjaro-applications-discovery/src/static/icons
