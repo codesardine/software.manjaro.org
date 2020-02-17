@@ -4,6 +4,8 @@
     <link href="https://fonts.googleapis.com/css?family=Exo+2&display=swap" rel="stylesheet">
     {% block head %}
     <meta charset="utf-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='images/favicon.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/apple-icon.png') }}">
     <meta name="description" content="Discover and explore any Linux Software within Manjaro, supports native applications search, packages, snaps and flatpacks.">
     <title>Discover Software Within Manjaro - {{ title }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
