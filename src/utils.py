@@ -26,6 +26,7 @@ def pkgs_template(title):
         template = "packages.html"
     apps = get.all_repo_pkgs(title)
     return render_template(template, apps=apps, nav=get_categories(), title=title, total=len(apps))
+    
 
 def snaps_template(title):
     snap_categories = get.all_snaps()[0]
