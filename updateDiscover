@@ -5,3 +5,4 @@ cd /opt/manjaro/tools/
 git clone https://gitlab.manjaro.org/webpage/manjaro-applications-discovery
 mkdir /opt/manjaro/tools/manjaro-applications-discovery/src/static/icons
 ln -s /usr/share/app-info/icons/* /opt/manjaro/tools/manjaro-applications-discovery/src/static/icons
+cp /opt/manjaro/tools/manjaro-applications-discovery/discoverUpdate /usr/bin
