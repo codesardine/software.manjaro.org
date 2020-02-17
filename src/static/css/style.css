@@ -32,8 +32,12 @@ header img {
     margin-top: 5px;
 }
 
+.featured .form-inline {
+    margin-top: 0;
+}
+
 #search {
-    border: none;
+    border-radius: none !important;
     padding: 3px;
     margin: 0 auto;
     width: 90% !important;
@@ -49,6 +53,7 @@ header img {
 
 #search:focus {
     border-color: #009688 !important;
+    box-shadow: none !important;
 }
 
 .featured #search {
@@ -159,7 +164,7 @@ img {
 }
 
 #sidebar ul li:nth-child(2) {
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 #sidebar ul li:nth-child(6) a:before, #sidebar ul li:nth-child(7) a:before,
