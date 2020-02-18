@@ -86,28 +86,30 @@ h3 {
     width: 20px;
 }
 
-.logo img {    
-  margin:5px;
-  display: block;
-  cursor: pointer;
-  animation: pulse 2s infinite;
+.logo img {
+    margin: 5px;
+    display: block;
+    cursor: pointer;
+    animation: pulse 2s infinite;
 }
 
 .logo img:hover {
     animation: none;
-  }
+}
 
 @keyframes pulse {
     0% {
         box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
     }
+
     70% {
         box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
     }
+
     100% {
         box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
     }
-  }
+}
 
 .navbar {
     background-color: #212121;
@@ -152,7 +154,7 @@ img {
     color: #d8d6d6;
     border-bottom: 1px solid rgba(255, 255, 255, .05);
     text-shadow: 0px 1px 1px black;
-    margin-left: 15px !important;    
+    margin-left: 15px !important;
 }
 
 #sidebar ul li:nth-child(5) {
@@ -191,14 +193,16 @@ img {
     margin-top: 10px;
 }
 
-#sidebar ul li:nth-child(6) a:before, #sidebar ul li:nth-child(7) a:before,
-#sidebar ul li:nth-child(8) a:before, #sidebar ul li:nth-child(9) a:before,
+#sidebar ul li:nth-child(6) a:before,
+#sidebar ul li:nth-child(7) a:before,
+#sidebar ul li:nth-child(8) a:before,
+#sidebar ul li:nth-child(9) a:before,
 #sidebar ul li:nth-child(10) a:before {
     border-radius: 100%;
     background-color: #d72263;
     width: 6px;
     height: 6px;
-    margin-top:8px; 
+    margin-top: 8px;
     margin-left: -27px;
 }
 
@@ -327,9 +331,16 @@ h4 {
     .app {
         margin-bottom: 80px;
     }
-    
+
     .featured .app {
         margin-top: 80px;
+    }
+}
+
+@media (min-width: 768px) {
+    main {
+        margin-left: 1.6rem !important;
+        margin-right: 1.6rem !important;
     }
 }
 
@@ -337,15 +348,21 @@ h4 {
     body {
         background-image: none;
     }
+    .app {
+        margin-left: 0.6rem;
+    }
 }
+
 @media (max-width: 991px) {
     .featured .jumbotron img {
         margin-top: 20px;
     }
+
     .app {
         margin-bottom: 2rem;
     }
 }
+
 @media (max-width: 1199px) {
     .app {
         margin-bottom: 2rem;

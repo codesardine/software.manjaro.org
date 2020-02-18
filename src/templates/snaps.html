@@ -3,7 +3,7 @@
 {{ title }}
 {% endblock %}
 {% block content %}
-<main class="p-4 p-md-5 pt-5">
+<main class="p-sm-0 p-md-5 pt-5">
     <div id="search-items" class="row">
         {% for category in categories %}
         {% set cat=database.get_category_snaps(category) %}
