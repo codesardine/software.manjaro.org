@@ -293,10 +293,6 @@ img {
     color: white;
 }
 
-.featured main {
-    margin-top: -20px !important;
-}
-
 .featured #sidebar ul li:nth-child(2) {
     margin-top: 0;
 }
@@ -346,12 +342,21 @@ h4 {
         margin-left: 1.6rem !important;
         margin-right: 1.6rem !important;
     }
+
+    .featured main {
+        margin-top: -20px !important;
+    }
 }
 
 @media (max-width: 767px) {
     body {
         background-image: none;
     }
+
+    .featured .jumbotron {
+        border-radius: 0 !important;
+    }
+
     .app {
         margin-left: 0.6rem;
     }
