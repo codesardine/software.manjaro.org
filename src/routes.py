@@ -16,7 +16,12 @@ def packages():
 
 @app.route("/snaps")
 def snaps():
-    return utils.snaps_template(utils.get_categories()[3].get("title"))
+    return utils.external_repos_template(utils.get_categories()[3].get("title"))
+
+
+@app.route("/flatpaks")
+def flatpaks():
+    return utils.external_repos_template(utils.get_categories()[4].get("title"))
 
 
 #APPSTREAM

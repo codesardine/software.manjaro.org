@@ -9,7 +9,7 @@
             {% set name = app.get_name()  %}
             {% endif %}
             {% set icon = "/static/images/package.svg"  %}
-            <img src="{{ icon | replace('/usr/share/app-info', '/static') }}" class="img64" alt="package image">
+            <img src="{{ icon }}" class="img64" alt="package image">
             <div class="content">
                 <h4 class="name">{{ name }}</h4>
                 <p class="description">{{ app.get_desc() }} - <a href="{{ app.get_url() }}" target="_blank"

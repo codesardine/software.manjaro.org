@@ -157,7 +157,7 @@ img {
     margin-left: 15px !important;
 }
 
-#sidebar ul li:nth-child(5) {
+#sidebar ul li:nth-child(6) {
     border-bottom: 1px solid #d8d6d6;
 }
 
@@ -177,6 +177,10 @@ img {
     background: url("/static/images/snapcraft.svg");
 }
 
+#sidebar ul li:nth-child(6) a:before {
+    background: url("/static/images/flatpak_logo.png");
+}
+
 #sidebar ul li:nth-child(4) a:before {
     background: url("/static/images/package.svg");
 }
@@ -193,11 +197,11 @@ img {
     margin-top: 10px;
 }
 
-#sidebar ul li:nth-child(6) a:before,
 #sidebar ul li:nth-child(7) a:before,
 #sidebar ul li:nth-child(8) a:before,
 #sidebar ul li:nth-child(9) a:before,
-#sidebar ul li:nth-child(10) a:before {
+#sidebar ul li:nth-child(10) a:before,
+#sidebar ul li:nth-child(11) a:before {
     border-radius: 100%;
     background-color: #d72263;
     width: 6px;
@@ -226,23 +230,23 @@ img {
     text-decoration: none;
 }
 
-#sidebar ul li:nth-child(6) a:before {
+#sidebar ul li:nth-child(7) a:before {
     background-color: #4db6ac;
 }
 
-#sidebar ul li:nth-child(7) a:before {
+#sidebar ul li:nth-child(8) a:before {
     background-color: #ff8a65;
 }
 
-#sidebar ul li:nth-child(9) a:before {
+#sidebar ul li:nth-child(10) a:before {
     background-color: #64b5f6;
 }
 
-#sidebar ul li:nth-child(8) a:before {
+#sidebar ul li:nth-child(9) a:before {
     background-color: #ffee58;
 }
 
-#sidebar ul li:nth-child(10) a:before {
+#sidebar ul li:nth-child(11) a:before {
     background-color: #ef5350;
 }
 

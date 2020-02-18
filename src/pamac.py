@@ -36,7 +36,7 @@ class Get:
 
     
     @cache(maxsize=128)
-    def all_snaps(self):
+    def external_repos(self):
         # FIXME some unknown categories are missing
-        snap_categories = self.database.get_categories_names()
-        return snap_categories, self.database
+        categories = self.database.get_categories_names()
+        return categories, self.database

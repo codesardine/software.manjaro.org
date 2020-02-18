@@ -13,11 +13,11 @@
             {% set icon = "/static/images/logo.svg"  %}
             {% endif %}
             {%if loop.index <= 20 %}
-            <img src="{{ icon | replace('/usr/share/app-info', '/static') }}" class="img64" alt="application image"
+            <img src="{{ icon | replace('/usr/share/app-info', '/static/images/appstream') }}" class="img64" alt="application image"
                 loading="lazy">
             {% endif %}
             {%if loop.index > 20 %}
-            <img src="static/images/logo.svg" data-src="{{ icon | replace('/usr/share/app-info', '/static') }}" class="img64 lazyload"
+            <img src="static/images/logo.svg" data-src="{{ icon | replace('/usr/share/app-info', '/static/images/appstream') }}" class="img64 lazyload"
                 alt="application image" loading="lazy">
             {% endif %}
             <div class="content">

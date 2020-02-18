@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ title }}
+{% endblock %}
+{% block content %}
+<main class="p-sm-0 p-md-5 pt-5">
+    <div id="search-items" class="row">
+        {% for category in categories %}
+        {% set cat=database.get_category_flatpaks(category) %}
+        {% for app in cat %}
+        {% set icon=app.get_icon()  | replace('/var/lib/flatpak/appstream/flathub/x86_64/active/icons/64x64/', '/static/images/appstream/flathub/') %}
+            {%if not icon %}
+            {% set icon = "/static/images/flatpak_logo.png"  %}
+            {% endif %}
+        <div class="col-xl-3 col-md-6 col-sm-12 app">
+            {%if loop.index <= 30 %}
+            <img src="{{ icon }}" class="img64" alt="application image"
+                loading="lazy">
+            {% endif %}
+            {%if loop.index > 30 %}
+            <img src="/static/images/flatpak_logo.png" data-src="{{ icon }}" class="img64 lazyload"
+                alt="application image" loading="lazy">
+            {% endif %}
+            <div class="content">
+                <h4 class="name">{{ app.get_app_name() }}</h4>
+                <p class="description">{{ app.get_desc() }} - <a href="{{ app.get_url() }}" target="_blank"
+                        class="website">website</a></p>
+            </div>
+            <!--<a href="{{ app.get_url() }}" class="website">Website</a>-->
+        </div>
+        {% endfor %}
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

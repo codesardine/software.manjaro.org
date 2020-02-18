@@ -3,6 +3,8 @@ rm -r /opt/manjaro/tools/manjaro-applications-discovery/
 rmdir /opt/manjaro/tools/manjaro-applications-discovery/
 cd /opt/manjaro/tools/
 git clone https://gitlab.manjaro.org/webpage/manjaro-applications-discovery
-mkdir /opt/manjaro/tools/manjaro-applications-discovery/src/static/icons
-ln -s /usr/share/app-info/icons/* /opt/manjaro/tools/manjaro-applications-discovery/src/static/icons
-cp /opt/manjaro/tools/manjaro-applications-discovery/discoverUpdate /usr/bin
+mkdir /opt/manjaro/tools/manjaro-applications-discovery/src/static/images/appstream/icons
+mkdir /opt/manjaro/tools/manjaro-applications-discovery/src/static/images/appstream/flathub
+ln -s /usr/share/app-info/icons/* /opt/manjaro/tools/manjaro-applications-discovery/src/static/images/appstream/icons
+ln -s /var/lib/flatpak/appstream/flathub/x86_64/active/icons/64x64/* /opt/manjaro/tools/manjaro-applications-discovery/src/static/images/appstream/flathub
+cp /opt/manjaro/tools/manjaro-applications-discovery/updateDiscover /usr/bin

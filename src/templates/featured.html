@@ -22,14 +22,14 @@
     </div>
     <div class="row">
         {% for app in apps %}
-        {% set ico=app.get_icon() %}
+        {% set icon=app.get_icon() %}
         <div class="col-xl-3 col-md-6 col-sm-12 app">
             {%if loop.index <= 4 %}
-            <img src="{{ ico | replace('/usr/share/app-info', '/static') }}" class="img64" alt="application image"
+            <img src="{{ icon | replace('/usr/share/app-info', '/static/images/appstream') }}" class="img64" alt="application image"
                 loading="lazy">
             {% endif %}
             {%if loop.index > 4 %}
-            <img src="static/images/logo.svg" data-src="{{ ico | replace('/usr/share/app-info', '/static') }}"
+            <img src="static/images/logo.svg" data-src="{{ icon | replace('/usr/share/app-info', '/static/images/appstream') }}"
                 class="img64 lazyload" alt="application image" loading="lazy">
             {% endif %}
             <div class="content">
