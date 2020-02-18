@@ -57,6 +57,6 @@ docs/_build/
 target/
 
 # Testing
-src/static/icons
+src/static/images/appstream
 test.py
 .idea/
