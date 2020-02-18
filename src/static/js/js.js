@@ -41,8 +41,12 @@ function matchApp(app, searchValue) {
 }
 
 $('#search').keyup(debounce(function () {
+  $("body").addClass("wait");
+  $( "#sidebar" ).hide();
   let searchValue = $('#search').val().toLocaleLowerCase()
   matchApp(app, searchValue)
+  setTimeout(function(){   $("body").removeClass("wait");
+}, 300);
 }, 1200));
 
 $(document).ready(function () {
