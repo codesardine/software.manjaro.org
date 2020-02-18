@@ -73,6 +73,11 @@ h2 {
     font-weight: bold !important;
 }
 
+h1 a, h1 a:hover, h1 a:active, h1 a:focus {
+    color: white;
+    color: rgba(255, 255, 255, 0.9);
+}
+
 h1 span,
 h2 span {
     color: #e91e63;
