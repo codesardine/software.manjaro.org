@@ -355,6 +355,7 @@ footer a, footer a:hover, footer a:active, footer a:focus {
     footer {
         padding-left: 10px;
         padding-right: 10px;
+        font-size: 0.8rem;
     }
 }
 
