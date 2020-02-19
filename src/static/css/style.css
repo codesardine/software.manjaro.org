@@ -310,10 +310,6 @@ img {
     padding-top: 0;
 }
 
-main {
-    margin-top: 38px;
-}
-
 .navbar .nav-link:hover {
     color: #212529 !important;
     background: white !important;
@@ -340,6 +336,10 @@ footer a, footer a:hover, footer a:active, footer a:focus {
     color: #e91e63;
 }
 
+footer {
+    font-size: 0.8rem !important;
+}
+
 @media (min-width: 1200px) {
     .app {
         margin-bottom: 80px;
@@ -350,12 +350,25 @@ footer a, footer a:hover, footer a:active, footer a:focus {
     }
 }
 
+@media (min-width: 576px) and (max-width: 767px) {
+    .featured main {
+        margin-top: 30px !important;
+    }    
+}
+
 @media (max-width: 575px) {
 
     footer {
         padding-left: 10px;
         padding-right: 10px;
-        font-size: 0.8rem;
+    }
+    h2 {display: none;}
+    .featured main {
+        margin-top: -20px !important;
+    }
+    .featured .jumbotron:not(:first-child) .row div {
+        padding-right: 25px;
+        padding-left: 25px;
     }
 }
 
@@ -377,6 +390,9 @@ footer a, footer a:hover, footer a:active, footer a:focus {
 
     .featured .jumbotron {
         border-radius: 0 !important;
+    }
+    .featured .jumbotron:first-child {
+        margin-top: 0px;   
     }
 
     .app {
