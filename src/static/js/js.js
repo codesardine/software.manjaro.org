@@ -4,7 +4,7 @@ $(function () {
   });
 });
 
-$( ".logo" ).click(function() {
+$( ".navbar-toggler span" ).click(function() {
   $( "#sidebar" ).toggle();
 });
 

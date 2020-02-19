@@ -100,20 +100,31 @@ h3 {
     width: 20px;
 }
 
-.logo img {
+.navbar-toggler {
     margin: 5px;
-    display: block;
-    cursor: pointer;
-    animation: pulse 2s infinite;
+    display: block !important;
+    position: absolute;
+    right: 0;
+    top: -2px;
 }
 
-.logo img:hover {
+.navbar-toggler:focus {
+    outline: none;
+}
+
+.navbar-toggler span {
+    cursor: pointer;
+    animation: pulse 2s infinite;
+    color: #d8d6d6;
+}
+
+.navbar-toggler span:hover {
     animation: none;
 }
 
 @keyframes pulse {
     0% {
-        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.8);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
     }
 
     70% {
@@ -146,8 +157,8 @@ img {
     transition: all .3s;
     position: relative;
     position: fixed;
-    top: 44px;
-    left: 16px;
+    top: 45px;
+    right: 8px;
     z-index: 999;
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.8);
 }
