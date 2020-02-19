@@ -8,6 +8,10 @@ $( ".logo" ).click(function() {
   $( "#sidebar" ).toggle();
 });
 
+$( "main, footer" ).click(function() {
+  $( "#sidebar" ).hide();
+});
+
 function debounce(fn, threshold) {
   var timeout;
   threshold = threshold || 600;
