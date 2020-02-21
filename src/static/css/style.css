@@ -129,6 +129,7 @@ h3 {
     border: 1px solid transparent;
     background: transparent;
     border: none;
+    -webkit-appearance: none;
 }
 
 .navbar-toggler:focus {
