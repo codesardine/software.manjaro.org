@@ -15,9 +15,11 @@ body {
 
 html {
     overflow-x: hidden;
+    cursor: progress; 
 }
 
-.featured .row, footer {
+.featured .row,
+footer {
     margin-left: 0;
     margin-right: 0;
 }
@@ -28,21 +30,13 @@ html {
 }
 
 header {
-    height: 38px;
+    height: 42px;
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
     text-shadow: 0px 1px 1px black;
 }
 
 header img {
     margin-right: 0 !important;
-}
-
-.form-inline {
-    margin-top: 5px;
-}
-
-.featured .form-inline {
-    margin-top: 0;
 }
 
 #search {
@@ -54,6 +48,22 @@ header img {
     border: 1px solid #e91e63;
     outline: none;
     color: #d8d6d6;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.search-box {
+    position: absolute;
+    right: 32px;
+}
+
+.search-icon:focus {
+    outline: none;
+}
+
+.search-icon {
+    position: absolute;
+    right: 44px;
 }
 
 #search::placeholder {
@@ -82,7 +92,10 @@ h2 {
     font-weight: bold !important;
 }
 
-h1 a, h1 a:hover, h1 a:active, h1 a:focus {
+h1 a,
+h1 a:hover,
+h1 a:active,
+h1 a:focus {
     color: white;
     color: rgba(255, 255, 255, 0.9);
 }
@@ -105,16 +118,29 @@ h3 {
     display: block !important;
     position: absolute;
     right: 0;
-    top: -2px;
+    top: 1px;
+}
+
+.search-icon {
+    padding: .25rem .75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid transparent;
+    background: transparent;
+    border: none;
 }
 
 .navbar-toggler:focus {
     outline: none;
 }
 
-.navbar-toggler span {
+.navbar-toggler .fas {
     cursor: pointer;
     animation: pulse 2s infinite;
+}
+
+header .fas {
     color: #d8d6d6;
 }
 
@@ -157,7 +183,7 @@ img {
     transition: all .3s;
     position: relative;
     position: fixed;
-    top: 45px;
+    top: 49px;
     right: 8px;
     z-index: 999;
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.8);
@@ -165,7 +191,6 @@ img {
 
 #sidebar ul {
     margin-bottom: 0;
-    padding-top: 4px;
 }
 
 #sidebar ul li {
@@ -182,7 +207,7 @@ img {
     margin-left: 15px !important;
 }
 
-#sidebar ul li:nth-child(6) {
+#sidebar ul li:nth-child(5) {
     border-bottom: 1px solid #d8d6d6;
 }
 
@@ -198,35 +223,31 @@ img {
     filter: drop-shadow(1px 1px 1px black);
 }
 
-#sidebar ul li:nth-child(5) a:before {
+#sidebar ul li:nth-child(4) a:before {
     background: url("/static/images/snapcraft.svg");
 }
 
-#sidebar ul li:nth-child(6) a:before {
+#sidebar ul li:nth-child(5) a:before {
     background: url("/static/images/flatpak_logo.png");
 }
 
-#sidebar ul li:nth-child(4) a:before {
+#sidebar ul li:nth-child(3) a:before {
     background: url("/static/images/package.svg");
 }
 
-#sidebar ul li:nth-child(3) a:before {
+#sidebar ul li:nth-child(2) a:before {
     background: url("/static/images/applications.svg");
 }
 
-#sidebar ul li:nth-child(2) a:before {
+#sidebar ul li:nth-child(1) a:before {
     background: url("/static/images/featured.svg");
 }
 
-#sidebar ul li:nth-child(2) {
-    margin-top: 10px;
-}
-
+#sidebar ul li:nth-child(6) a:before,
 #sidebar ul li:nth-child(7) a:before,
 #sidebar ul li:nth-child(8) a:before,
 #sidebar ul li:nth-child(9) a:before,
-#sidebar ul li:nth-child(10) a:before,
-#sidebar ul li:nth-child(11) a:before {
+#sidebar ul li:nth-child(10) a:before {
     border-radius: 100%;
     background-color: #d72263;
     width: 6px;
@@ -239,7 +260,7 @@ img {
     background-color: #eeeeee;
 }
 
-.featured #sidebar ul li:nth-child(2):hover {
+#sidebar ul li:first-child:hover {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
@@ -255,23 +276,23 @@ img {
     text-decoration: none;
 }
 
-#sidebar ul li:nth-child(7) a:before {
+#sidebar ul li:nth-child(6) a:before {
     background-color: #4db6ac;
 }
 
-#sidebar ul li:nth-child(8) a:before {
+#sidebar ul li:nth-child(7) a:before {
     background-color: #ff8a65;
 }
 
-#sidebar ul li:nth-child(10) a:before {
+#sidebar ul li:nth-child(9) a:before {
     background-color: #64b5f6;
 }
 
-#sidebar ul li:nth-child(9) a:before {
+#sidebar ul li:nth-child(8) a:before {
     background-color: #ffee58;
 }
 
-#sidebar ul li:nth-child(11) a:before {
+#sidebar ul li:nth-child(10) a:before {
     background-color: #ef5350;
 }
 
@@ -322,10 +343,6 @@ img {
     color: white;
 }
 
-.featured #sidebar ul li:nth-child(2) {
-    margin-top: 0;
-}
-
 .featured #sidebar ul {
     padding-top: 0;
 }
@@ -352,7 +369,10 @@ h4 {
     font-size: 1.2rem !important;
 }
 
-footer a, footer a:hover, footer a:active, footer a:focus {
+footer a,
+footer a:hover,
+footer a:active,
+footer a:focus {
     color: #e91e63;
 }
 
@@ -373,7 +393,13 @@ footer {
 @media (min-width: 576px) and (max-width: 767px) {
     .featured main {
         margin-top: 30px !important;
-    }    
+    }
+}
+
+@media (min-width: 576px) {
+    .search-icon {
+        display: none;
+    }
 }
 
 @media (max-width: 575px) {
@@ -382,13 +408,35 @@ footer {
         padding-left: 10px;
         padding-right: 10px;
     }
-    h2 {display: none;}
+
+    h2 {
+        display: none;
+    }
+
     .featured main {
         margin-top: -20px !important;
     }
+
     .featured .jumbotron:not(:first-child) .row div {
         padding-right: 25px;
         padding-left: 25px;
+    }
+
+    .search-box {
+        position: absolute;
+        right: 0;
+        left: 0;
+        margin-top: 74px;
+        background-color:#212121;
+        padding: 5px;
+        display: none;
+        text-align: center;
+        margin-top: 42px;
+        display: none;
+    }
+
+    .search-icon {
+        display:block;
     }
 }
 
@@ -401,6 +449,13 @@ footer {
     .featured main {
         margin-top: -20px !important;
     }
+
+    .applications main,
+    .packages main,
+    .snaps main,
+    .flatpaks main {
+        margin-top: 42px;
+    }
 }
 
 @media (max-width: 767px) {
@@ -411,8 +466,9 @@ footer {
     .featured .jumbotron {
         border-radius: 0 !important;
     }
+
     .featured .jumbotron:first-child {
-        margin-top: 0px;   
+        margin-top: 0px;
     }
 
     .app {
@@ -421,6 +477,13 @@ footer {
 
     footer div:first-child {
         margin-bottom: 20px;
+    }
+
+    .applications main,
+    .packages main,
+    .snaps main,
+    .flatpaks main {
+        margin-top: 32px;
     }
 }
 

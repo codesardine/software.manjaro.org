@@ -3,9 +3,15 @@ $(function () {
     return false;
   });
 });
+$( "#search" ).focus();
 
-$( ".navbar-toggler span" ).click(function() {
+$( ".navbar-toggler .fa-bars" ).click(function() {
   $( "#sidebar" ).toggle();
+});
+
+$( ".search-icon .fa-search" ).click(function() {
+  $( ".search-box" ).toggle();
+  $( "#search" ).focus();
 });
 
 $( "main, footer" ).click(function() {
@@ -88,4 +94,5 @@ $(document).ready(function () {
   document.addEventListener("scroll", lazyLoad);
   window.addEventListener("resize", lazyLoad);
   window.addEventListener("orientationchange", lazyLoad);
+  $("body").css("cursor", "default");
 });
