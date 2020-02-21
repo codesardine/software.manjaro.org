@@ -66,8 +66,13 @@ header img {
     right: 44px;
 }
 
+.featured .search-icon {
+    display: none;
+}
+
 #search::placeholder {
     color: #d8d6d6;
+    opacity: 1;
 }
 
 #search:focus {
@@ -428,14 +433,12 @@ footer {
 
     .search-box {
         position: absolute;
-        right: 0;
-        left: 0;
-        margin-top: 74px;
+        right: 72px;
+        left: 36px;
         background-color:#212121;
         padding: 5px;
         display: none;
         text-align: center;
-        margin-top: 42px;
         display: none;
     }
 
