@@ -4,26 +4,22 @@
     <div id="search-items" class="row">
         {% for app in apps %}
         <div class="col-xl-3 col-md-6 col-sm-12 app">
-            {% set name=app.get_app_name() %}
-            {%if not name %}
-            {% set name = app.get_name()  %}
-            {% endif %}
-            {% set icon=app.get_icon() %}
-            {%if not icon %}
-            {% set icon = "/static/images/logo.svg"  %}
-            {% endif %}
-            {%if loop.index <= 20 %}
+            {% set name = app.get_app_name() %}
+            {% set pkg_name = app.get_name() %}
+            {% set icon = app.get_icon() %}
+            {% set description = app.get_desc() %}
+            {% if loop.index <= 20 %}
             <img src="{{ icon | replace('/usr/share/app-info', '/static/images/appstream') }}" class="img64" alt="application image"
                 loading="lazy">
             {% endif %}
-            {%if loop.index > 20 %}
+            {% if loop.index > 20 %}
             <img src="static/images/logo.svg" data-src="{{ icon | replace('/usr/share/app-info', '/static/images/appstream') }}" class="img64 lazyload"
                 alt="application image" loading="lazy">
             {% endif %}
             <div class="content">
                 <h4 class="name">{{ name }}</h4>
-                <p class="description">{{ app.get_desc() }}</p>
-                <span class="keywords" style="display:none;">{{ app.get_name() }} {{ app.get_long_desc() }}</span>
+                <p class="description">{{ description }}</p>
+                <span class="keywords" style="display:none;">{{ pkg_name }}</span>
             </div>
             <!--<a href="{{ app.get_url() }}" class="website">Website</a>-->
         </div>

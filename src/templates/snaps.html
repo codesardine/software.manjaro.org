@@ -6,29 +6,34 @@
 <main class="p-sm-0 p-md-5 pt-5">
     <div id="search-items" class="row">
         {% for category in categories %}
-        {% set cat=database.get_category_snaps(category) %}
-        {% for app in cat %}
-        {% set icon=app.get_icon() %}
-            {%if not icon %}
-            {% set icon = "/static/images/snapcraft.svg"  %}
-            {% endif %}
-        <div class="col-xl-3 col-md-6 col-sm-12 app">
-            {%if loop.index <= 30 %}
-            <img src="{{ icon }}" class="img64" alt="application image"
-                loading="lazy">
-            {% endif %}
-            {%if loop.index > 30 %}
-            <img src="/static/images/snapcraft.svg" data-src="{{ icon }}" class="img64 lazyload"
-                alt="application image" loading="lazy">
-            {% endif %}
-            <div class="content">
-                <h4 class="name">{{ app.get_app_name() }}</h4>
-                <p class="description">{{ app.get_desc() }}</p>
-                <span class="keywords" style="display:none;">{{ app.get_name() }} {{ app.get_long_desc() }}</span>
-            </div>
-            <!--<a href="{{ app.get_url() }}" class="website">Website</a>-->
-        </div>
-        {% endfor %}
+        
+            {% set cat = database.get_category_snaps(category) %}
+            {% for app in cat %}
+
+                {% set name = app.get_app_name() %}
+                {% set pkg_name = app.get_name() %}
+                {% set description = app.get_desc() %}
+                {% set icon = app.get_icon() %}
+                {% if not icon %}
+                {% set icon = "/static/images/snapcraft.svg" %}
+                {% endif %}
+                <div class="col-xl-3 col-md-6 col-sm-12 app">
+                    {%if loop.index <= 30 %}
+                    <img src="{{ icon }}" class="img64" alt="application image"
+                        loading="lazy">
+                    {% endif %}
+                    {% if loop.index > 30 %}
+                    <img src="/static/images/snapcraft.svg" data-src="{{ icon }}" class="img64 lazyload"
+                        alt="application image" loading="lazy">
+                    {% endif %}
+                    <div class="content">
+                        <h4 class="name">{{ name }}</h4>
+                        <p class="description">{{ description }}</p>
+                        <span class="keywords" style="display:none;">{{ pkg_name }}</span>
+                    </div>
+                    <!--<a href="{{ app.get_url() }}" class="website">Website</a>-->
+                </div>
+            {% endfor %}
         {% endfor %}
     </div>
 </main>

@@ -1,7 +1,10 @@
 from flask import render_template
 import pamac
+from functools import lru_cache as cache
 get = pamac.Get()
 
+
+@cache(maxsize=32)
 def get_categories():
     return {'title': 'Featured', 'href': '/'},\
            {'title': 'Applications', 'href': 'applications'},\
@@ -10,16 +13,19 @@ def get_categories():
            {'title': 'Flatpaks', 'href': 'flatpaks'}        
 
 
+@cache(maxsize=32)
 def get_appstream_app_list(category):
     return get.appstream_category(category)
 
 
+@cache(maxsize=32)
 def appstream_template(category):
     template = "featured.html"
     apps = get_appstream_app_list(category)
     return render_template(template, apps=apps, nav=get_categories(), title=category)
 
 
+@cache(maxsize=32)
 def pkgs_template(title):
     if title == "Applications":
         template = "applications.html"
@@ -29,6 +35,7 @@ def pkgs_template(title):
     return render_template(template, apps=apps, nav=get_categories(), title=title, total=len(apps))
 
 
+@cache(maxsize=32)
 def external_repos_template(title):
     if title == "Snaps":
         template = "snaps.html"
