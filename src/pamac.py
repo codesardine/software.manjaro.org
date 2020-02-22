@@ -1,4 +1,3 @@
-from functools import lru_cache as cache
 from operator import methodcaller
 import gi
 gi.require_version('Pamac', '9.0')
@@ -19,7 +18,6 @@ class Get:
         return self.database.get_category_pkgs(category)
 
 
-    @cache(maxsize=128)
     def all_repo_pkgs(self, title):
             pkgs = []
             for repository in self.database.get_repos_names():
