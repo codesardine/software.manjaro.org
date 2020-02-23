@@ -11,9 +11,6 @@ body {
     background-attachment: fixed;
     background-color: #fafafa !important;
     font-family: 'Exo 2', sans-serif !important;
-}
-
-html {
     overflow-x: hidden;
     cursor: progress; 
 }
@@ -479,7 +476,8 @@ footer {
     }
 
     .app {
-        margin-left: 0.6rem;
+        padding-right: 1.5rem !important;
+        padding-left: 1.5rem !important;
     }
 
     footer div:first-child {
@@ -497,10 +495,6 @@ footer {
 @media (max-width: 991px) {
     .featured .jumbotron img {
         margin-top: 20px;
-    }
-
-    .app {
-        margin-bottom: 2rem;
     }
 }
 
