@@ -9,19 +9,23 @@
             {% set icon = app.get_icon() %}
             {% set description = app.get_desc() %}
             {% if loop.index <= 20 %}
-            <img src="{{ icon | replace('/usr/share/app-info', '/static/images/appstream') }}" class="img64" alt="application image"
-                loading="lazy">
-            {% endif %}
-            {% if loop.index > 20 %}
-            <img src="static/images/logo.svg" data-src="{{ icon | replace('/usr/share/app-info', '/static/images/appstream') }}" class="img64 lazyload"
+            <img src="{{ icon | replace('/usr/share/app-info', '/static/images/appstream') }}" class="img64"
                 alt="application image" loading="lazy">
             {% endif %}
-            <div class="content">
-                <h4 class="name">{{ name }}</h4>
-                <p class="description">{{ description }}</p>
-                <span class="keywords" style="display:none;">{{ pkg_name }}</span>
+            {% if loop.index > 20 %}
+            <img src="static/images/logo.svg"
+                data-src="{{ icon | replace('/usr/share/app-info', '/static/images/appstream') }}"
+                class="img64 lazyload" alt="application image" loading="lazy">
+            {% endif %}
+            <div class="img-overflow-hidden">
+                <div class="content">
+                    <h4 class="name">{{ name }}</h4>
+                    <p class="description">{{ description }}</p>
+                    <span class="keywords" style="display:none;">{{ pkg_name }}</span>
+                </div>
+                <a href="/applications/{{ pkg_name }}" target="_blank" role="button" class="">More Info</a>
             </div>
-            <!--<a href="{{ app.get_url() }}" class="website">Website</a>-->
+
         </div>
         {% endfor %}
     </div>

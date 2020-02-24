@@ -38,3 +38,12 @@ def external_repos_template(title):
     categories = get.external_repos()[0]
     pamac_database = get.external_repos()[1]
     return render_template(template, categories=categories, nav=get_categories(), title=title, database=pamac_database)
+
+
+def search_repo_package_template(package_name):
+    pkg = get.search_repo_package(package_name)
+    title = pkg.get_app_name()
+    if not title:
+        title = pkg.get_name()
+    return render_template("single-package.html", nav=get_categories(), pkg=pkg, title=title)
+

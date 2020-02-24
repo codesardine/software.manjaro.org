@@ -3,7 +3,7 @@
 {{ title }}
 {% endblock %}
 {% block content %}
-<main class="p-sm-0 p-md-5 pt-5">
+<main class="p-4 p-md-5 pt-5">
     <div id="search-items" class="row">
         {% for category in categories %}
         
@@ -31,7 +31,6 @@
                         <p class="description">{{ description }}</p>
                         <span class="keywords" style="display:none;">{{ pkg_name }}</span>
                     </div>
-                    <!--<a href="{{ app.get_url() }}" class="website">Website</a>-->
                 </div>
             {% endfor %}
         {% endfor %}

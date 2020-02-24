@@ -7,6 +7,11 @@ app = Flask(__name__)
 @app.route("/applications")
 def applications():
     return utils.pkgs_template(utils.get_categories()[1].get("title"))
+
+
+@app.route("/applications/<application>")
+def application(application):
+    return utils.search_repo_package_template(application)
     
 
 @app.route("/packages")

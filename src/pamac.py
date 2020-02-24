@@ -1,4 +1,3 @@
-from operator import methodcaller
 import gi
 gi.require_version('Pamac', '9.0')
 from gi.repository import Pamac
@@ -28,7 +27,6 @@ class Get:
                     elif title == "Applications" and icon:
                         pkgs.append(package)
                     
-            pkgs.sort(key=methodcaller("get_name"))
             return tuple(pkgs)
 
     
@@ -36,3 +34,11 @@ class Get:
         # FIXME some unknown categories are missing
         categories = self.database.get_categories_names()
         return categories, self.database
+
+    
+    def search_repo_package(self, name):
+            repo = self.database.search_repos_pkgs(name)
+            for pkg in repo:
+                if pkg.get_name() == name:
+                    print(dir(pkg))
+                    return pkg
