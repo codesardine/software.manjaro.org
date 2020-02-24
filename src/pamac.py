@@ -40,5 +40,4 @@ class Get:
             repo = self.database.search_repos_pkgs(name)
             for pkg in repo:
                 if pkg.get_name() == name:
-                    print(dir(pkg))
                     return pkg
