@@ -35,12 +35,13 @@
                     <br>
                     <code>pamac install {{ pkg_name }}</code>
                     <br>
+                    <code>pacman -S {{ pkg_name }}</code>
+                    <br><br>
+                    Removing:
+                    <br>
                     <code>pamac remove {{ pkg_name }}</code>
                     <br>
-                    <br>
-                    <code>pacman -S {{ pkg_name }}</code>
-                    <br>
-                    <code>pacman -R --remove {{ pkg_name }}</code></p>
+                    <code>pacman -R {{ pkg_name }}</code></p>
             </div>
             <div id="carousel" class="col-sm-12 col-md-8 carousel slide"
                 style="{% if screenshots | length <= 1 %} margin-top:-6px !important;{% endif %}" data-ride="carousel">
