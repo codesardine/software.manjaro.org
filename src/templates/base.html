@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='images/favicon.png') }}">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/apple-icon.png') }}">
     <meta name="description" content="Discover and explore any Linux Software within Manjaro, supports native applications search, packages, snaps and flatpacks.">
-    <title>Discover Software Within Manjaro - {{ title }}</title>
+    <title>Discover Software Within Manjaro - {{ pkg_format }} {{ title }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -18,7 +18,7 @@
 <body class="{{ title.lower() | replace(' & ', '-') }}">
     <header class="navbar navbar-expand fixed-top">
         <span class="logo navbar-brand"><img src="/static/images/logo.svg" alt="Pamac image"></span>
-        <h2>Discover Software<span>&nbsp//&nbsp</span></h2>
+        <h2>Discover Software<span>&nbsp//&nbsp{% if pkg_format %}{{ pkg_format }}&nbsp//&nbsp{% endif %}</span></h2>
         <h1>{{ title }}<span>&nbsp&nbsp{{ total }}</span></h1>
         <form class="search-box">
             <input id="search" type="search" placeholder="Search {{ title }}" aria-label="Search {{ title }}">

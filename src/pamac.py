@@ -3,7 +3,6 @@ gi.require_version('Pamac', '9.0')
 from gi.repository import Pamac
 
 
-
 class Get:
 
     def __init__(self):
@@ -36,8 +35,16 @@ class Get:
         return categories, self.database
 
     
-    def search_repo_package(self, name):
-            repo = self.database.search_repos_pkgs(name)
-            for pkg in repo:
-                if pkg.get_name() == name:
-                    return pkg
+    def search_single_package(self, pkg_name, pkg_format):
+        if pkg_format == "Native":
+            repo = self.database.search_repos_pkgs(pkg_name)
+
+        elif pkg_format == "Snap":
+                repo = self.database.search_snaps(pkg_name)
+
+        elif pkg_format == "Flatpak":
+            repo = self.database.search_flatpaks(pkg_name)
+            
+        for pkg in repo:
+              if pkg_name in pkg.get_name():
+                  return pkg

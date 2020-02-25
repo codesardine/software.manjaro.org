@@ -11,7 +11,23 @@ def applications():
 
 @app.route("/applications/<application>")
 def application(application):
-    return utils.search_repo_package_template(application)
+    return utils.search_package_template(application, "Native")
+
+
+@app.route("/packages/<package>")
+def package(package):
+    return utils.search_package_template(package, "Native")
+
+
+@app.route("/snaps/<snap>")
+def snap(snap):
+    return utils.search_package_template(snap, "Snap")
+
+
+@app.route("/flatpaks/<flatpak>")
+def flatpak(flatpak):
+    print(flatpak)
+    return utils.search_package_template(flatpak, "Flatpak")
     
 
 @app.route("/packages")
