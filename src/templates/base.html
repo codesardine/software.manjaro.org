@@ -13,12 +13,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    {% if title == "404" %}<meta name="robots" content="noindex, nofollow">{% endif %}
+    {% if title == "YOU ARE LOST" %}<meta name="robots" content="noindex, nofollow">{% endif %}
     {% endblock %}
 </head>
-<body class="{{ title.lower() | replace(' & ', '-') }}">
+<body class="{{ title.lower() | replace(' & ', '-') | replace(' ', '-') }}">
     <header class="navbar navbar-expand fixed-top">
-        <span class="logo navbar-brand"><img src="/static/images/logo.svg" alt="Pamac image"></span>
+        <span class="logo navbar-brand"><img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Pamac image"></span>
         <h2>Discover Software<span>&nbsp//&nbsp{% if pkg_format %}{{ pkg_format }}&nbsp//&nbsp{% endif %}</span></h2>
         <h1>{{ title }}<span>&nbsp&nbsp{{ total }}</span></h1>
         <form class="search-box">

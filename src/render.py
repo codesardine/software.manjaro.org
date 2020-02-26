@@ -45,7 +45,7 @@ def external_repos_template(title):
 
 
 def template_404():
-    title = "404"
+    title = "YOU ARE LOST"
     return render_template('404.html', nav=get_categories(), title=title)
 
 
