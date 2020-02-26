@@ -1,8 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
-<main class="p-4 p-md-5 pt-5">
+<main class="not-found p-4 p-md-5 pt-5">
 
-<h4 style="text-align:center""><br>Not found</h4>
+<h2 style="text-align:center"><br>404 Page Not Found <br>redirecting in<br><br><span id="countdown">10</span></h2>
 
 </main>
+  <script type="text/javascript">
+      let seconds = 10;
+      function countdown() {
+          seconds = seconds - 1;
+          if (seconds < 0) {
+              window.location = "https://discover.manjaro.org";
+          } else {
+              document.getElementById("countdown").innerHTML = seconds;
+              window.setTimeout("countdown()", 1000);
+          }
+      }
+      countdown();
+  </script>
 {% endblock %}
