@@ -36,6 +36,7 @@ class Get:
 
 
     def search_single_package(self, pkg_name, pkg_format):
+
         if pkg_format == "Native":
             repo = self.database.search_repos_pkgs(pkg_name)
 
@@ -46,6 +47,7 @@ class Get:
             repo = self.database.search_flatpaks(pkg_name)
 
         for pkg in repo:
-            if pkg_name in pkg.get_name():
+            if pkg_name == pkg.get_name():
                 return pkg
+
         return None

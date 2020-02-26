@@ -44,12 +44,16 @@ def external_repos_template(title):
     return render_template(template, categories=categories, nav=get_categories(), title=title, database=pamac_database)
 
 
+def template_404():
+    title = "404"
+    return render_template('404.html', nav=get_categories(), title=title)
+
+
 def search_package_template(pkg_name, pkg_format):
 
     pkg = get.search_single_package(pkg_name, pkg_format)
     if not pkg:
-        title = "404"
-        return render_template('404.html', nav=get_categories(), title=title)
+        return template_404()        
 
     title = pkg.get_app_name()
     if not title:
