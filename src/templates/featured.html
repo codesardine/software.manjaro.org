@@ -22,22 +22,25 @@
     </div>
     <div class="row">
         {% for app in apps %}
-        {% set icon=app.get_icon() %}
+        {% set icon = app.get_icon() %}
+        {% set description = app.get_desc() %}
         <div class="col-xl-3 col-md-6 col-sm-12 app">
-            {%if loop.index <= 4 %}
+            {% if loop.index <= 4 %}
             <img src="{{ icon | replace('/usr/share/app-info', '/static/images/appstream') }}" class="img64" alt="application image"
                 loading="lazy">
             {% endif %}
-            {%if loop.index > 4 %}
+            {% if loop.index > 4 %}
             <img src="static/images/logo.svg" data-src="{{ icon | replace('/usr/share/app-info', '/static/images/appstream') }}"
                 class="img64 lazyload" alt="application image" loading="lazy">
             {% endif %}
-            <div class="content">
-                <h4 class="name">{{ app.get_app_name() }}</h4>
-                <p class="description">{{ app.get_desc() }}</p>
-            </div>
+            <div class="img-overflow-hidden">
+                    <div class="content">
+                        <h4 class="name">{{ name }}</h4>
+                        <p class="description">{{ description }}</p>
+                    </div>
+                </div>
         </div>
-        {%if loop.index == 4 %}
+        {% if loop.index == 4 %}
         <div class="jumbotron col-12">
             <div class="row">
                 <div class="col-lg-6 col-12-sm">
@@ -53,7 +56,7 @@
             </div>
         </div>
         {% endif %}
-        {%if loop.index == 8 %}
+        {% if loop.index == 8 %}
         <div class="jumbotron col-12">
             <div class="row">
                 <div class="col-lg-6 col-12-sm">
@@ -69,7 +72,7 @@
             </div>
         </div>
         {% endif %}
-        {%if loop.index == 12 %}
+        {% if loop.index == 12 %}
         <div class="jumbotron col-12">
             <div class="row">
                 <div class="col-lg-6 col-12-sm">
