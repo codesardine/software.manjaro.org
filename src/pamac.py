@@ -25,26 +25,27 @@ class Get:
                         pkgs.append(package)
                     elif title == "Applications" and icon:
                         pkgs.append(package)
-                    
+
             return tuple(pkgs)
 
-    
+
     def external_repos(self):
         # FIXME some unknown categories are missing
         categories = self.database.get_categories_names()
         return categories, self.database
 
-    
+
     def search_single_package(self, pkg_name, pkg_format):
         if pkg_format == "Native":
             repo = self.database.search_repos_pkgs(pkg_name)
 
         elif pkg_format == "Snap":
-                repo = self.database.search_snaps(pkg_name)
+            repo = self.database.search_snaps(pkg_name)
 
         elif pkg_format == "Flatpak":
             repo = self.database.search_flatpaks(pkg_name)
-            
+
         for pkg in repo:
-              if pkg_name in pkg.get_name():
-                  return pkg
+            if pkg_name in pkg.get_name():
+                return pkg
+        return None

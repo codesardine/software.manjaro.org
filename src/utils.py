@@ -4,11 +4,11 @@ get = pamac.Get()
 
 
 def get_categories():
-    return {'title': 'Featured', 'href': '/'},\
+    return {'title': 'Featured', 'href': ''},\
            {'title': 'Applications', 'href': 'applications'},\
            {'title': 'Packages', 'href': 'packages'},\
            {'title': 'Snaps', 'href': 'snaps'}, \
-           {'title': 'Flatpaks', 'href': 'flatpaks'}        
+           {'title': 'Flatpaks', 'href': 'flatpaks'}
 
 
 def get_appstream_app_list(category):
@@ -22,7 +22,7 @@ def appstream_template(category):
 
 
 def pkgs_template(title):
-    
+
     if title == "Applications":
         template = "applications.html"
     else:
@@ -47,11 +47,15 @@ def external_repos_template(title):
 def search_package_template(pkg_name, pkg_format):
 
     pkg = get.search_single_package(pkg_name, pkg_format)
-    title = pkg.get_app_name()
+    if not pkg:
+        return render_template('404.html', nav=get_categories(), title=pkg_name)
 
+    title = pkg.get_app_name()
     if not title:
         title = pkg.get_name()
 
+    #TODO normalize names : rename single-package.html
+    # template = f"simple-{pkg_format.lower()}.html"
     if pkg_format == "Snap":
         template = "single-snap.html"
     elif pkg_format == "Flatpak":
@@ -60,4 +64,3 @@ def search_package_template(pkg_name, pkg_format):
         template = "single-package.html"
 
     return render_template(template, nav=get_categories(), pkg=pkg, title=title, pkg_format=pkg_format)
-
