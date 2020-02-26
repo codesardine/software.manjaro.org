@@ -17,16 +17,16 @@ class Get:
 
 
     def all_repo_pkgs(self, title):
-            pkgs = []
-            for repository in self.database.get_repos_names():
-                for package in self.database.get_repo_pkgs(repository):
-                    icon = package.get_icon()
-                    if title == "Packages" and not icon:
-                        pkgs.append(package)
-                    elif title == "Applications" and icon:
-                        pkgs.append(package)
+        pkgs = []
+        for repository in self.database.get_repos_names():
+            for package in self.database.get_repo_pkgs(repository):
+                icon = package.get_icon()
+                if title == "Packages" and not icon:
+                    pkgs.append(package)
+                elif title == "Applications" and icon:
+                    pkgs.append(package)
 
-            return tuple(pkgs)
+        return tuple(pkgs)
 
 
     def external_repos(self):
