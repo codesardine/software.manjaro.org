@@ -431,7 +431,8 @@ h4 {
     top: -40px;
 }
 
-.carousel-control-next, .carousel-control-prev {
+.carousel-control-next,
+.carousel-control-prev {
     bottom: auto !important;
     top: 8px !important;
 }
@@ -445,6 +446,54 @@ footer a:focus {
 
 footer {
     font-size: 0.8rem !important;
+}
+
+.not-found h2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.6rem !important;
+    color: white;
+}
+
+.not-found .h5 {
+    color: white;
+}
+
+.not-found .speech-bubble {
+    position: relative;
+    background: #00aabb;
+    border-radius: .4em;
+    position: absolute;
+    padding: 20px;
+    color: white;
+    bottom: 80px;
+    left: 20px;
+}
+
+.not-found .speech-bubble:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-top-color: #00aabb;
+	border-bottom: 0;
+	border-left: 0;
+	margin-left: -10px;
+	margin-bottom: -20px;
+}
+
+.you-are-lost {
+    background-color: #212121 !important;
+    background-position: bottom 0 left 60px;
+}
+
+.not-found #countdown {
+    color: #e91e63;
 }
 
 @media (min-width: 1200px) {
