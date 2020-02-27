@@ -9,12 +9,12 @@ def applications():
 
 @app.route("/applications/<application>")
 def application(application):
-    return render.search_package_template(application, "Native")
+    return render.search_package_template(application, "Application")
 
 
 @app.route("/packages/<package>")
 def package(package):
-    return render.search_package_template(package, "Native")
+    return render.search_package_template(package, "Package")
 
 
 @app.route("/snaps/<snap>")

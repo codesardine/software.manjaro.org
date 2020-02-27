@@ -8,12 +8,8 @@
         {% endif %}
         {% set icon = pkg.get_icon() | replace('/var/lib/flatpak/appstream/flathub/x86_64/active/icons/64x64/', '/static/images/appstream/flathub/') %}
         {% if not icon %}
-        {% set icon = "/static/images/package.svg"  %}
+        {% set icon = "/static/images/package.svg" %}
         {% endif  %}
-        {% set description = pkg.get_long_desc() %}
-        {% if not description %}
-        {% set description = pkg.get_desc() %}
-        {% endif %}
         {% set screenshots = pkg.get_screenshots() %}
         {% set pkg_name = pkg.get_name() %}
 

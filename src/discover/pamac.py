@@ -33,7 +33,7 @@ class Get:
 
     def search_single_package(self, pkg_name, pkg_format):
 
-        if pkg_format == "Native":
+        if pkg_format == "Package" or pkg_format == "Application":
             repo = self.database.search_repos_pkgs(pkg_name)
 
         elif pkg_format == "Snap":

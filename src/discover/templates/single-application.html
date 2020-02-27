@@ -10,10 +10,6 @@
         {% if not icon %}
         {% set icon = "/static/images/package.svg"  %}
         {% endif  %}
-        {% set description = pkg.get_long_desc() %}
-        {% if not description %}
-        {% set description = pkg.get_desc() %}
-        {% endif %}
         {% set screenshots = pkg.get_screenshots() %}
         {% set licenses = pkg.get_licenses() %}
         {% set pkg_name = pkg.get_name() %}

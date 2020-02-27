@@ -11,6 +11,7 @@
         {% set icon = "/static/images/package.svg"  %}
         {% endif  %}
         {% set screenshots = pkg.get_screenshots() %}
+        {% set licenses = pkg.get_licenses() %}
         {% set pkg_name = pkg.get_name() %}
 
         <div class="row">
@@ -18,16 +19,22 @@
                 <div><img src="{{ icon }}" class="img64" alt="package image"></div>
                 <h4>{{ name }}</h4>
                 <p class="small">
+                    Licenses: <span class="text-info small">{% for license in licenses %} {{ license }}{% endfor %}</span>
+                    <br>
                     Version: <span class="text-info small">{{ pkg.get_version() }}</span>
                 </p>
                 <p class="small">
                     Installing:
                     <br>
-                    <code>sudo snap install {{ pkg_name }}</code>
+                    <code>pamac install {{ pkg_name }}</code>
+                    <br>
+                    <code>pacman -S {{ pkg_name }}</code>
                     <br><br>
                     Removing:
                     <br>
-                    <code>sudo snap remove {{ pkg_name }}</code></p>
+                    <code>pamac remove {{ pkg_name }}</code>
+                    <br>
+                    <code>pacman -R {{ pkg_name }}</code></p>
             </div>
             <div id="carousel" class="col-sm-12 col-md-8 carousel slide"
                 style="{% if screenshots | length <= 1 %} margin-top:-6px !important;{% endif %}" data-ride="carousel">

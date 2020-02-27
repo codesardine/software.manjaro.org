@@ -24,25 +24,19 @@ def appstream_template(category):
 
 def pkgs_template(title):
 
-    if title == "Applications":
-        template = "applications.html"
-    else:
-        template = "packages.html"
-
+    template = f"{title.lower()}.html"
+    description = f"Discover {title.lower()} available on Manjaro linux."
     apps = get.all_repo_pkgs(title)
-    return render_template(template, apps=apps, nav=get_categories(), title=title, total=len(apps))
+    return render_template(template, apps=apps, nav=get_categories(), title=title, total=len(apps), description=description)
 
 
 def external_repos_template(title):
 
-    if title == "Snaps":
-        template = "snaps.html"
-    else:
-        template = "flatpaks.html"
-
+    template = f"{title.lower()}.html"
+    description = f"Discover {title.lower()} available on Manjaro linux."
     categories = get.external_repos()[0]
     pamac_database = get.external_repos()[1]
-    return render_template(template, categories=categories, nav=get_categories(), title=title, database=pamac_database)
+    return render_template(template, categories=categories, nav=get_categories(), title=title, database=pamac_database, description=description)
 
 
 def template_404():
@@ -60,11 +54,9 @@ def search_package_template(pkg_name, pkg_format):
     if not title:
         title = pkg.get_name()
 
-    if pkg_format == "Snap":
-        template = f"single-{pkg_format.lower()}.html"
-    elif pkg_format == "Flatpak":
-        template = f"single-{pkg_format.lower()}.html"
-    elif pkg_format == "Native":
-        template = f"single-package-{pkg_format.lower()}.html"
+    description = pkg.get_desc()
+    if not description:
+        description = pkg.get_log_desc()
 
-    return render_template(template, nav=get_categories(), pkg=pkg, title=title, pkg_format=pkg_format)
+    template = f"single-{pkg_format.lower()}.html"
+    return render_template(template, nav=get_categories(), pkg=pkg, title=title, pkg_format=pkg_format, description=description)
