@@ -1,5 +1,6 @@
 from flask import render_template
-import pamac
+import discover.pamac as pamac
+
 get = pamac.Get()
 
 

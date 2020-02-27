@@ -11,10 +11,8 @@ class Get:
         database.enable_appstream()
         self.database = database
 
-
     def appstream_category(self, category):
         return self.database.get_category_pkgs(category)
-
 
     def all_repo_pkgs(self, title):
         pkgs = []
@@ -28,12 +26,10 @@ class Get:
 
         return tuple(pkgs)
 
-
     def external_repos(self):
         # FIXME some unknown categories are missing
         categories = self.database.get_categories_names()
         return categories, self.database
-
 
     def search_single_package(self, pkg_name, pkg_format):
 
