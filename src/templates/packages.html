@@ -11,10 +11,10 @@
             <div class="img-overflow-hidden">
                     <div class="content">
                         <h4 class="name">{{ pkg_name }}</h4>
-                        <p class="description">{{ description | trunc_desc }}</p>
+                        <p class="description">{{ description | truncate_description }}</p>
                         <span class="keywords" style="display:none;">{{ pkg_name }}</span>
                     </div>
-                    <a href="/packages/{{ pkg_name }}" target="_blank" style="" role="button" class="">More Info</a>
+                    <a href="/packages/{{ pkg_name }}" target="_blank" role="button" class="">More Info</a>
                 </div>
         </div>
         {% endfor %}

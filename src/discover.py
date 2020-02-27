@@ -2,10 +2,10 @@
 from flask import Flask
 app = Flask(__name__)
 from routes import *
-from templateutils import *
+from templateUtils import *
 
 
 if __name__ == "__main__":
-    app.jinja_env.filters['trunc_desc'] = truncate_desc
-    app.jinja_env.filters['class_manjaro'] = get_class_manjaro
+    # this only works on debugind not with wsgi server
+    app.jinja_env.filters['truncate_description'] = truncate_description
     app.run(port=8000, host="127.0.0.1", debug=True)

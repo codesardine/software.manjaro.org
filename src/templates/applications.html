@@ -20,7 +20,7 @@
             <div class="img-overflow-hidden">
                 <div class="content">
                     <h4 class="name">{{ name }}</h4>
-                    <p class="description">{{ description }}</p>
+                    <p class="description">{{ description | truncate_description() }}</p>
                     <span class="keywords" style="display:none;">{{ pkg_name }}</span>
                 </div>
                 <a href="/applications/{{ pkg_name }}" target="_blank" style="" role="button" class="">More Info</a>
