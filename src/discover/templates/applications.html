@@ -13,7 +13,7 @@
                 alt="application image" loading="lazy">
             {% endif %}
             {% if loop.index > 20 %}
-            <img src="static/images/logo.svg"
+            <img src="{{ url_for('static', filename='images/logo.svg') }}"
                 data-src="{{ icon | replace('/usr/share/app-info', '/static/images/appstream') }}"
                 class="img64 lazyload" alt="application image" loading="lazy">
             {% endif %}

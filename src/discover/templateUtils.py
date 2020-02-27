@@ -1,7 +1,3 @@
-from flask import Flask
-
-
-#@app.template_filter('truncate_description')
 def truncate_description(long_description: str, characters: int = 160):
     """ 
     desc: truncate long description strings to 160 char 
