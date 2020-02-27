@@ -50,7 +50,7 @@ def search_package_template(pkg_name, pkg_format):
 
     pkg = get.search_single_package(pkg_name, pkg_format)
     if not pkg:
-        return template_404()        
+        return template_404()
 
     title = pkg.get_app_name()
     if not title:

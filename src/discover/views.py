@@ -1,5 +1,6 @@
 from discover import app, cache
 import discover.render as render
+import discover.api as api
 
 
 @app.route("/applications/")
@@ -66,3 +67,37 @@ def error_404(error404):
 @cache.cached(timeout=100)
 def sitemap():
     return render.sitemap_template()
+
+
+#Api
+
+@app.route("/api/applications")
+def api_applications():
+    worker = api.ApplicationsWorker(1)
+    worker.getAll()
+    return worker.toJson()
+
+@app.route("/api/packages")
+def api_packages():
+    worker = api.PackagesWorker(2)
+    worker.getAll()
+    return worker.toJson()
+
+@app.route("/api/applications/<pkgname>")
+@app.route("/api/packages/<pkgname>")
+def api_package(pkgname):
+    worker = api.PackagesWorker(2)
+    worker.getPackage(pkgname)
+    return worker.toJson()
+
+@app.route("/api/snaps")
+def api_snaps():
+    worker = api.SnapWorker(2)
+    worker.getAll()
+    return worker.toJson()
+
+@app.route("/api/snaps/<pkgname>")
+def api_snap(pkgname):
+    worker = api.SnapWorker(2)
+    worker.getPackage(pkgname)
+    return worker.toJson()
