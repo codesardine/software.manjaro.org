@@ -31,7 +31,7 @@ def snap(snap):
 @cache.cached(timeout=40)
 def flatpak(flatpak):
     return render.search_package_template(flatpak, "Flatpak")
-    
+
 
 @app.route("/packages/")
 @cache.cached(timeout=80)
@@ -69,35 +69,71 @@ def sitemap():
     return render.sitemap_template()
 
 
-#Api
+# API
 
 @app.route("/api/applications")
 def api_applications():
     worker = api.ApplicationsWorker(1)
-    worker.getAll()
-    return worker.toJson()
+    worker.get_all()
+    return worker.to_json()
+
+@app.route("/api/applications/<pkgname>")
+def api_application(pkgname):
+    worker = api.ApplicationsWorker(1)
+    worker.get_package(pkgname)
+    return worker.to_json()
+
+@app.route("/api/applications/filter", defaults={"option": "count"})
+@app.route("/api/applications/filter/<option>")
+def api_applications_filter(option=""):
+    worker = api.ApplicationsWorker(1)
+    worker.get_all()
+    return worker.to_json(option)
 
 @app.route("/api/packages")
 def api_packages():
     worker = api.PackagesWorker(2)
-    worker.getAll()
-    return worker.toJson()
+    worker.get_all()
+    return worker.to_json()
 
-@app.route("/api/applications/<pkgname>")
 @app.route("/api/packages/<pkgname>")
 def api_package(pkgname):
     worker = api.PackagesWorker(2)
-    worker.getPackage(pkgname)
-    return worker.toJson()
+    worker.get_package(pkgname)
+    return worker.to_json()
+
+@app.route("/api/packages/filter", defaults={"option": "count"})
+@app.route("/api/packages/filter/<option>")
+def api_packages_filter(option=""):
+    """
+    filter/option :
+       - count : only count applications, items[] is empty
+       - name : only string pkg.get_name() in items[]
+       - app : only string pkg.get_app_name() in items[]
+       - url@xxx : filter, "xxx" is in url
+       - desc@xxx : filter, "xxx" is in description
+       - dep@xxx : filter, "xxx" is a dependence
+    """
+    worker = api.PackagesWorker(1)
+    worker.get_all()
+    return worker.to_json(option)
 
 @app.route("/api/snaps")
 def api_snaps():
     worker = api.SnapWorker(2)
-    worker.getAll()
-    return worker.toJson()
+    worker.get_all()
+    return worker.to_json()
 
 @app.route("/api/snaps/<pkgname>")
 def api_snap(pkgname):
     worker = api.SnapWorker(2)
+<<<<<<< HEAD
     worker.getPackage(pkgname)
     return worker.toJson()
+||||||| constructed merge base
+    worker.getPackage(pkgname)
+    return worker.toJson()
+=======
+    worker.get_package(pkgname)
+    return worker.to_json()
+>>>>>>> add filters
