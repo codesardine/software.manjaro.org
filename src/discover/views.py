@@ -120,20 +120,38 @@ def api_packages_filter(option=""):
 
 @app.route("/api/snaps")
 def api_snaps():
-    worker = api.SnapWorker(2)
+    worker = api.SnapWorker(3)
     worker.get_all()
     return worker.to_json()
 
 @app.route("/api/snaps/<pkgname>")
 def api_snap(pkgname):
-    worker = api.SnapWorker(2)
-<<<<<<< HEAD
-    worker.getPackage(pkgname)
-    return worker.toJson()
-||||||| constructed merge base
-    worker.getPackage(pkgname)
-    return worker.toJson()
-=======
+    worker = api.SnapWorker(3)
     worker.get_package(pkgname)
     return worker.to_json()
->>>>>>> add filters
+
+@app.route("/api/snaps/filter", defaults={"option": "count"})
+@app.route("/api/snaps/filter/<option>")
+def api_snaps_filter(option=""):
+    worker = api.SnapWorker(3)
+    worker.get_all()
+    return worker.to_json(option)
+
+@app.route("/api/flatpaks")
+def api_flatpaks():
+    worker = api.FlatpakWorker(4)
+    worker.get_all()
+    return worker.to_json()
+
+@app.route("/api/flatpaks/<pkgname>")
+def api_flatpak(pkgname):
+    worker = api.FlatpakWorker(4)
+    worker.get_package(pkgname)
+    return worker.to_json()
+
+@app.route("/api/flatpaks/filter", defaults={"option": "count"})
+@app.route("/api/flatpaks/filter/<option>")
+def api_flatpaks_filter(option=""):
+    worker = api.FlatpakWorker(4)
+    worker.get_all()
+    return worker.to_json(option)

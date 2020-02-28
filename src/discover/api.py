@@ -203,6 +203,10 @@ class PackagesWorker(Worker):
 
 
 class SnapWorker(Worker):
+    """
+    fields:
+    app-name, name, channel, confined, desc, long-desc, icon, license, publisher, repo, url, version, screenshots
+    """
     def get_all(self):
         database = render.get.external_repos()[1]
         for category in render.get.external_repos()[0]:
@@ -219,18 +223,72 @@ class SnapWorker(Worker):
                 if value:
                     ret[prop.name] = value
             return ret
-        return {
+        ret = {
             'name': item.get_name(),
-            'url': item.get_url(),
-            'icon': item.get_icon(),
+            #'url': item.get_url(),
+            #'icon': item.get_icon(),
             'desc': item.get_desc(),
+            'repo': item.get_repo() # return "Snap"
         }
+        url = item.get_url()
+        if url and not "mailto" in url:
+            ret["url"] = url
+        icon = item.get_icon()
+        if icon:
+            ret["icon"] = icon
+        return ret
 
     def get_package(self, package_name):
         self.datas = ()
         database = render.get.external_repos()[1]
         for category in render.get.external_repos()[0]:
             cat = database.get_category_snaps(category)
+            for app in cat:
+                if app.get_name() == package_name:
+                    self.datas = (app,)
+                    return
+
+class FlatpakWorker(Worker):
+    """
+    fields:
+    app-name, name, version, desc, long-desc, icon, id, license, repo, url, launchable, installed-size, download-size, screenshots
+    """
+    def get_all(self):
+        database = render.get.external_repos()[1]
+        for category in render.get.external_repos()[0]:
+            cat = database.get_category_flatpaks(category)
+            for app in cat:
+                self.datas.append(app)
+        super().get_all()
+
+    def _includeItem(self, item, detail=False):
+        if detail:
+            ret = {}
+            for prop in item.props:
+                value = item.get_property(prop.name)
+                if value:
+                    ret[prop.name] = value
+            return ret
+        ret = {
+            'name': item.get_name(),
+            #'url': item.get_url(),
+            #'icon': item.get_icon(),
+            'desc': item.get_desc(),
+            #'repo': item.get_repo()     # return "flathub"
+        }
+        icon = item.get_icon()
+        if icon:
+            ret["icon"] = icon
+        url = item.get_url()
+        if url:
+            ret["url"] = url
+        return ret
+
+    def get_package(self, package_name):
+        self.datas = ()
+        database = render.get.external_repos()[1]
+        for category in render.get.external_repos()[0]:
+            cat = database.get_category_flatpaks(category)
             for app in cat:
                 if app.get_name() == package_name:
                     self.datas = (app,)
