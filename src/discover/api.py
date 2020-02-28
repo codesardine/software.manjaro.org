@@ -78,7 +78,7 @@ class Worker:
 
             if ret["count"] < 1:
                 ret["status"] = 404
-        except InterruptedError:
+        except:
             ret["status"] = 500
             print(f"Api Error: {sys.exc_info()[0]}")
         return jsonify(ret)
