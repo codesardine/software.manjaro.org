@@ -381,7 +381,9 @@ h4 {
 }
 
 .single-package img {
-    float: none;
+    float: right;
+    vertical-align: top;
+    margin-right: 0px;
 }
 
 .single-package h4 {
@@ -390,19 +392,12 @@ h4 {
 
 .single-package .description {
     text-align: justify;
+    background: #bbdefb;
+    padding: 10px;
 }
 
 .content {
     margin-bottom: -11px;
-}
-
-.carousel {
-    margin-top: 32px;
-    margin-bottom: 4rem;
-}
-
-.single-package .img64 {
-    margin-bottom: 2rem;
 }
 
 .carousel-item {
@@ -410,17 +405,18 @@ h4 {
 }
 
 .carousel-control-prev-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23e91e63' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23009688' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
 }
 
 .carousel-control-next-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23e91e63' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23009688' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
 }
 
 .carousel-indicators li {
-    background-color: #e91e63 !important;
-    width: 15px !important;
-    height: 15px !important;
+    background-color: #009688 !important;
+    width: 12px !important;
+    height: 12px !important;
+    margin-top: 3px;
 }
 
 .carousel-indicators>li {
@@ -428,7 +424,17 @@ h4 {
 }
 
 .carousel-indicators {
-    top: -40px;
+    top: -42px;
+}
+
+.carousel-controls {
+    margin-top: -42px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    z-index: 15;
+    list-style: none;
 }
 
 .carousel-control-next,
@@ -461,9 +467,8 @@ footer {
     color: white;
 }
 
-.not-found .speech-bubble {
-    position: relative;
-    background: #00aabb;
+.speech-bubble {
+    position: fixed !important;
     border-radius: .4em;
     position: absolute;
     padding: 20px;
@@ -472,7 +477,7 @@ footer {
     left: 20px;
 }
 
-.not-found .speech-bubble:after {
+.speech-bubble:after {
 	content: '';
 	position: absolute;
 	bottom: 0;
@@ -484,6 +489,25 @@ footer {
 	border-bottom: 0;
 	border-left: 0;
 	margin-left: -10px;
+	margin-bottom: -20px;
+}
+
+.not-found .speech-bubble {
+    background: #00aabb;
+}
+
+.not-found .speech-bubble:after {
+	border-top-color: #00aabb;
+}
+
+.single-package .speech-bubble {
+    background: #0277bd;
+    text-align: center;
+}
+
+.single-package .speech-bubble:after {
+    border-top-color: #0277bd;
+    margin-left: -54px;
 	margin-bottom: -20px;
 }
 
@@ -628,11 +652,22 @@ footer {
     .packages .search-icon {
         display: block;
     }
+
+    .single-package .carousel {
+        margin-top: 38px;
+    }
+    .single-package .speech-bubble {
+        bottom: 24px !important;
+    }
 }
 
 @media (max-width: 991px) {
     .featured .jumbotron img {
         margin-top: 20px;
+    }
+    
+    main {
+        margin-bottom: 120px !important;
     }
 }
 

@@ -1,0 +1,43 @@
+<div id="app-carousel" class="col-sm-12 col-md-8 carousel slide" data-ride="carousel">
+    {% if screenshots | length > 1 %}
+    <ol class="carousel-controls">
+        <a class="carousel-control-prev" href="#app-carousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#app-carousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </ol>
+    <ol class="carousel-indicators">
+        {% if not screenshots %}
+        <li data-target="#app-carousel" data-slide-to="0" class="active"></li>
+        {% else %}
+        {% for shot in screenshots %}
+        <li data-target="#app-carousel" data-slide-to="{{ loop.index -1 }}"
+            class="{% if loop.index == 1 %}active{% endif %}"></li>
+        {% endfor %}
+        {% endif %}
+    </ol>
+    {% endif %}
+    <div class="carousel-inner">
+        {% if not screenshots %}
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="/static/images/no-screenshoot.png" alt="package image">
+        </div>
+        {% else %}
+        {% for shot in screenshots %}
+        <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+            <img class="d-block w-100" src="{{ shot }}" alt="package image">
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+<div class="col-md-12 col-lg-8 offset-lg-4">
+    <p class="description">{{ description }}</p>
+</div>
+<div class="speech-bubble">
+    Easy install<br>from Pamac UI
+</div>

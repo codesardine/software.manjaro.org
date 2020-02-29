@@ -54,9 +54,9 @@ def search_package_template(pkg_name, pkg_format):
     if not title:
         title = pkg.get_name()
 
-    description = pkg.get_desc()
+    description = pkg.get_long_desc()
     if not description:
-        description = pkg.get_log_desc()
+        description = pkg.get_desc()
 
     template = f"single-{pkg_format.lower()}.html"
     return render_template(template, nav=get_categories(), pkg=pkg, title=title, pkg_format=pkg_format, description=description)
