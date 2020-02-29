@@ -39,27 +39,11 @@
     </header>
     <nav id="sidebar">
         <ul class="list-unstyled components">
-
             {% for item in nav %}
             <li>
                 <a href="../{{ item.href }}">{{ item.title }}</a>
             </li>
             {% endfor %}
-            <li>
-                <a href="https://manjaro.org">manjaro.org</a>
-            </li>
-            <li>
-                <a href="https://manjaro.org/download/">downloads</a>
-            </li>
-            <li>
-                <a href="https://forum.manjaro.org">forum</a>
-            </li>
-            <li>
-                <a href="https://wiki.manjaro.org">wiki</a>
-            </li>
-            <li>
-                <a href="https://gitlab.manjaro.org">gitlab</a>
-            </li>
         </ul>
     </nav>
     {% block content %}
@@ -73,5 +57,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha256-WqU1JavFxSAMcLP2WIOI+GB2zWmShMI82mTpLDcqFUg=" crossorigin="anonymous"></script>
 <script src="{{ url_for('static', filename='js/js.js') }}"></script>
-
 </html>
