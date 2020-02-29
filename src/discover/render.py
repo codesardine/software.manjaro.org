@@ -18,8 +18,9 @@ def get_appstream_app_list(category):
 
 def appstream_template(category):
     template = "featured.html"
+    description = "Discover and explore any Software available in Manjaro linux, supports native application search, packages, snaps and flatpacks."
     apps = get_appstream_app_list(category)
-    return render_template(template, apps=apps, nav=get_categories(), title=category)
+    return render_template(template, apps=apps, nav=get_categories(), title=category, description=description)
 
 
 def pkgs_template(title):
