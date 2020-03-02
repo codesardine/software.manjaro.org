@@ -14,11 +14,11 @@
         {% set pkg_name = pkg.get_name() %}
 
         <div class="row">
-            <div class="col-sm-12 col-md-4">
-                <div><img src="{{ icon }}" class="img64" alt="package image"></div>
-                <h4>{{ name }}</h4>
+            <div itemscope itemtype="http://schema.org/SoftwareApplication" class="col-sm-12 col-md-4">
+                <div><img itemprop="image" src="{{ icon }}" class="img64" alt="flatpak image"></div>
+                <h4 itemprop="name" >{{ name }}</h4>
                 <p class="small">
-                    Version: <span class="text-info small">{{ pkg.get_version() }}</span>
+                    Version: <span itemprop="softwareVersion" class="text-info small">{{ pkg.get_version() }}</span>
                 </p>
                 <p class="small">
                     Installing:

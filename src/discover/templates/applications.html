@@ -3,7 +3,7 @@
 <main class="p-4 p-md-5 pt-5">
     <div id="search-items" class="row">
         {% for app in apps %}
-        <div class="col-xl-3 col-md-6 col-sm-12 app">
+        <div itemscope itemtype="http://schema.org/SoftwareApplication" class="col-xl-3 col-md-6 col-sm-12 app">
             {% set name = app.get_app_name() %}
             {% set pkg_name = app.get_name() %}
             {% set icon = app.get_icon() %}
@@ -13,17 +13,17 @@
                 alt="application image" loading="lazy">
             {% endif %}
             {% if loop.index > 20 %}
-            <img src="{{ url_for('static', filename='images/logo.svg') }}"
+            <img itemprop="image" src="{{ url_for('static', filename='images/logo.svg') }}"
                 data-src="{{ icon | replace('/usr/share/app-info', '/static/images/appstream') }}"
                 class="img64 lazyload" alt="application image" loading="lazy">
             {% endif %}
             <div class="img-overflow-hidden">
                 <div class="content">
-                    <h4 class="name">{{ name }}</h4>
-                    <p class="description">{{ description | truncate_description() }}</p>
+                    <h4 itemprop="name" class="name">{{ name }}</h4>
+                    <p itemprop="description" class="description">{{ description | truncate_description() }}</p>
                     <span class="keywords" style="display:none;">{{ pkg_name }}</span>
                 </div>
-                <a href="/applications/{{ pkg_name }}" target="_blank" style="" role="button" class="">More Info</a>
+                <a itemprop="url" href="/applications/{{ pkg_name }}" target="_blank" style="" role="button" class="">More Info</a>
             </div>
 
         </div>

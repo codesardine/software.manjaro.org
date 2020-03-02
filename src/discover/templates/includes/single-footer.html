@@ -29,14 +29,14 @@
         {% else %}
         {% for shot in screenshots %}
         <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
-            <img class="d-block w-100" src="{{ shot }}" alt="package image">
+            <img itemprop="screenshot" class="d-block w-100" src="{{ shot }}" alt="package image">
         </div>
         {% endfor %}
         {% endif %}
     </div>
 </div>
 <div class="col-md-12 col-lg-8 offset-lg-4">
-    <p class="description">{{ description }}</p>
+    <p itemprop="description" class="description">{{ description }}</p>
 </div>
 <div class="speech-bubble">
     Easy install<br>from Pamac UI
