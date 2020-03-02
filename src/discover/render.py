@@ -76,7 +76,7 @@ def sitemap_template():
         for package in packages:
             urls.append([f"https://discover.manjaro.org/{category.lower()}/{package.get_name()}", thirty_days_ago])
     
-    for repo in "Snaps", "flatpaks":
+    for repo in "Snaps", "Flatpaks":
         for category in get.external_repos()[0]:
             database = get.external_repos()[1]
             if repo == "Flatpaks":
