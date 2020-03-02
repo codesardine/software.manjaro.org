@@ -1,6 +1,6 @@
 from flask import render_template, make_response
 import discover.pamac as pamac
-from datetime import datetime, timedelta
+from datetime import date, timedelta
 
 get = pamac.Get()
 
@@ -66,7 +66,7 @@ def search_package_template(pkg_name, pkg_format):
 
 def sitemap_template():
     urls = []
-    thirty_days_ago = datetime.now() - timedelta(days=30)
+    thirty_days_ago = (date.today() - timedelta( days=30 )).isoformat()
   
     for category in get_categories():
         urls.append([f"https://discover.manjaro.org/{category['href']}", thirty_days_ago])
