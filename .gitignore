@@ -58,6 +58,6 @@ target/
 
 # Testing
 src/discover/static/images/appstream/*
-data/cache
+src/data/cache
 test.py
 .idea/
