@@ -50,3 +50,8 @@ def featured():
 @app.route("/<error404>/")
 def error_404(error404):
     return render.template_404()
+
+
+@app.route('/sitemap.xml', methods=['GET'])
+def sitemap():
+    return render.sitemap_template()

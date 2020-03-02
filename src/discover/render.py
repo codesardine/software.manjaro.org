@@ -1,5 +1,6 @@
-from flask import render_template
+from flask import render_template, make_response
 import discover.pamac as pamac
+from datetime import datetime, timedelta
 
 get = pamac.Get()
 
@@ -61,3 +62,33 @@ def search_package_template(pkg_name, pkg_format):
 
     template = f"single-{pkg_format.lower()}.html"
     return render_template(template, nav=get_categories(), pkg=pkg, title=title, pkg_format=pkg_format, description=description)
+
+
+def sitemap_template():
+    urls = []
+    thirty_days_ago = datetime.now() - timedelta(days=30)
+  
+    for category in get_categories():
+        urls.append([f"https://discover.manjaro.org/{category['href']}", thirty_days_ago])
+
+    for category in "Applications", "Packages":
+        packages = get.all_repo_pkgs(category)
+        for package in packages:
+            urls.append([f"https://discover.manjaro.org/{category.lower()}/{package.get_name()}", thirty_days_ago])
+    
+    for repo in "Snaps", "flatpaks":
+        for category in get.external_repos()[0]:
+            database = get.external_repos()[1]
+            if repo == "Flatpaks":
+                pkg_format = database.get_category_flatpaks(category)                
+            elif repo == "Snaps":
+                 pkg_format = database.get_category_snaps(category)
+
+            for app in pkg_format:
+                 urls.append([f"https://discover.manjaro.org/{repo.lower()}/{app.get_name()}", thirty_days_ago])
+            
+            
+    sitemap_template = render_template('sitemap_template.xml', urls=urls)
+    response = make_response(sitemap_template)
+    response.headers["Content-Type"] = "application/xml"
+    return response
