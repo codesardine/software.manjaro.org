@@ -359,6 +359,7 @@ h4 {
     text-align: justify;
     background: #bbdefb;
     padding: 10px;
+    overflow: hidden;
 }
 
 .content {
