@@ -19,6 +19,8 @@
                 <h4 itemprop="name" >{{ name }}</h4>
                 <p class="small">
                     Version: <span itemprop="softwareVersion" class="text-info small">{{ pkg.get_version() }}</span>
+                    <br>
+                    {{ link | safe }}
                 </p>
                 <p class="small">
                     Installing:

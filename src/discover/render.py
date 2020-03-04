@@ -58,8 +58,15 @@ def search_package_template(pkg_name, pkg_format):
     if not description:
         description = pkg.get_desc()
 
+    url = pkg.get_url()
+    if not "@" in url:
+        if url.startswith("https://git") or url.endswith(".git/") or url.endswith(".git"):
+            link = f"<a itemprop='url' href='{url}' target='_blank'>source</a>"
+        else:
+            link = f"<a itemprop='url' href='{url}' target='_blank'>website</a>"
+
     template = f"single-{pkg_format.lower()}.html"
-    return render_template(template, nav=get_categories(), pkg=pkg, title=title, pkg_format=pkg_format, description=description)
+    return render_template(template, nav=get_categories(), link=link, pkg=pkg, title=title, pkg_format=pkg_format, description=description)
 
 
 def sitemap_template():

@@ -22,6 +22,8 @@
                     Licenses: <span class="text-info small">{% for license in licenses %} {{ license }}{% endfor %}</span>
                     <br>
                     Version: <span itemprop="softwareVersion" class="text-info small">{{ pkg.get_version() }}</span>
+                    <br>
+                    {{ link | safe }}
                 </p>
                 <p class="small">
                     Installing:
