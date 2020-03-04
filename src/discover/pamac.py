@@ -1,23 +1,17 @@
-import gi
-gi.require_version('Pamac', '9.0')
-from gi.repository import Pamac
+from discover import database
 
 
 class Get:
+       
+    @staticmethod
+    def appstream_category(category):
+        return database.get_category_pkgs(category)
 
-    def __init__(self):
-        self.config = Pamac.Config(conf_path="/etc/pamac.conf")
-        database = Pamac.Database(config=self.config)
-        database.enable_appstream()
-        self.database = database
-
-    def appstream_category(self, category):
-        return self.database.get_category_pkgs(category)
-
-    def all_repo_pkgs(self, title):
+    @staticmethod
+    def all_repo_pkgs(title):
         pkgs = []
-        for repository in self.database.get_repos_names():
-            for package in self.database.get_repo_pkgs(repository):
+        for repository in database.get_repos_names():
+            for package in database.get_repo_pkgs(repository):
                 icon = package.get_icon()
                 if title == "Packages" and not icon:
                     pkgs.append(package)
@@ -26,21 +20,23 @@ class Get:
 
         return tuple(pkgs)
 
-    def external_repos(self):
+    @staticmethod
+    def external_repos():
         # FIXME some unknown categories are missing
-        categories = self.database.get_categories_names()
-        return categories, self.database
+        categories = database.get_categories_names()
+        return categories, database
 
-    def search_single_package(self, pkg_name, pkg_format):
+    @staticmethod
+    def search_single_package(pkg_name, pkg_format):
 
         if pkg_format == "Package" or pkg_format == "Application":
-            repo = self.database.search_repos_pkgs(pkg_name)
+            repo = database.search_repos_pkgs(pkg_name)
 
         elif pkg_format == "Snap":
-            repo = self.database.search_snaps(pkg_name)
+            repo = database.search_snaps(pkg_name)
 
         elif pkg_format == "Flatpak":
-            repo = self.database.search_flatpaks(pkg_name)
+            repo = database.search_flatpaks(pkg_name)
 
         for pkg in repo:
             if pkg_name == pkg.get_name():

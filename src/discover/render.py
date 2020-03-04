@@ -2,8 +2,6 @@ from flask import render_template, make_response
 import discover.pamac as pamac
 from datetime import date, timedelta
 
-get = pamac.Get()
-
 
 def get_categories():
     return {'title': 'Featured', 'href': ''},\
@@ -14,7 +12,7 @@ def get_categories():
 
 
 def get_appstream_app_list(category):
-    return get.appstream_category(category)
+    return pamac.Get.appstream_category(category)
 
 
 def appstream_template(category):
@@ -28,7 +26,7 @@ def pkgs_template(title):
 
     template = f"{title.lower()}.html"
     description = f"Discover {title.lower()} available on Manjaro linux."
-    apps = get.all_repo_pkgs(title)
+    apps = pamac.Get.all_repo_pkgs(title)
     return render_template(template, apps=apps, nav=get_categories(), title=title, total=len(apps), description=description)
 
 
@@ -36,8 +34,8 @@ def external_repos_template(title):
 
     template = f"{title.lower()}.html"
     description = f"Discover {title.lower()} available on Manjaro linux."
-    categories = get.external_repos()[0]
-    pamac_database = get.external_repos()[1]
+    categories = pamac.Get.external_repos()[0]
+    pamac_database = pamac.Get.external_repos()[1]
     return render_template(template, categories=categories, nav=get_categories(), title=title, database=pamac_database, description=description)
 
 
@@ -48,7 +46,7 @@ def template_404():
 
 def search_package_template(pkg_name, pkg_format):
 
-    pkg = get.search_single_package(pkg_name, pkg_format)
+    pkg = pamac.Get.search_single_package(pkg_name, pkg_format)
     if not pkg:
         return template_404()        
 
@@ -72,13 +70,13 @@ def sitemap_template():
         urls.append([f"https://discover.manjaro.org/{category['href']}", thirty_days_ago])
 
     for category in "Applications", "Packages":
-        packages = get.all_repo_pkgs(category)
+        packages = pamac.Get.all_repo_pkgs(category)
         for package in packages:
             urls.append([f"https://discover.manjaro.org/{category.lower()}/{package.get_name()}", thirty_days_ago])
     
     for repo in "Snaps", "Flatpaks":
-        for category in get.external_repos()[0]:
-            database = get.external_repos()[1]
+        for category in pamac.Get.external_repos()[0]:
+            database = pamac.Get.external_repos()[1]
             if repo == "Flatpaks":
                 pkg_format = database.get_category_flatpaks(category)                
             elif repo == "Snaps":
