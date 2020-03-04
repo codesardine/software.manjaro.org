@@ -1,4 +1,5 @@
 from discover import app, cache
+from flask import make_response
 import discover.render as render
 import discover.api as api
 
@@ -54,7 +55,16 @@ def flatpaks():
 @app.route("/")
 @cache.cached(timeout=40)
 def featured():
-    return render.appstream_template(render.get_categories()[0].get("title"))
+    resp = make_response(render.appstream_template(render.get_categories()[0].get("title")))
+
+    preloads = (
+        "</static/css/style.css>; rel=preload; as=style",
+        "</static/js/js.js>; rel=preload; as=script",
+        "<//stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css>; rel=preload; as=style",
+        "<//fonts.googleapis.com/css?family=Exo+2&display=swap>; as=style",
+    )
+    resp.headers['Link'] = ",".join(preloads)
+    return resp
 
 
 @app.route("/<error404>/")
@@ -72,12 +82,14 @@ def sitemap():
 # API
 
 @app.route("/api/applications")
+@cache.cached(timeout=60*4)
 def api_applications():
     worker = api.ApplicationsWorker(1)
     worker.get_all()
     return worker.to_json()
 
 @app.route("/api/applications/<pkgname>")
+@cache.cached(timeout=60*4)
 def api_application(pkgname):
     worker = api.ApplicationsWorker(1)
     worker.get_package(pkgname)
@@ -85,18 +97,21 @@ def api_application(pkgname):
 
 @app.route("/api/applications/filter", defaults={"option": "count"})
 @app.route("/api/applications/filter/<option>")
+@cache.cached(timeout=60*4)
 def api_applications_filter(option=""):
     worker = api.ApplicationsWorker(1)
     worker.get_all()
     return worker.to_json(option)
 
 @app.route("/api/packages")
+@cache.cached(timeout=60*4)
 def api_packages():
     worker = api.PackagesWorker(2)
     worker.get_all()
     return worker.to_json()
 
 @app.route("/api/packages/<pkgname>")
+@cache.cached(timeout=60*4)
 def api_package(pkgname):
     worker = api.PackagesWorker(2)
     worker.get_package(pkgname)
@@ -104,6 +119,7 @@ def api_package(pkgname):
 
 @app.route("/api/packages/filter", defaults={"option": "count"})
 @app.route("/api/packages/filter/<option>")
+@cache.cached(timeout=60*4)
 def api_packages_filter(option=""):
     """
     filter/option :
@@ -119,12 +135,14 @@ def api_packages_filter(option=""):
     return worker.to_json(option)
 
 @app.route("/api/snaps")
+@cache.cached(timeout=60*4)
 def api_snaps():
     worker = api.SnapWorker(3)
     worker.get_all()
     return worker.to_json()
 
 @app.route("/api/snaps/<pkgname>")
+@cache.cached(timeout=60*4)
 def api_snap(pkgname):
     worker = api.SnapWorker(3)
     worker.get_package(pkgname)
@@ -132,18 +150,21 @@ def api_snap(pkgname):
 
 @app.route("/api/snaps/filter", defaults={"option": "count"})
 @app.route("/api/snaps/filter/<option>")
+@cache.cached(timeout=60*4)
 def api_snaps_filter(option=""):
     worker = api.SnapWorker(3)
     worker.get_all()
     return worker.to_json(option)
 
 @app.route("/api/flatpaks")
+@cache.cached(timeout=60*4)
 def api_flatpaks():
     worker = api.FlatpakWorker(4)
     worker.get_all()
     return worker.to_json()
 
 @app.route("/api/flatpaks/<pkgname>")
+@cache.cached(timeout=60*4)
 def api_flatpak(pkgname):
     worker = api.FlatpakWorker(4)
     worker.get_package(pkgname)
@@ -151,6 +172,7 @@ def api_flatpak(pkgname):
 
 @app.route("/api/flatpaks/filter", defaults={"option": "count"})
 @app.route("/api/flatpaks/filter/<option>")
+@cache.cached(timeout=60*4)
 def api_flatpaks_filter(option=""):
     worker = api.FlatpakWorker(4)
     worker.get_all()

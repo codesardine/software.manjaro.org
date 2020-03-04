@@ -81,7 +81,12 @@ class Worker:
         except:
             ret["status"] = 500
             print(f"Api Error: {sys.exc_info()[0]}")
-        return jsonify(ret)
+
+        resp = jsonify(ret) # return flask.wrappers.Response
+        resp.cache_control.max_age = 60*60      # in client cache for 1 hour
+        resp.headers['Server'] = "Discover Pamac"
+        return resp
+
 
     @staticmethod
     def is_manjaro(pkg) ->int:
@@ -219,8 +224,7 @@ class SnapWorker(Worker):
         if detail:
             ret = {}
             for prop in item.props:
-                value = item.get_property(prop.name)
-                if value:
+                if value := item.get_property(prop.name):
                     ret[prop.name] = value
             return ret
         ret = {
@@ -233,8 +237,7 @@ class SnapWorker(Worker):
         url = item.get_url()
         if url and not "mailto" in url:
             ret["url"] = url
-        icon = item.get_icon()
-        if icon:
+        if icon := item.get_icon():
             ret["icon"] = icon
         return ret
 
@@ -265,8 +268,7 @@ class FlatpakWorker(Worker):
         if detail:
             ret = {}
             for prop in item.props:
-                value = item.get_property(prop.name)
-                if value:
+                if value := item.get_property(prop.name):
                     ret[prop.name] = value
             return ret
         ret = {
@@ -276,11 +278,9 @@ class FlatpakWorker(Worker):
             'desc': item.get_desc(),
             #'repo': item.get_repo()     # return "flathub"
         }
-        icon = item.get_icon()
-        if icon:
+        if icon := item.get_icon():
             ret["icon"] = icon
-        url = item.get_url()
-        if url:
+        if url := item.get_url():
             ret["url"] = url
         return ret
 
