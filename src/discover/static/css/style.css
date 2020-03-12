@@ -351,8 +351,12 @@ h4 {
     margin-right: 0px;
 }
 
-.single-package h4 {
-    margin-bottom: 1rem;
+.single-package .web-install-btn {
+    font-size: 80%;
+    float: right;
+    margin-top: 54px;
+    margin-right: -58px;
+    padding: .35em .4em;
 }
 
 .single-package .description {

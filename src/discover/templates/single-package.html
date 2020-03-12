@@ -18,6 +18,7 @@
             <div itemscope itemtype="http://schema.org/SoftwareApplication" class="col-sm-12 col-md-4">
                 <div><img src="{{ icon }}" class="img64" alt="package image"></div>
                 <h4 itemprop="name" >{{ name }}</h4>
+                <a href="web-pamac://{{ pkg_name }}" class="btn web-install-btn badge badge-primary disabled" role="button" aria-disabled="true">Install</a>
                 <p class="small">
                     Licenses: <span class="text-info small">{% for license in licenses %} {{ license }}{% endfor %}</span>
                     <br>

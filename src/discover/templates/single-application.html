@@ -18,12 +18,14 @@
             <div itemscope itemtype="http://schema.org/SoftwareApplication" class="col-sm-12 col-md-4">
                 <div><img itemprop="image" src="{{ icon }}" class="img64" alt="application image"></div>
                 <h4 itemprop="name" >{{ name }}</h4>
+                <a href="web-pamac://{{ pkg_name }}" class="btn web-install-btn badge badge-primary disabled" role="button" aria-disabled="true">Install</a>
                 <p class="small">
                     Licenses: <span class="text-info small">{% for license in licenses %} {{ license }}{% endfor %}</span>
                     <br>
                     Version: <span itemprop="softwareVersion" class="text-info small">{{ pkg.get_version() }}</span>
                     <br>
                     {{ link | safe }}
+                    <br>                    
                 </p>
                 <p class="small">
                     Installing:
