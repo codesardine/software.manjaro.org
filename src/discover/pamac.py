@@ -11,13 +11,27 @@ class Get:
     def all_repo_pkgs(title):
         pkgs = []
         for repository in database.get_repos_names():
-            for package in database.get_repo_pkgs(repository):
-                icon = package.get_icon()
-                if title == "Packages" and not icon:
-                    pkgs.append(package)
-                elif title == "Applications" and icon:
-                    pkgs.append(package)
+            iter_obj = iter(database.get_repo_pkgs(repository))
+            if title == "Packages":
+                while 1:
+                    try:
+                        package = next(iter_obj)
+                        icon = package.get_icon()
+                        if not icon:
+                            pkgs.append(package)
+                    except StopIteration:
+                        break
 
+            elif title == "Applications":
+                while 1:
+                    try:
+                        package = next(iter_obj)
+                        icon = package.get_icon()
+                        if icon:
+                            pkgs.append(package)
+                    except StopIteration:
+                        break
+                
         return tuple(pkgs)
 
     @staticmethod
@@ -43,3 +57,9 @@ class Get:
                 return pkg
 
         return None
+
+def preload():
+    return Get.all_repo_pkgs("Packages")
+
+packages = preload()
+

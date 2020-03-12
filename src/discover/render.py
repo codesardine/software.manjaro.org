@@ -2,6 +2,7 @@ from flask import render_template, make_response
 import discover.pamac as pamac
 from datetime import date, timedelta
 
+packages = pamac.packages
 
 def get_categories():
     return {'title': 'Featured', 'href': ''},\
@@ -26,7 +27,10 @@ def pkgs_template(title):
 
     template = f"{title.lower()}.html"
     description = f"Discover {title.lower()} available on Manjaro linux."
-    apps = pamac.Get.all_repo_pkgs(title)
+    if title == "Packages":
+        apps = packages
+    else:
+        apps = pamac.Get.all_repo_pkgs(title)
     return render_template(template, apps=apps, nav=get_categories(), title=title, total=len(apps), description=description)
 
 

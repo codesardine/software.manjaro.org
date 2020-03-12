@@ -18,6 +18,4 @@ database = Pamac.Database(
         conf_path="/etc/pamac.conf"
         ))
 database.enable_appstream()
-
-
 import discover.views
