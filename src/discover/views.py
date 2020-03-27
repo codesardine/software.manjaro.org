@@ -5,7 +5,7 @@ import discover.render as render
 @app.route("/applications/")
 @cache.cached(timeout=50)
 def applications():
-    return render.pkgs_template(render.get_categories()[1].get("title"))
+    return render.pkgs_template(render.get_categories()[0].get("title"))
 
 
 @app.route("/applications/<application>")
@@ -35,25 +35,25 @@ def flatpak(flatpak):
 @app.route("/packages/")
 @cache.cached(timeout=80)
 def packages():
-    return render.pkgs_template(render.get_categories()[2].get("title"))
+    return render.pkgs_template(render.get_categories()[1].get("title"))
 
 
 @app.route("/snaps/")
 @cache.cached(timeout=50)
 def snaps():
-    return render.external_repos_template(render.get_categories()[3].get("title"))
+    return render.external_repos_template(render.get_categories()[2].get("title"))
 
 
 @app.route("/flatpaks/")
 @cache.cached(timeout=50)
 def flatpaks():
-    return render.external_repos_template(render.get_categories()[4].get("title"))
+    return render.external_repos_template(render.get_categories()[3].get("title"))
 
 
 @app.route("/")
 @cache.cached(timeout=40)
 def featured():
-    return render.appstream_template(render.get_categories()[0].get("title"))
+    return render.appstream_template("Featured")
 
 
 @app.route("/<error404>/")

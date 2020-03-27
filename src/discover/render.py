@@ -5,8 +5,7 @@ from datetime import date, timedelta
 packages = pamac.packages
 
 def get_categories():
-    return {'title': 'Featured', 'href': ''},\
-           {'title': 'Applications', 'href': 'applications'},\
+    return {'title': 'Applications', 'href': 'applications'},\
            {'title': 'Packages', 'href': 'packages'},\
            {'title': 'Snaps', 'href': 'snaps'}, \
            {'title': 'Flatpaks', 'href': 'flatpaks'}

@@ -228,24 +228,20 @@ img {
     filter: drop-shadow(1px 1px 1px black);
 }
 
-#sidebar ul li:nth-child(4) a:before {
+#sidebar ul li:nth-child(3) a:before {
     background: url("/static/images/snapcraft.svg");
 }
 
-#sidebar ul li:nth-child(5) a:before {
+#sidebar ul li:nth-child(4) a:before {
     background: url("/static/images/flatpak_logo.png");
 }
 
-#sidebar ul li:nth-child(3) a:before {
+#sidebar ul li:nth-child(2) a:before {
     background: url("/static/images/package.svg");
 }
 
-#sidebar ul li:nth-child(2) a:before {
-    background: url("/static/images/applications.svg");
-}
-
 #sidebar ul li:nth-child(1) a:before {
-    background: url("/static/images/featured.svg");
+    background: url("/static/images/applications.svg");
 }
 
 #sidebar ul li:hover {
