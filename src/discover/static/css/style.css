@@ -296,6 +296,10 @@ img {
     text-shadow: 0px 1px 1px #4d4d4d;
 }
 
+.featured .jumbotron p a {
+    color: #343a40;
+}
+
 .featured .jumbotron .col p:nth-of-type(3) {
     margin-top: 40px;
     font-size: 0.8rem;
@@ -458,6 +462,17 @@ footer {
 	margin-bottom: -20px;
 }
 
+.speech-bubble {
+    background: #0277bd;
+    text-align: center;
+}
+
+.speech-bubble:after {
+    border-top-color: #0277bd;
+    margin-left: -54px;
+	margin-bottom: -20px;
+}
+
 .not-found .speech-bubble {
     background: #00aabb;
 }
@@ -466,15 +481,31 @@ footer {
 	border-top-color: #00aabb;
 }
 
-.single-package .speech-bubble {
-    background: #0277bd;
-    text-align: center;
+.featured .speech-bubble {
+    background-color: #343a40;
 }
 
-.single-package .speech-bubble:after {
-    border-top-color: #0277bd;
-    margin-left: -54px;
-	margin-bottom: -20px;
+.featured .speech-bubble:after {
+    border-top-color: #343a40;
+    margin-left: -185px;
+}
+
+.featured footer {
+    z-index: 99;
+    position: relative;
+}
+
+.applications .speech-bubble:after {
+    margin-left: -140px;
+}
+
+.snaps .speech-bubble:after {
+    margin-left: -120px;
+}
+
+.packages .speech-bubble:after,
+.flatpaks .speech-bubble:after {
+    margin-left: -130px;
 }
 
 .you-are-lost {
@@ -622,7 +653,7 @@ footer {
     .single-package .carousel {
         margin-top: 38px;
     }
-    .single-package .speech-bubble {
+    .speech-bubble {
         bottom: 24px !important;
     }
 }
