@@ -508,6 +508,13 @@ footer {
     margin-left: -130px;
 }
 
+.applications .speech-bubble:after,
+.snaps .speech-bubble:after,
+.packages .speech-bubble:after,
+.flatpaks .speech-bubble:after {
+    padding-bottom: 100px !important;
+}
+
 .you-are-lost {
     background-color: #212121 !important;
     background-position: bottom 0 left 60px;
