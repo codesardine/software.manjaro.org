@@ -10,6 +10,10 @@ $( ".search-icon .fa-search" ).click(function() {
   $( "#search" ).focus();
 });
 
+$(window).one('scroll',function() {
+  $( ".speech-bubble" ).hide();
+});
+
 function debounce(fn, threshold) {
   var timeout;
   threshold = threshold || 600;
