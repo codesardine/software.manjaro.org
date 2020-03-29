@@ -378,13 +378,15 @@ footer {
 	border-top-color: #00aabb;
 	border-bottom: 0;
 	border-left: 0;
-	margin-left: -10px;
-	margin-bottom: -20px;
 }
 
 .speech-bubble {
     background: #0277bd;
     text-align: center;
+}
+
+.single-package .speech-bubble:after {
+    margin-left: -54px;
 }
 
 .speech-bubble:after {
