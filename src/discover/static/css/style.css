@@ -462,6 +462,17 @@ footer {
     }
 }
 
+@media (max-width: 416px) {
+    .featured .speech-bubble:after {
+        margin-left: -40%;
+    }
+
+    .featured .speech-bubble {
+        left: 0;
+        bottom:64px;
+    }
+}
+
 @media (max-width: 575px) {
 
     footer {
