@@ -5,17 +5,9 @@ $(function () {
 });
 $( "#search" ).focus();
 
-$( ".navbar-toggler .fa-bars" ).click(function() {
-  $( "#sidebar" ).toggle();
-});
-
 $( ".search-icon .fa-search" ).click(function() {
   $( ".search-box" ).toggle();
   $( "#search" ).focus();
-});
-
-$( "main, footer" ).click(function() {
-  $( "#sidebar" ).hide();
 });
 
 function debounce(fn, threshold) {
@@ -52,7 +44,6 @@ function matchApp(app, searchValue) {
 
 $('#search').keyup(debounce(function () {
   $("body").addClass("wait");
-  $( "#sidebar" ).hide();
   let searchValue = $('#search').val().toLocaleLowerCase()
   matchApp(app, searchValue)
   setTimeout(function(){   $("body").removeClass("wait");
