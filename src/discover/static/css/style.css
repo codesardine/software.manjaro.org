@@ -54,7 +54,6 @@ header img {
 
 .search-box {
     position: absolute;
-    right: 0;
     display: none;
 }
 
@@ -171,10 +170,9 @@ img {
 }
 
 #sidebar {
-    background: #263238;
+    background: #212121;
     position: fixed;
-    z-index: 999;
-    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.8);
+    z-index: 9999;
 }
 
 #sidebar ul li a:before {
@@ -377,12 +375,13 @@ footer {
 	border: 20px solid transparent;
 	border-top-color: #00aabb;
 	border-bottom: 0;
-	border-left: 0;
+    border-left: 0;
 }
 
 .speech-bubble {
     background: #0277bd;
     text-align: center;
+    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.5);
 }
 
 .single-package .speech-bubble:after {
@@ -442,6 +441,30 @@ footer {
     color: #e91e63;
 }
 
+main {
+    margin-bottom: 120px !important;
+}
+
+#sidebar {
+    height: 38px;
+}
+
+#sidebar ul li a:before {
+    float: left;
+    position: relative;
+}
+
+#sidebar ul {
+    display: flex;
+    justify-content: center;
+    padding-top: 7px;
+    padding-left: 20px;
+}
+
+#sidebar ul li {
+    margin-right: 20px;
+}
+
 @media (min-width: 1200px) {
     .app {
         margin-bottom: 80px;
@@ -495,17 +518,6 @@ footer {
         padding-left: 25px;
     }
 
-    .search-box {
-        position: absolute;
-        right: 34px;
-        left: 36px;
-        background-color: #212121;
-        padding: 5px;
-        display: none;
-        text-align: center;
-        display: none;
-    }
-
     .search-icon {
         display: block;
     }
@@ -541,6 +553,11 @@ footer {
     .snaps .search-box,
     .applications .search-box,
     .packages .search-box {
+        display: block;
+    }
+
+    .search-box {
+        right: 16px;
         display: block;
     }
 }
@@ -589,78 +606,46 @@ footer {
     .single-package .carousel {
         margin-top: 38px;
     }
+
+    .search-box {
+        position: absolute;
+        right: 34px;
+        left: 36px;
+        background-color: #212121;
+        padding: 5px;
+        display: none;
+        text-align: center;
+        display: none;
+    }
 }
 
 @media (max-width: 991px) {
+
     .featured .jumbotron img {
         margin-top: 20px;
     }
     
-    main {
-        margin-bottom: 120px !important;
-    }
-
-
     .featured footer {
         padding-bottom: 70px !important;
-    }
+    }  
     
     #sidebar {
         bottom: 0 !important;
         width: 100% !important;
-        height: 38px;
-    }
-
-    #sidebar ul li a:before {
-        float: left;
-        position: relative;
-    }
-
-    #sidebar ul {
-        display: flex;
-        justify-content: center;
-        padding-top: 7px;
-        padding-left: 20px;
-    }
-
-    #sidebar ul li {
-        margin-right: 20px;
     }
 }
 
 @media (min-width: 992px) {
-
-    main {
-        margin-left: 1.6rem !important;
-        margin-right: calc(1.6rem + 38px) !important;
-    }
-
-    header {
-        margin-right: 38px !important;
-    }
-
-    #sidebar {
-        top: 0;
-        right: 0;
-        height: 100vh;
-    }
+   #sidebar { 
+       top: 2px;
+       right: 0;
+       width: 200px;
+    } 
     
-    #sidebar ul li a {
-        display: block;
-        margin-left: 7px !important;
-    }
-    
-    #sidebar ul {
-        width: 38px;
-        padding-top: 11px;
-    }
-    
-    #sidebar ul li {
-        padding-bottom: 46px;
+    .search-box {
+        right: 200px;
     }
 }
-
-
 
 @media (max-width: 1199px) {
     .app {
