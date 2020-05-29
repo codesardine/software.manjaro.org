@@ -29,7 +29,8 @@
                                 <p itemprop="description" class="description">{{ description | truncate_description }}</p>
                                 <span class="keywords" style="display:none;">{{ pkg_name }}</span>
                             </div>
-                            <a href="/flatpaks/{{ pkg_name }}" target="_blank" style="" role="button" class="">More Info</a>
+                            <a itemprop="url" href="/flatpaks/{{ pkg_name }}" target="_blank" role="button" class="btn btn-primary btn-sm">Info</a>
+                            <a href="web-pamac://{{ pkg_name }}?flatpak" class="web-install-btn btn btn-success btn-sm" role="button" aria-disabled="true">Install</a>
                         </div>
                 </div>
             {% endfor %}

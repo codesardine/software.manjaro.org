@@ -150,7 +150,7 @@ header .fas {
 
 img {
     float: left;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 #sidebar ul li:nth-child(3) a:before {
@@ -263,18 +263,26 @@ h4 {
     font-size: 1.2rem !important;
 }
 
+.app img {
+    margin-top: 8px;
+}
+
 .single-package img {
     float: right;
     vertical-align: top;
     margin-right: 0px;
 }
 
-.single-package .web-install-btn {
-    font-size: 80%;
-    float: right;
-    margin-top: 54px;
-    margin-right: -58px;
-    padding: .35em .4em;
+.web-install-btn {
+    margin-left: 10px;
+}
+
+.snaps .web-install-btn {
+    display: none;
+}
+
+.flatpaks .web-install-btn {
+    display: none;
 }
 
 .single-package .description {
@@ -282,10 +290,6 @@ h4 {
     background: #bbdefb;
     padding: 10px;
     overflow: hidden;
-}
-
-.content {
-    margin-bottom: -11px;
 }
 
 .carousel-item {

@@ -12,13 +12,11 @@
         {% endif  %}
         {% set screenshots = pkg.get_screenshots() %}
         {% set licenses = pkg.get_licenses() %}
-        {% set pkg_name = pkg.get_name() %}
 
         <div class="row">
             <div itemscope itemtype="http://schema.org/SoftwareApplication" class="col-sm-12 col-md-4">
                 <div><img itemprop="image" src="{{ icon }}" class="img64" alt="application image"></div>
                 <h4 itemprop="name" >{{ name }}</h4>
-                <a href="web-pamac://{{ pkg_name }}" class="btn web-install-btn badge badge-primary disabled" role="button" aria-disabled="true">Install</a>
                 <p class="small">
                     Licenses: <span class="text-info small">{% for license in licenses %} {{ license }}{% endfor %}</span>
                     <br>
