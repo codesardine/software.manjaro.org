@@ -66,7 +66,7 @@ header img {
     right: 6px;
 }
 
-.featured .search-icon {
+.search-icon, .search-box {
     display: none;
 }
 
@@ -144,8 +144,8 @@ header .fas {
     color: #d8d6d6;
 }
 
-.navbar {
-    background-color: #212121;
+.navbar, #sidebar {
+    background-color: #1b2224;
 }
 
 img {
@@ -170,7 +170,6 @@ img {
 }
 
 #sidebar {
-    background: #212121;
     position: fixed;
     z-index: 9999;
 }
@@ -275,14 +274,6 @@ h4 {
 
 .web-install-btn {
     margin-left: 10px;
-}
-
-.snaps .web-install-btn {
-    display: none;
-}
-
-.flatpaks .web-install-btn {
-    display: none;
 }
 
 .single-package .description {
@@ -522,7 +513,10 @@ main {
         padding-left: 25px;
     }
 
-    .search-icon {
+    .flatpaks .search-icon,
+    .snaps .search-icon,
+    .applications .search-icon,
+    .packages .search-icon {
         display: block;
     }
 
@@ -562,7 +556,6 @@ main {
 
     .search-box {
         right: 16px;
-        display: block;
     }
 }
 
