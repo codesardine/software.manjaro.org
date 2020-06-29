@@ -1,4 +1,4 @@
-# Manjaro Software Discover:service
+# Manjaro Software Discover service
 
 running localy:
 ```
