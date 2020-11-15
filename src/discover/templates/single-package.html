@@ -12,6 +12,7 @@
         {% endif  %}
         {% set screenshots = pkg.get_screenshots() %}
         {% set licenses = pkg.get_licenses() %}
+        {% set pkg_name = pkg.get_name() %}
 
         <div class="row">
             <div itemscope itemtype="http://schema.org/SoftwareApplication" class="col-sm-12 col-md-4">
