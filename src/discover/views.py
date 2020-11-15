@@ -2,6 +2,7 @@ from discover import app, cache
 import discover.render as render
 
 
+@app.route("/")
 @app.route("/applications/")
 @cache.cached(timeout=50)
 def applications():
@@ -50,7 +51,7 @@ def flatpaks():
     return render.external_repos_template(render.get_categories()[3].get("title"))
 
 
-@app.route("/")
+#@app.route("/")
 @cache.cached(timeout=40)
 def featured():
     return render.appstream_template("Featured")
