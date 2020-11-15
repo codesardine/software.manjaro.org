@@ -29,6 +29,10 @@ function debounce(fn, threshold) {
   };
 }
 
+$('.back-button').click(function(){
+    window.history.back()
+})
+
 function matchApp(app, searchValue) {
   if (searchValue == "") {
     $(app).each(function () {
@@ -54,7 +58,7 @@ $('#search').keyup(debounce(function () {
 }, 300);
 }, 1200));
 
-$(document).ready(function () {
+$( document ).ready(function() {
   app = $("#search-items .app");
   let lazyImages = [].slice.call(document.querySelectorAll("img.lazyload"));
   let active = false;
@@ -89,5 +93,9 @@ $(document).ready(function () {
   document.addEventListener("scroll", lazyLoad);
   window.addEventListener("resize", lazyLoad);
   window.addEventListener("orientationchange", lazyLoad);
+  function forceImageLoad() {
+      $(window).scrollTop($(window).scrollTop()+1)
+  }
+  window.addEventListener('pageshow', forceImageLoad());
   $("body").css("cursor", "default");
 });

@@ -17,6 +17,7 @@
         <div class="row">
             <div itemscope itemtype="http://schema.org/SoftwareApplication" class="col-sm-12 col-md-4">
                 <div><img src="{{ icon }}" class="img64" alt="package image"></div>
+                <a href="#" class="back-button"><i class="fas fa-chevron-circle-left"></i></a>
                 <h4 itemprop="name" >{{ name }}</h4>
                 <p class="small">
                     Licenses: <span class="text-info small">{% for license in licenses %} {{ license }}{% endfor %}</span>

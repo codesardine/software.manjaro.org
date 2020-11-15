@@ -16,6 +16,7 @@
         <div class="row">
             <div itemscope itemtype="http://schema.org/SoftwareApplication" class="col-sm-12 col-md-4">
                 <div><img itemprop="image" src="{{ icon }}" class="img64" alt="snap image"></div>
+                <a href="#" class="back-button"><i class="fas fa-chevron-circle-left"></i></a>
                 <h4 itemprop="name" >{{ name }}</h4>
                 <p class="small">
                     Version: <span itemprop="softwareVersion" class="text-info small">{{ pkg.get_version() }}</span>
