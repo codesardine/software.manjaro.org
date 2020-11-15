@@ -247,6 +247,7 @@ img {
 
 .img-overflow-hidden {
     overflow: hidden;
+    padding: 3px;
 }
 
 .app .description {
