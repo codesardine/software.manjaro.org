@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+   .row img {
+       width: 100px;
+       float:none;
+       margin: 0;
+       margin-bottom: 10px;
+       }
+    .row a, .row a:visited {
+        color: #757575;
+        font-weight: bold;
+    }
+    .row a:hover {
+        color:#424242;
+        text-decoration: none;
+    }
+</style>
+<div class="container">
+    <div class="row align-items-center justify-content-center" style="height: 100vh;">
+        {% for item in nav %}
+          {% if item.title == "Flatpaks" %}
+            {% set img = "/static/images/flatpak_logo.png" %}
+          {% elif item.title == "Snaps" %}
+            {% set img ="/static/images/snapcraft.svg" %}
+          {% else %}
+            {% set img ="/static/images/applications.svg" %}
+          {% endif %}
+        <div class="col-sm text-center">
+            <a href="../{{ item.href }}">
+                <img src="{{ img }}">
+                <h3>{{ item.title }}</h3>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="speech-bubble">
+    Manjaro is compatible with diferent packaging formats.
+</div>
+{% endblock %}

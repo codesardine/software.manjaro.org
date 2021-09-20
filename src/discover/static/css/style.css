@@ -158,15 +158,11 @@ img {
 }
 
 #sidebar ul li:nth-child(3) a:before {
-    background: url("/static/images/snapcraft.svg");
-}
-
-#sidebar ul li:nth-child(4) a:before {
     background: url("/static/images/flatpak_logo.png");
 }
 
 #sidebar ul li:nth-child(2) a:before {
-    background: url("/static/images/package.svg");
+    background: url("/static/images/snapcraft.svg");
 }
 
 #sidebar ul li:nth-child(1) a:before {
@@ -187,6 +183,10 @@ img {
     background-repeat: no-repeat !important;
     position: absolute;
     filter: drop-shadow(1px 1px 1px black);
+}
+
+.explore-software #sidebar {
+    display: none;
 }
 
 .featured .jumbotron:first-child {
@@ -394,29 +394,12 @@ footer {
 	margin-bottom: -20px;
 }
 
-.not-found .speech-bubble {
-    background: #00aabb;
-}
-
-.not-found .speech-bubble:after {
-	border-top-color: #00aabb;
-}
-
-.featured .speech-bubble {
-    background-color: #343a40;
-}
-
-.featured .speech-bubble:after {
-    border-top-color: #343a40;
-}
-
-.featured footer {
-    z-index: 99;
-    position: relative;
-}
-
 .applications .speech-bubble:after {
     margin-left: -140px;
+}
+
+.explore-software .speech-bubble:after {
+    margin-left: -190px;
 }
 
 .snaps .speech-bubble:after {

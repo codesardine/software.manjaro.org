@@ -2,42 +2,39 @@
 {% block content %}
 <main class="p-4 p-md-5 pt-5">
     <div id="search-items" class="row">
-        {% for category in categories %}
-        
-            {% set cat = database.get_category_snaps(category) %}
-            {% for app in cat %}
-
-                {% set name = app.get_app_name() %}
-                {% set pkg_name = app.get_name() %}
-                {% set description = app.get_desc() %}
-                {% set icon = app.get_icon() %}
-                {% if not icon %}
-                {% set icon = "/static/images/snapcraft.svg" %}
+        {% for app in apps %}           
+            {% set name = app["title"] %}
+            {% set pkg_name = app["name"] %}
+            {% set description = app["description"] %}
+            {% set icon = app["icon"] %}
+            {% if not icon %}
+            {% set icon = "/static/images/snapcraft.svg" %}
+            {% endif %}
+            <div itemscope itemtype="http://schema.org/SoftwareApplication" class="col-xl-3 col-md-6 col-sm-12 app">
+                {%if loop.index <= 30 %}
+                <img src="{{ icon }}" class="img64" alt="application image"
+                    loading="lazy">
                 {% endif %}
-                <div itemscope itemtype="http://schema.org/SoftwareApplication" class="col-xl-3 col-md-6 col-sm-12 app">
-                    {%if loop.index <= 30 %}
-                    <img src="{{ icon }}" class="img64" alt="application image"
-                        loading="lazy">
-                    {% endif %}
-                    {% if loop.index > 30 %}
-                    <img itemprop="image" src="/static/images/snapcraft.svg" data-src="{{ icon }}" class="img64 lazyload"
-                        alt="application image" loading="lazy">
-                    {% endif %}
-                    <div class="img-overflow-hidden">
-                            <div class="content">
-                                <h4 itemprop="name" class="name">{{ name }}</h4>
-                                <p itemprop="description" class="description">{{ description | truncate_description }}</p>
-                                <span class="keywords" style="display:none;">{{ pkg_name }}</span>
-                            </div>
-                            <a itemprop="url" href="/snaps/{{ pkg_name }}" role="button" class="btn btn-primary btn-sm">Info</a>
-                            <a href="web-pamac://{{ pkg_name }}?snap" class="web-install-btn btn btn-success btn-sm" role="button" aria-disabled="true">Install</a>
+                {% if loop.index > 30 %}
+                <img itemprop="image" src="/static/images/snapcraft.svg" data-src="{{ icon }}" class="img64 lazyload"
+                    alt="application image" loading="lazy">
+                {% endif %}
+                <div class="img-overflow-hidden">
+                        <div class="content">
+                            <h4 itemprop="name" class="name">{{ name }}</h4>
+                            <p itemprop="description" class="description">{{ description | truncate_description }}</p>
+                            <span class="keywords" style="display:none;">{{ pkg_name }}</span>
                         </div>
-                </div>
-            {% endfor %}
+                        <a itemprop="url" href="/snap/{{ pkg_name }}" role="button" class="btn btn-primary btn-sm">Info</a>
+                        <a href="web-pamac://{{ pkg_name }}?snap" class="web-install-btn btn btn-success btn-sm" role="button" aria-disabled="true">Install</a>
+                    </div>
+            </div>
         {% endfor %}
     </div>
 </main>
 <div class="speech-bubble">
     Explore Snaps within Manjaro.
+    <br>
+    last updated {{ updated }}
 </div>
 {% endblock %}

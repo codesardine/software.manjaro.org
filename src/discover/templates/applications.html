@@ -4,12 +4,12 @@
     <div id="search-items" class="row">
         {% for app in apps %}
         <div itemscope itemtype="http://schema.org/SoftwareApplication" class="col-xl-3 col-md-6 col-sm-12 app">
-            {% set name = app.get_app_name() %}
-            {% set pkg_name = app.get_name() %}
-            {% set icon = app.get_icon() %}
-            {% set description = app.get_desc() %}
+            {% set name = app.title %}
+            {% set pkg_name = app.name %}
+            {% set icon = app.icon %}
+            {% set description = app.description %}
             {% if loop.index <= 20 %}
-            <img src="{{ icon | replace('/usr/share/app-info', '/static/images/appstream') }}" class="img64"
+            <img src="{{ icon }}" class="img64"
                 alt="application image" loading="lazy">
             {% endif %}
             {% if loop.index > 20 %}
@@ -23,7 +23,7 @@
                     <p itemprop="description" class="description">{{ description | truncate_description() }}</p>
                     <span class="keywords" style="display:none;">{{ pkg_name }}</span>
                 </div>
-                <a itemprop="url" href="/applications/{{ pkg_name }}" role="button" class="btn btn-primary btn-sm">Info</a>
+                <a itemprop="url" href="/application/{{ pkg_name }}" role="button" class="btn btn-primary btn-sm">Info</a>
                 <a href="web-pamac://{{ pkg_name }}" class="web-install-btn btn btn-success btn-sm" role="button" aria-disabled="true">Install</a>
             </div>
 
@@ -32,6 +32,7 @@
     </div>
 </main>
 <div class="speech-bubble">
-    Explore Applications within Manjaro.
+    Explore Applications within Manjaro. <br>
+    last updated {{ updated }}
 </div>
 {% endblock %}

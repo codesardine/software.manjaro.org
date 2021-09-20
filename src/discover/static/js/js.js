@@ -10,8 +10,12 @@ $( ".search-icon .fa-search" ).click(function() {
   $( "#search" ).focus();
 });
 
-$(window).one('scroll',function() {
-  $( ".speech-bubble" ).hide();
+$(window).on('scroll', function () {
+  if ($(document).scrollTop() >= 50) {
+    $(".speech-bubble").hide();
+  } else {
+    $(".speech-bubble").show();
+  }
 });
 
 function debounce(fn, threshold) {

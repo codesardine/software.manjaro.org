@@ -1,69 +1,144 @@
-from discover import app, cache
-import discover.render as render
+from discover import app, cache, query
+from Manjaro.SDK import PackageManager
+from flask import render_template, redirect, make_response
+from datetime import date, timedelta
+
+def navigation():
+    return {'title': 'Applications', 'href': 'applications'},\
+           {'title': 'Snaps', 'href': 'snaps'}, \
+           {'title': 'Flatpaks', 'href': 'flatpaks'}
 
 
 @app.route("/")
-@app.route("/applications/")
+def root():
+    return render_template(
+        "home.html",
+        title="explore software",
+        nav=navigation(),
+        description="Explore software available in Manjaro, Native packages, flatpaks and snaps are supported."
+        )
+
+
+@app.route("/applications")
 @cache.cached(timeout=50)
 def applications():
-    return render.pkgs_template(render.get_categories()[0].get("title"))
+    return render_template(
+        "applications.html",
+        updated=query.pkg_last_updated(),
+        apps=query.all_apps(),
+        title="Applications",
+        nav=navigation(),
+        description="Explore software in Manjaro linux, supports native packages, snaps and flatpacks."
+    )
 
 
-@app.route("/applications/<application>")
+@app.route("/application/<name>")
 @cache.cached(timeout=40)
-def application(application):
-    return render.search_package_template(application, "Application")
+def application(name):
+    pkg = query.app_by_name(name)
+    return render_template(
+        "single-application.html",
+        pkg=pkg,
+        title=pkg.title,
+        description=pkg.description)
 
 
-@app.route("/packages/<package>")
+@app.route("/package/<name>")
 @cache.cached(timeout=40)
-def package(package):
-    return render.search_package_template(package, "Package")
+def package(name):
+    pkg = query.pkg_by_name(name)
+    return render_template(
+        "single-package.html",
+        pkg=pkg,
+        title=pkg.name,
+        description=pkg.description)
 
 
-@app.route("/snaps/<snap>")
+@app.route("/snap/<name>")
 @cache.cached(timeout=40)
-def snap(snap):
-    return render.search_package_template(snap, "Snap")
+def snap(name):
+    pkg = query.snap_by_name(name)
+    return render_template(
+        "single-snap.html",
+        pkg=pkg,
+        title=pkg.title,
+        description=pkg.description
+    )
 
 
-@app.route("/flatpaks/<flatpak>")
+@app.route("/flatpak/<name>")
 @cache.cached(timeout=40)
-def flatpak(flatpak):
-    return render.search_package_template(flatpak, "Flatpak")
-    
+def flatpak(name):
+    pkg = query.flatpak_by_name(name)
+    return render_template(
+        "single-flatpak.html",
+        pkg=pkg,
+        title=pkg.title,
+        description=pkg.description
+    )
 
-@app.route("/packages/")
-@cache.cached(timeout=80)
-def packages():
-    return render.pkgs_template(render.get_categories()[1].get("title"))
 
-
-@app.route("/snaps/")
+@app.route("/snaps")
 @cache.cached(timeout=50)
 def snaps():
-    return render.external_repos_template(render.get_categories()[2].get("title"))
+    return render_template(
+        "snaps.html",
+        updated=query.snap_last_updated(),
+        apps=query.all_snaps(),
+        title="Snaps",
+        nav=navigation(),
+        description="Explore snaps available in Manjaro linux."
+    )
 
 
-@app.route("/flatpaks/")
+@app.route("/flatpaks")
 @cache.cached(timeout=50)
 def flatpaks():
-    return render.external_repos_template(render.get_categories()[3].get("title"))
+    return render_template(
+        "flatpaks.html",
+        updated=query.flatpak_last_updated(),
+        apps=query.all_flatpaks(),
+        title="Flatpaks",
+        nav=navigation(),
+        description="Explore flatpaks available in Manjaro linux."
+    )
 
 
-#@app.route("/")
-@cache.cached(timeout=40)
-def featured():
-    return render.appstream_template("Featured")
-
-
-@app.route("/<error404>/")
+@app.route("/<error404>")
 @cache.cached(timeout=40)
 def error_404(error404):
-    return render.template_404()
+    return redirect("/", 302, Response=None)
 
 
 @app.route('/sitemap.xml', methods=['GET'])
-@cache.cached(timeout=100)
 def sitemap():
-    return render.sitemap_template()
+    thirty_days = (date.today() - timedelta(days=30)).isoformat()
+    urls = [("https://discover.manjaro.org/applications", thirty_days),
+            ("https://discover.manjaro.org/snaps", thirty_days),
+            ("https://discover.manjaro.org/flatpaks", thirty_days)
+    ]
+
+    for pkg in query.all_apps():
+        urls.append(
+            (f"https://discover.manjaro.org/application/{pkg.name}",
+             thirty_days)
+            )
+
+    for pkg in query.all_snaps():
+        urls.append(
+            (f"https://discover.manjaro.org/snap/{pkg.name}",
+             thirty_days)
+        )
+
+    for pkg in query.all_flatpaks():
+        urls.append(
+            (f"https://discover.manjaro.org/flatpak/{pkg.name}",
+             thirty_days)
+        )
+
+    
+    response = make_response(
+        render_template('sitemap_template.xml', urls=urls)
+    )
+    response.headers["Content-Type"] = "application/xml"
+    return response

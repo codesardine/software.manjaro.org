@@ -2,16 +2,19 @@
 {% block content %}
 <main class="single-package p-md-5 pt-5">
     <div class="container">
-        {% set name = pkg.get_app_name() %}
+        {% set name = pkg["title"] %}
         {% if not name %}
-        {% set name = pkg.get_name() %}
+          {% set name = pkg["name"] %}
         {% endif %}
-        {% set icon = pkg.get_icon() | replace('/usr/share/app-info', '/static/images/appstream') %}
+        {% set icon = pkg["icon"] %}
         {% if not icon %}
-        {% set icon = "/static/images/package.svg"  %}
+          {% set icon = "/static/images/package.svg"  %}
         {% endif  %}
-        {% set screenshots = pkg.get_screenshots() %}
-        {% set pkg_name = pkg.get_name() %}
+        {% if pkg["screenshots"] %}
+          {% set screenshots = pkg["screenshots"].split(" ") %}
+        {% endif %}
+        {% set pkg_name = pkg["name"] %}
+        {% set version = pkg["version"] %}
 
         <div class="row">
             <div itemscope itemtype="http://schema.org/SoftwareApplication" class="col-sm-12 col-md-4">
@@ -19,7 +22,7 @@
                 <a href="#" class="back-button"><i class="fas fa-chevron-circle-left"></i></a>
                 <h4 itemprop="name" >{{ name }}</h4>
                 <p class="small">
-                    Version: <span itemprop="softwareVersion" class="text-info small">{{ pkg.get_version() }}</span>
+                    Version: <span itemprop="softwareVersion" class="text-info small">{{ version }}</span>
                     <br>
                     {{ link | safe }}
                 </p>
