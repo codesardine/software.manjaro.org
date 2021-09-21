@@ -15,6 +15,6 @@ def truncate_description(long_description: str, characters: int = 160):
 
 def update_system():
     subprocess.run(
-        "su - discover -c 'pacman-mirrors --fasttrack && pacman -Syy --noconfirm archlinux-appstream-data'", shell=True
+        "pacman-mirrors --fasttrack && pacman -Syy --noconfirm archlinux-appstream-data", shell=True
         )
     Database().reload_tables()
