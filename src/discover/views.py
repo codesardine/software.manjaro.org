@@ -13,9 +13,9 @@ def navigation():
 def root():
     return render_template(
         "home.html",
-        title="explore software",
+        title="pick a format",
         nav=navigation(),
-        description="Explore software available in Manjaro, Native packages, flatpaks and snaps are supported."
+        description="Explore and install software available in Manjaro,  it supports native packages, Flatpaks and Snaps."
         )
 
 
@@ -28,7 +28,7 @@ def applications():
         apps=query.all_apps(),
         title="Applications",
         nav=navigation(),
-        description="Explore software in Manjaro linux, supports native packages, snaps and flatpacks."
+        description="Explore native software in Manjaro."
     )
 
 
@@ -51,7 +51,8 @@ def package(name):
         "single-package.html",
         pkg=pkg,
         title=pkg.name,
-        description=pkg.description)
+        description=pkg.description
+        )
 
 
 @app.route("/snap/<name>")

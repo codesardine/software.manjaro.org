@@ -185,7 +185,7 @@ img {
     filter: drop-shadow(1px 1px 1px black);
 }
 
-.explore-software #sidebar {
+.pick-a-format #sidebar {
     display: none;
 }
 
@@ -307,7 +307,7 @@ h4 {
     margin-top: 3px;
 }
 
-.carousel-indicators>li {
+.carousel-indicators > li {
     border-radius: 50%;
 }
 
@@ -398,8 +398,8 @@ footer {
     margin-left: -140px;
 }
 
-.explore-software .speech-bubble:after {
-    margin-left: -190px;
+.pick-a-format .speech-bubble:after {
+    margin-left: -45%;
 }
 
 .snaps .speech-bubble:after {
