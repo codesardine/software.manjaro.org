@@ -23,7 +23,7 @@ app.jinja_env.filters['truncate_description'] = Utils.truncate_description
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
 
-@scheduler.task('interval', id='update', hours=24, misfire_grace_time=900)
+@scheduler.task('interval', id='update', minutes=1440, max_instances=1)
 def update():
     Utils.update_system()
     
