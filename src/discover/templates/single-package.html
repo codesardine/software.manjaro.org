@@ -23,24 +23,31 @@
                 <a href="#" class="back-button"><i class="fas fa-chevron-circle-left"></i></a>
                 <h4 itemprop="name" >{{ name }}</h4>
                 <p class="small">
-                    Licenses: <span class="text-info small">{% for license in licenses %} {{ license }}{% endfor %}</span>
+                    Licenses: <span class="text-info">{% for license in licenses %} {{ license }} {% endfor %}</span>
                     <br>
-                    Version: <span itemprop="softwareVersion" class="text-info small">{{ version }}</span>
+                    Version: <span itemprop="softwareVersion" class="text-info">{{ version }}</span>
                     <br>
+                    {% if pkg["download_size"] !=0 %}
+                    Download Size: <span class="text-info">{{ pkg["download_size"] }}</span>
+                    <br>
+                    {% endif %}
+                    {% if pkg["url"] %}
+                    <a target="_blank" href="{{ pkg[" url"] }}">{{ pkg["url"] }}</a>
+                    <br>
+                    {% endif %}
                     {{ link | safe }}
+                    <br>
+                    {% include 'includes/package-details.html' %}
                 </p>
                 <p class="small">
                     Installing:
                     <br>
                     <code>pamac install {{ pkg_name }}</code>
-                    <br>
-                    <code>pacman -S {{ pkg_name }}</code>
                     <br><br>
                     Removing:
                     <br>
                     <code>pamac remove {{ pkg_name }}</code>
-                    <br>
-                    <code>pacman -R {{ pkg_name }}</code></p>
+                    </p>
             </div>
             {% include 'includes/single-footer.html' %}
         </div>

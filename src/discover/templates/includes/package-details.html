@@ -1,0 +1,51 @@
+<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModal">
+    More Details
+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Package Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                {% if pkg["launchable"] %}
+                Launchable: <span class="text-info">{{ pkg["launchable"] }}</span><br>
+                {% endif %}
+                {% if pkg["backups"] %}
+                backups: <span class="text-info">{{ pkg["backups"] }}</span><br>
+                {% endif %}
+                Build Date: <span class="text-info">{{ pkg["build_date"] }}</span><br>
+                {% if pkg["conflits"] %}
+                Conflits: <span class="text-info">{{ pkg["conflits"] }}</span><br>
+                {% endif %}
+                Depends: <span class="text-info">{{ pkg["depends"] }}</span><br>
+                {% if pkg["makedepends"] %}
+                MakeDepends: <span class="text-info">{{ pkg["makedepends"] }}</span><br>
+                {% endif %}
+                {% if pkg["optdepends"] %}
+                OptDepends: <span class="text-info">{{ pkg["optdepends"] }}</span><br>
+                {% endif %}
+                {% if pkg["optionalfor"] %}
+                OptionalFor: <span class="text-info">{{ pkg["optionalfor"] }}</span><br>
+                {% endif %}
+                {% if pkg["provides"] %}
+                Provides: <span class="text-info">{{ pkg["provides"] }}</span><br>
+                {% endif %}
+                {% if pkg["required_by"] %}
+                RequiredBy: <span class="text-info">{{ pkg["required_by"] }}</span><br>
+                {% endif %}
+                Packager: <span class="text-info">{{ pkg["packager"] }}</span>  
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
