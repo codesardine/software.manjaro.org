@@ -26,15 +26,14 @@ class Database():
 
     def populate_pkg_tables(self):        
         for pkg in self.pamac.get_all_pkgs():
-            name = pkg.get_name()
-            d = self.pamac.get_pkg_details(name)
-            icon = d["icon"]
-            launchable = d["launchable"]
-            if icon and launchable.endswith(".desktop"):
+            d = self.pamac.get_pkg_details(
+                pkg.get_name()
+            )
+            if d["icon"]:
                 model = models.Apps(
                     app_id=d["app_id"],
-                    icon=icon.replace('/usr/share/app-info', '/static'),
-                    launchable=launchable,
+                    icon=d["icon"].replace('/usr/share/app-info', '/static'),
+                    launchable=d["launchable"],
                     title=d["title"],
                     backups=" ".join(d["backups"]),
                     build_date=d["build_date"],
@@ -69,7 +68,7 @@ class Database():
             else:
                 model = models.Packages(
                     app_id=d["app_id"],
-                    launchable=launchable,
+                    launchable=d["launchable"],
                     backups=" ".join(d["backups"]),
                     build_date=d["build_date"],
                     check_depends=" ".join(d["check_depends"]),
@@ -104,8 +103,9 @@ class Database():
     
     def populate_snap_tables(self):
         for pkg in self.pamac.get_all_snaps():
-            name = pkg.get_name()
-            d = self.pamac.get_snap_details(name)
+            d = self.pamac.get_snap_details(
+                pkg.get_name()
+            )
             sql.session.add(
                 models.Snaps(
                     app_id=d["app_id"],
@@ -135,7 +135,6 @@ class Database():
     def populate_flatpak_tables(self):
         for pkg in self.pamac.get_all_flatpaks():
             d = self.pamac.get_flatpak_details(pkg)
-            icon = d["icon"]
             if d["icon"]:
                 d["icon"] = d["icon"].replace(
                     "/var/lib/flatpak/appstream/flathub/x86_64/active/icons",
