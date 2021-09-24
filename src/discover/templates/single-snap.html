@@ -24,6 +24,17 @@
                 <p class="small">
                     Version: <span itemprop="softwareVersion" class="text-info small">{{ version }}</span>
                     <br>
+                    {% if pkg["download_size"] !=0 %}
+                    Download Size: <span class="text-info">{{ pkg["download_size"] }}</span>
+                    <br>
+                    {% endif %}
+                    {% if pkg["publisher"]%}
+                    Publisher: <span class="text-info">{{ pkg["publisher"] }}</span><br>
+                    {% endif %}
+                    {% if pkg["url"] %}
+                    <a target="_blank" href="{{ pkg["url"] }}">{{ pkg["url"] }}</a>
+                    <br>
+                    {% endif %}
                     {{ link | safe }}
                 </p>
                 <p class="small">

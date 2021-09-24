@@ -46,13 +46,22 @@ def application(name):
 @app.route("/package/<name>")
 @cache.cached(timeout=40)
 def package(name):
-    pkg = query.pkg_by_name(name)
-    return render_template(
-        "single-package.html",
-        pkg=pkg,
-        title=pkg.name,
-        description=pkg.description
+    p = query.pkg_by_name(name)
+    a = query.app_by_name(name)
+    if a is not None:
+        pkg = a
+    elif p is not None:
+        pkg = p
+
+    if a or p is not None:
+        return render_template(
+            "single-package.html",
+            pkg=pkg,
+            title=pkg.name,
+            description=pkg.description
         )
+    else:
+        return redirect("/", 302, Response=None)
 
 
 @app.route("/snap/<name>")
