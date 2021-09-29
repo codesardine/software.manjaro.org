@@ -12,9 +12,9 @@ $( ".search-icon .fa-search" ).click(function() {
 
 $(window).on('scroll', function () {
   if ($(document).scrollTop() >= 50) {
-    $(".speech-bubble").hide();
+    $(".bubble-img").hide();
   } else {
-    $(".speech-bubble").show();
+    $(".bubble-img").show();
   }
 });
 

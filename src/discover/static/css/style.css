@@ -4,11 +4,6 @@
 }
 
 body {
-    background-image: url("/static/images/tux.svg");
-    background-repeat: no-repeat;
-    background-position: bottom 0 left -12px;
-    background-size: 60px;
-    background-attachment: fixed;
     background-color: #fafafa !important;
     font-family: 'Exo 2', sans-serif !important;
     overflow-x: hidden;
@@ -355,14 +350,27 @@ footer {
     color: white;
 }
 
+.bubble-img {
+    background-image: url("/static/images/mascout.png");
+    background-repeat: no-repeat;
+    background-position: bottom 5px left -12px;
+    background-size: 100px;
+    background-attachment: fixed;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 0;
+    bottom: 5px;
+    }
+
 .speech-bubble {
     position: fixed !important;
     border-radius: .4em;
     position: absolute;
-    padding: 20px;
+    padding: 10px;
     color: white;
-    bottom: 80px;
-    left: 20px;
+    bottom: 100px;
+    left: 50px;
 }
 
 .speech-bubble:after {
@@ -395,7 +403,7 @@ footer {
 }
 
 .applications .speech-bubble:after {
-    margin-left: -140px;
+    margin-left: -130px;
 }
 
 .pick-a-format .speech-bubble:after {
@@ -403,16 +411,12 @@ footer {
 }
 
 .snaps .speech-bubble:after {
-    margin-left: -120px;
+    margin-left: -110px;
 }
 
 .packages .speech-bubble:after,
 .flatpaks .speech-bubble:after {
-    margin-left: -130px;
-}
-
-.featured .speech-bubble:after {
-    margin-left: -170px;
+    margin-left: -120px;
 }
 
 .you-are-lost {
