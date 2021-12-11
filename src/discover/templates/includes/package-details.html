@@ -17,30 +17,84 @@
                 {% if pkg["launchable"] %}
                 Launchable: <span class="text-info">{{ pkg["launchable"] }}</span><br>
                 {% endif %}
-                {% if pkg["backups"] %}
-                backups: <span class="text-info">{{ pkg["backups"] }}</span><br>
-                {% endif %}
+
                 Build Date: <span class="text-info">{{ pkg["build_date"] }}</span><br>
-                {% if pkg["conflits"] %}
-                Conflits: <span class="text-info">{{ pkg["conflits"] }}</span><br>
+                Packager: <span class="text-info">{{ pkg["packager"] }}</span>
+                <br><br>
+                
+                {% if pkg["backups"] %}
+                Backups: <span class="text-info">{{ pkg["backups"] }}</span><br>
+                <br>
                 {% endif %}
-                Depends: <span class="text-info">{{ pkg["depends"] }}</span><br>
+                
+                {% if pkg["conflits"] %}                
+                    {% set conflits = pkg["conflits"].split(" ") %}
+                    Conflicts with: <br>
+                    {% for d in conflits %}
+                        {% set m = d | split_version %}
+                        <a target="_blank" class="text-info" href="{{ m[0] }}">{{ m[0] }}</a> {{ m[1] }}<br>  
+                    {% endfor %}
+                <br>
+                {% endif %}
+                
+                {% if pkg["depends"] %}
+                    {% set depends = pkg["depends"].split(" ") %}
+                    Depends On: <br>
+                    {% for d in depends %}
+                        {% set m = d | split_version %}
+                        <a target="_blank" class="text-info" href="{{ m[0] }}">{{ m[0] }}</a> {{ m[1] }}<br>
+                    {% endfor %}
+                    <br>
+                {% endif %}
+
                 {% if pkg["makedepends"] %}
-                MakeDepends: <span class="text-info">{{ pkg["makedepends"] }}</span><br>
-                {% endif %}
+                    {% set makedepends = pkg["makedepends"].split(" ") %}
+                    Make Dependencies: <br>
+                    {% for d in makedepends %}
+                    {% set m = d | split_version %}
+                    <a target="_blank" class="text-info" href="{{ m[0] }}">{{ m[0] }}</a> {{ m[1] }}<br>
+                    {% endfor %}
+                    <br>
+                 {% endif %}
+                
                 {% if pkg["optdepends"] %}
-                OptDepends: <span class="text-info">{{ pkg["optdepends"] }}</span><br>
+                    {% set optdepends = pkg["optdepends"] %}
+                    Optional Dependencies: <br>
+                    {% for d in optdepends %}
+                    {% set p = d.split(":") %}
+                    <a target="_blank" class="text-info" href="{{ p[0] }}">{{ p[0] }}</a> {{ p[1] }}<br>
+                    {% endfor %}
+                    <br>
                 {% endif %}
+                
                 {% if pkg["optionalfor"] %}
-                OptionalFor: <span class="text-info">{{ pkg["optionalfor"] }}</span><br>
+                    {% set optionalfor = pkg["optionalfor"].split(" ") %}
+                    Optional For: <br>
+                    {% for d in optionalfor %}
+                        {% set m = d | split_version %}
+                        <a target="_blank" class="text-info" href="{{ m[0] }}">{{ m[0] }}</a> {{ m[1] }}<br>
+                    {% endfor %}
+                    <br>
                 {% endif %}
+                
                 {% if pkg["provides"] %}
-                Provides: <span class="text-info">{{ pkg["provides"] }}</span><br>
+                    {% set provides = pkg["provides"].split(" ") %}
+                    Provides: <br>
+                    {% for d in provides %}
+                        {% set m = d | split_version %}
+                        <a target="_blank" class="text-info" href="{{ m[0] }}">{{ m[0] }}</a> {{ m[1] }}<br>
+                    {% endfor %}
+                    <br>
                 {% endif %}
+                
                 {% if pkg["required_by"] %}
-                RequiredBy: <span class="text-info">{{ pkg["required_by"] }}</span><br>
+                    {% set required_by = pkg["required_by"].split(" ") %}
+                    Required By: <br>
+                    {% for d in required_by %}
+                        {% set m = d | split_version %}
+                        <a target="_blank" class="text-info" href="{{ m[0] }}">{{ m[0] }}</a> {{ m[1] }}<br>
+                    {% endfor %}
                 {% endif %}
-                Packager: <span class="text-info">{{ pkg["packager"] }}</span>  
                 </p>
             </div>
             <div class="modal-footer">

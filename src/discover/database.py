@@ -1,6 +1,8 @@
 from Manjaro.SDK import PackageManager
 from discover import models, sql
 from time import strftime
+import json
+
 
 class Database():
     def __init__(self):
@@ -9,9 +11,9 @@ class Database():
     def reload_tables(self):
         self.populate_pkg_tables()
         pkg_time = strftime("%Y-%m-%d %H:%M")
-        self.populate_flatpak_tables()
+        #self.populate_flatpak_tables()
         flatpak_time = strftime("%Y-%m-%d %H:%M")
-        self.populate_snap_tables()
+        #self.populate_snap_tables()
         snap_time = strftime("%Y-%m-%d %H:%M")
         sql.session.add(
             models.Discover(
@@ -52,7 +54,7 @@ class Database():
                     long_description=d["long_description"],
                     makedepends=" ".join(d["makedepends"]),
                     name=d["name"],
-                    optdepends=" ".join(d["optdepends"]),
+                    optdepends=json.dumps(d["optdepends"]),
                     optionalfor=" ".join(d["optionalfor"]),
                     packager=d["packager"],
                     provides=" ".join(d["provides"]),
@@ -86,7 +88,7 @@ class Database():
                     long_description=d["long_description"],
                     makedepends=" ".join(d["makedepends"]),
                     name=d["name"],
-                    optdepends=" ".join(d["optdepends"]),
+                    optdepends=json.dumps(d["optdepends"]),
                     optionalfor=" ".join(d["optionalfor"]),
                     packager=d["packager"],
                     provides=" ".join(d["provides"]),

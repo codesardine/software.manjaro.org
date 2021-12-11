@@ -2,6 +2,7 @@ from discover import app, cache, query
 from Manjaro.SDK import PackageManager
 from flask import render_template, redirect, make_response
 from datetime import date, timedelta
+import json
 
 def navigation():
     return {'title': 'Applications', 'href': 'applications'},\
@@ -54,6 +55,7 @@ def package(name):
         pkg = p
 
     if a or p is not None:
+        pkg.optdepends = json.loads(pkg.optdepends)
         return render_template(
             "single-package.html",
             pkg=pkg,

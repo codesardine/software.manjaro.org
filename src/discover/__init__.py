@@ -18,10 +18,15 @@ scheduler = APScheduler()
 scheduler.api_enabled = False
 
 from discover import views, Utils
+from discover.templates import filters
 
-app.jinja_env.filters['truncate_description'] = Utils.truncate_description
+app.jinja_env.filters['truncate_description'] = filters.truncate_description
+app.jinja_env.filters['remove_pkg_symbols'] = filters.remove_pkg_symbols
+app.jinja_env.filters['split_version'] = filters.split_version
+
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
+
 
 @scheduler.task('interval', id='update', minutes=1440, max_instances=1)
 def update():
