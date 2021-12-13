@@ -11,9 +11,9 @@ class Database():
     def reload_tables(self):
         self.populate_pkg_tables()
         pkg_time = strftime("%Y-%m-%d %H:%M")
-        #self.populate_flatpak_tables()
+        self.populate_flatpak_tables()
         flatpak_time = strftime("%Y-%m-%d %H:%M")
-        #self.populate_snap_tables()
+        self.populate_snap_tables()
         snap_time = strftime("%Y-%m-%d %H:%M")
         sql.session.add(
             models.Discover(
