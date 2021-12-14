@@ -33,17 +33,6 @@ def applications():
     )
 
 
-@app.route("/application/<name>")
-@cache.cached(timeout=40)
-def application(name):
-    pkg = query.app_by_name(name)
-    return render_template(
-        "single-application.html",
-        pkg=pkg,
-        title=pkg.title,
-        description=pkg.description)
-
-
 @app.route("/package/<name>")
 @cache.cached(timeout=40)
 def package(name):
