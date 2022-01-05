@@ -59,6 +59,8 @@ target/
 # Testing
 src/discover/static/images/appstream/*
 data/*
+src/Manjaro
+src/data
 src/Manjaro/*
 src/discover/discover.db
 test.py
