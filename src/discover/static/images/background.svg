@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="160.37448mm"
+   height="144.09648mm"
+   viewBox="0 0 160.37448 144.09648"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
+   sodipodi:docname="background.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.83402491"
+     inkscape:cx="347.11193"
+     inkscape:cy="14.388059"
+     inkscape:window-width="1512"
+     inkscape:window-height="910"
+     inkscape:window-x="0"
+     inkscape:window-y="30"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1404"
+       originx="-0.602114"
+       originy="-0.19840158" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(33.878648,-103.94033)">
+    <path
+       style="fill:#ffc107;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -33.878648,248.03682 160.369628,-0.0258 c 0,0 0.71002,-83.06207 -0.0265,-142.58155 0,0 -35.071078,42.53397 -61.774194,57.57758 -19.277307,10.86017 -43.651407,10.66911 -62.2171577,22.70534 -20.1188843,13.04313 -36.3518163,62.32444 -36.3518163,62.32444 z"
+       id="path857"
+       sodipodi:nodetypes="cccsccc" />
+  </g>
+</svg>

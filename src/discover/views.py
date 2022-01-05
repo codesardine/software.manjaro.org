@@ -5,19 +5,14 @@ from datetime import date, timedelta
 import json
 
 def navigation():
-    return {'title': 'Applications', 'href': 'applications'},\
-           {'title': 'Snaps', 'href': 'snaps'}, \
-           {'title': 'Flatpaks', 'href': 'flatpaks'}
+    return {'title': 'Applications', 'href': '/applications'},\
+           {'title': 'Snaps', 'href': '/snaps'}, \
+           {'title': 'Flatpaks', 'href': '/flatpaks'}
 
 
 @app.route("/")
 def root():
-    return render_template(
-        "home.html",
-        title="pick a format",
-        nav=navigation(),
-        description="Explore and install software available in Manjaro,  it supports native packages, Flatpaks and Snaps."
-        )
+    return redirect("/applications", 302, Response=None)
 
 
 @app.route("/applications")
@@ -25,12 +20,12 @@ def root():
 def applications():
     return render_template(
         "applications.html",
-        updated=query.pkg_last_updated(),
+        updated=query.last_updated(),
         apps=query.all_apps(),
-        title="Applications",
+        title="Discover Software Center",
         nav=navigation(),
-        description="Explore native software in Manjaro."
-    )
+        description="View, Search or install Software independently of packaging format."
+        )
 
 
 @app.route("/package/<name>")
@@ -44,11 +39,15 @@ def package(name):
         pkg = p
 
     if a or p is not None:
+        if not hasattr(pkg, "screenshots") or not pkg.screenshots:
+            pkg.screenshots = "/static/images/no-screenshot.png"
         pkg.optdepends = json.loads(pkg.optdepends)
         return render_template(
             "single-package.html",
+            updated=query.last_updated(),
             pkg=pkg,
             title=pkg.name,
+            nav=navigation(),
             description=pkg.description
         )
     else:
@@ -60,9 +59,11 @@ def package(name):
 def snap(name):
     pkg = query.snap_by_name(name)
     return render_template(
-        "single-snap.html",
+        "single-package.html",
+        updated=query.last_updated(),
         pkg=pkg,
         title=pkg.title,
+        nav=navigation(),
         description=pkg.description
     )
 
@@ -72,9 +73,11 @@ def snap(name):
 def flatpak(name):
     pkg = query.flatpak_by_name(name)
     return render_template(
-        "single-flatpak.html",
+        "single-package.html",
+        updated=query.last_updated(),
         pkg=pkg,
         title=pkg.title,
+        nav=navigation(),
         description=pkg.description
     )
 
@@ -83,8 +86,8 @@ def flatpak(name):
 @cache.cached(timeout=50)
 def snaps():
     return render_template(
-        "snaps.html",
-        updated=query.snap_last_updated(),
+        "applications.html",
+        updated=query.last_updated(),
         apps=query.all_snaps(),
         title="Snaps",
         nav=navigation(),
@@ -96,8 +99,8 @@ def snaps():
 @cache.cached(timeout=50)
 def flatpaks():
     return render_template(
-        "flatpaks.html",
-        updated=query.flatpak_last_updated(),
+        "applications.html",
+        updated=query.last_updated(),
         apps=query.all_flatpaks(),
         title="Flatpaks",
         nav=navigation(),
@@ -121,7 +124,13 @@ def sitemap():
 
     for pkg in query.all_apps():
         urls.append(
-            (f"https://discover.manjaro.org/application/{pkg.name}",
+            (f"https://discover.manjaro.org/package/{pkg.name}",
+             thirty_days)
+            )
+
+    for pkg in query.all_packages():
+        urls.append(
+            (f"https://discover.manjaro.org/package/{pkg.name}",
              thirty_days)
             )
 

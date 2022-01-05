@@ -4,65 +4,42 @@
     {% block head %}
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Exo+2&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
-        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
     <meta charset="utf-8">
     <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='images/favicon.png') }}">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/apple-icon.png') }}">
     <meta name="description" content="{{ description }}">
-    <title>{% if pkg_format %}{{ pkg_format }} - {{ title }} - {% endif %}Discover {% if pkg_format %}{{ pkg_format }}s{% else %}{{ title }}{% endif %} On Manjaro Linux</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    {% if title == "YOU ARE LOST" %}
-    <meta name="robots" content="noindex, nofollow">{% endif %}
+    <title>{{ title }}</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <meta name="google-site-verification" content="v6PClftSd5zHZAuSJyRpCl1fewbsYfYDp2-opMdPPXE" />
-    {% endblock %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> {% endblock %}
 </head>
-<body class="{% if title %}{{ title.lower() | replace(' & ', '-') | replace(' ', '-') }} {% endif %}">
-<script type="text/javascript">
-    var _paq = window._paq || [];
-    _paq.push(['disableCookies']);
-    _paq.push(['trackPageView']);
-    _paq.push(['enableLinkTracking']);
-    (function() {
-      var u="//matomo.manjaro.org/";
-      _paq.push(['setTrackerUrl', u+'matomo.php']);
-      _paq.push(['setSiteId', '1']);
-      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-    })();
-  </script>
-  <nav id="sidebar">
-        <ul class="list-unstyled components">
-            {% for item in nav %}
-            <li data-toggle="tooltip" data-placement="left" title="{{ item.title }}">
-                <a href="../{{ item.href }}"></a>
-            </li>
-            {% endfor %}
-        </ul>
-    </nav>
-    <header class="navbar navbar-expand fixed-top">
-        <a href="../" class="logo navbar-brand">
-            <img data-toggle="tooltip" data-placement="right" title="Featured" src="{{ url_for('static', filename='images/logo.svg') }}" alt="Pamac image">
-        </a>
-        <h2>Discover Software<span>&nbsp//&nbsp{% if pkg_format %}{{ pkg_format }}&nbsp//&nbsp{% endif %}</span></h2>
-        <h1>{{ title }}<span>&nbsp&nbsp{{ total }}</span></h1>
-        <form class="search-box">
-            <input id="search" type="search" placeholder="Search {{ title }}" aria-label="Search {{ title }}">
-        </form>
-        <button class="search-icon"><i class="fas fa-search" type="button" aria-controls="SearchSupportedContent"
-                aria-expanded="false" aria-label="Toggle search"></i></button>
-    </header>
-    {% block content %}
-    {% endblock %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha256-WqU1JavFxSAMcLP2WIOI+GB2zWmShMI82mTpLDcqFUg=" crossorigin="anonymous"></script>
-<script src="{{ url_for('static', filename='js/js.js') }}"></script>
+<body class="{% if title %}{{ title.lower() | replace(' & ', '-') | replace(' ', '-') }}{% endif %}">
+    <script type="text/javascript">
+        var _paq = window._paq || [];
+        _paq.push(['disableCookies']);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+            var u = "//matomo.manjaro.org/";
+            _paq.push(['setTrackerUrl', u + 'matomo.php']);
+            _paq.push(['setSiteId', '1']);
+            var d = document,
+                g = d.createElement('script'),
+                s = d.getElementsByTagName('script')[0];
+            g.type = 'text/javascript';
+            g.async = true;
+            g.defer = true;
+            g.src = u + 'matomo.js';
+            s.parentNode.insertBefore(g, s);
+        })();
+    </script>
+    {% include 'includes/info-modals.html' %}
+    {% block content %} {% endblock %}
+    <script src="{{ url_for('static', filename='js/discover.js') }}"></script>
 </body>
 </html>

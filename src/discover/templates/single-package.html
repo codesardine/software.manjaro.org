@@ -1,56 +1,85 @@
-{% extends 'base.html' %}
-{% block content %}
-<main class="single-package p-md-5 pt-5">
+{% extends 'base.html' %} {% block content %}
+<main class="single-package">
     <div class="container">
         {% set name = pkg["app_name"] %}
-        {% if not name %}
-        {% set name = pkg["name"] %}
-        {% endif %}
-        {% set icon = pkg["icon"] %}
-        {% if not icon %}
-        {% set icon = "/static/images/package.svg"  %}
-        {% endif  %}
-        {% if pkg["screenshots"] %}
+        {% if not name %} 
+        {% set name = pkg["name"] %} 
+        {% endif %} 
+        {% set icon = pkg["icon"] %} 
+        {% if not icon %} 
+        {% set icon = "/static/images/package.svg" %} 
+        {% endif %} 
         {% set screenshots = pkg["screenshots"].split(" ") %}
-        {% endif %}
-        {% set licenses = pkg["license"] %}
-        {% set pkg_name = pkg["name"] %}
+        {% set licenses = pkg["license"].split(" ") %} 
+        {% set pkg_name = pkg["name"] %} 
         {% set version = pkg["version"] %}
-
+        {% if pkg["long_description"] %}
+        {% set description = pkg["long_description"] %}
+        {% else %}
+        {% set description = pkg["description"] %}
+        {% endif %}
+        <div class="center">
+            <h1 class="white-text"><img src="{{ icon }}" class="single-icon" alt="package image">{{ name }}</h1>
+        </div>
         <div class="row">
-            <div itemscope itemtype="http://schema.org/SoftwareApplication" class="col-sm-12 col-md-4">
-                <div><img src="{{ icon }}" class="img64" alt="package image"></div>
-                <a href="#" class="back-button"><i class="fas fa-chevron-circle-left"></i></a>
-                <h4 itemprop="name" >{{ name }}</h4>
-                <p class="small">
-                    Licenses: <span class="text-info">{% for license in licenses %} {{ license }} {% endfor %}</span>
-                    <br>
-                    Version: <span itemprop="softwareVersion" class="text-info">{{ version }}</span>
-                    <br>
-                    {% if pkg["download_size"] !=0 %}
-                    Download Size: <span class="text-info">{{ pkg["download_size"] }}</span>
-                    <br>
-                    {% endif %}
-                    {% if pkg["url"] %}
-                    <a target="_blank" href="{{ pkg['url'] }}">{{ pkg["url"] }}</a>
-                    <br>
-                    {% endif %}
-                    {{ link | safe }}
-                    <br>
-                    {% include 'includes/package-details.html' %}
-                </p>
-                <p class="small">
-                    Installing:
-                    <br>
-                    <code>pamac install {{ pkg_name }}</code>
-                    <br><br>
-                    Removing:
-                    <br>
-                    <code>pamac remove {{ pkg_name }}</code>
-                    </p>
+            <div class="col s12">
+                <div class="carousel carousel-slider center">
+                    {% for img in screenshots %}
+                    <a class="carousel-item"><img src="{{ img }}"></a>
+                    {% endfor %}
+                </div>
             </div>
-            {% include 'includes/single-footer.html' %}
+        </div>
+        <div class="row">
+            <div class="col s12 l8">
+                <p class="grey lighten-5">
+                    Description<br><br>{{ description }}
+                </p>
+            </div>
+            <div class="col s12 l4">            
+                <p class="grey lighten-5">
+                    {% if pkg["pkg_format"] == "pamac" %}
+                    <span class="center" style="display: block;margin-bottom: 15px;">
+                        <button data-target="details" class="pkg-details-btn waves-effect waves-light btn-small modal-trigger">
+                            Details
+                        </button>
+                    </span>
+                    {% endif %}
+                    <span class="small">
+                        Licenses: <span class="text-info">
+                            {% for license in licenses %} 
+                              {% if "http" in license %}
+                                <a target="_blank" href='{{ license.split("=")[1] }}'>{{ license.split("=")[1] }}</a>
+                              {% else %}
+                                {{ license.replace("LicenseRef-", "").replace("-only", "") }} 
+                              {% endif %}
+                            {% endfor %} </span>
+                        <br> Version: <span class="text-info">{{ version }}</span>
+                        <br> {% if pkg["download_size"] !=0 %}
+                        Download Size: <span class="text-info">{{ pkg["download_size"] }}</span>
+                        <br> {% endif %} 
+                        {% if pkg["url"] and "mailto" not in pkg["url"] %}
+                        <a target="_blank" href="{{ pkg['url'] }}">{{ pkg["url"] }}</a>
+                        <br><br>
+                        {% endif %} 
+                        {{ link | safe }}
+                    </span>
+                    <span class="small">
+                        Installing:
+                        <br>
+                        <code>{{ pkg["pkg_format"] }} install {{ pkg_name }}</code>
+                        <br><br> Removing:
+                        <br>
+                        <code>{{ pkg["pkg_format"] }} remove {{ pkg_name }}</code>
+                    </span>
+                </p>
+                {% if pkg["pkg_format"] == "pamac" %}
+                {% include 'includes/package-details.html' %}
+                {% endif %}
+            </div>
         </div>
     </div>
+    {% include 'includes/dock.html' %}
+    {% include 'includes/navigation.html' %}
 </main>
 {% endblock %}

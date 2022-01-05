@@ -7,6 +7,7 @@ class ImagesTemplate:
 
 class BaseTemplate:
     id                = sql.Column(sql.Integer, primary_key=True)
+    pkg_format        = sql.Column(sql.String(20), nullable=False)
     app_id            = sql.Column(sql.String(100), nullable=True)
     title             = sql.Column(sql.String(100), nullable=True)
     description       = sql.Column(sql.String(250), nullable=True)
@@ -65,6 +66,5 @@ class Flatpaks(sql.Model, BaseTemplate, ImagesTemplate):
 
 class Discover(sql.Model):
     id = sql.Column(sql.Integer, primary_key=True)
-    pkg_last_updated = sql.Column(sql.String(100), nullable=True)
-    snap_last_updated = sql.Column(sql.String(100), nullable=True)
-    flatpak_last_updated = sql.Column(sql.String(100), nullable=True)
+    last_updated = sql.Column(sql.String(100), nullable=True)
+    

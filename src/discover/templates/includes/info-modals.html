@@ -1,0 +1,65 @@
+<div id="not-working" class="modal">
+    <div class="modal-content">
+        <h4>Installing is not working?</h4>
+        <p>Not all Manjaro editions have the needed software installed by default, to install software from this application you need to install <a
+                href="https://discover.manjaro.org/package/web-installer-url-handler">web-installer-url-handler</a> package, that is available in Manjaro repositories.
+            <br><br><code>pamac install web-installer-url-handler</code>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
+<div id="pkg-formats" class="modal">
+    <div class="modal-content">
+        <h4>What is package formats?</h4>
+        <p>
+            Packages is a file that describes how and where software is installed in Manjaro.
+            <br><br>
+            Native packages, as the name suggests, are packages that are specifically built for Manjaro, they are officially supported and usually depend on other packages in the system to function properly.
+            <br><br>
+            <a target="_blank" href="https://flatpak.org/">Flatpack</a>, are 3rd party self-contained packages with inbuilt dependencies and do not depend on the system to run.
+            <br><br>
+            <a target="_blank" href="https://snapcraft.io/about">Snap</a>, are self-contained containers that could have dependencies, it's more or less the same as running Ubuntu with a Manjaro Kernel.
+            <br><br>
+            <a target="_blank" href="https://appimage.org/">Appimage</a>, are a truly portable packages in one file and can be run without being installed.
+            <br><br>Snap, Flatpak and Appimage unlike traditional native packages work across distributions.
+    </p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
+<div id="install-localy" class="modal">
+    <div class="modal-content">
+        <h4>How do I install localy?</h4>
+        <p>
+            You should use the default package manager user interface <a href="https://discover.manjaro.org/package/pamac-gtk">Pamac</a> 
+            that can be found under ( add/remove software icon ). It does support other package formats,
+             you might need to install <a href="https://discover.manjaro.org/package/libpamac-flatpak-plugin">libpamac-flatpak-plugin</a>
+            or <a href="https://discover.manjaro.org/package/libpamac-snap-plugin">libpamac-snap-plugin</a>
+            for compability with additional formats and then activate them under Pamac settings.
+             There are also <a href="https://discover.manjaro.org/package/pamac-cli">pamac-cli</a>
+             and <a href="https://discover.manjaro.org/package/pacman">pacman</a> wich support native packages.
+             <br><br>
+             Other options to manage 3rd party packages, for snap you can install <a href="https://discover.manjaro.org/package/snapd">snapd</a>
+             and for flatpak you can install <a href="https://discover.manjaro.org/package/flatpak">flatpak</a> there is also
+             <a href="https://discover.manjaro.org/package/manjaro-cli">manjaro-cli</a> that supports all package formats.
+             <br><br>
+             Examples:
+             <br>
+             <code>pamac install packageName</code><br>
+             <code>pacman -S packageName</code><br>
+             <code>snap install packageName</code><br>
+             <code>flatpak install packageName</code><br>
+             <code>manjaro install -n packageName</code><br>
+             <br>
+             Not sure what to use? use Pamac or pamac-cli as it comes by default on any edition.
+        </p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>

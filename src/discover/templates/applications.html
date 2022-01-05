@@ -1,40 +1,40 @@
-{% extends 'base.html' %}
-{% block content %}
-<main class="p-4 p-md-5 pt-5">
+{% extends 'base.html' %} {% block content %}
+<main class="grey darken-4">
     <div id="search-items" class="row">
         {% for app in apps %}
-        <div itemscope itemtype="http://schema.org/SoftwareApplication" class="col-xl-3 col-md-6 col-sm-12 app">
-            {% set name = app.title %}
-            {% set pkg_name = app.name %}
-            {% set icon = app.icon %}
-            {% set description = app.description %}
-            {% if loop.index <= 20 %}
-            <img src="{{ icon }}" class="img64"
-                alt="application image" loading="lazy">
-            {% endif %}
-            {% if loop.index > 20 %}
-            <img itemprop="image" src="{{ url_for('static', filename='images/logo.svg') }}"
-                data-src="{{ icon | replace('/usr/share/app-info', '/static/images/appstream') }}"
-                class="img64 lazyload" alt="application image" loading="lazy">
-            {% endif %}
-            <div class="img-overflow-hidden">
-                <div class="content">
-                    <h4 itemprop="name" class="name">{{ name }}</h4>
-                    <p itemprop="description" class="description">{{ description | truncate_description() }}</p>
-                    <span class="keywords" style="display:none;">{{ pkg_name }}</span>
+         {% set name = app.title %}
+          {% set pkg_name = app.name %}
+           {% set icon = app.icon %} 
+           {% set description = app.description %} 
+        {% if not app.screenshots.split(" ")[0] %} 
+           {% set screenshot = url_for('static', filename='images/no-screenshot-small.jpg') %}
+         {% else %} 
+           {% set screenshot = app.screenshots.split(" ")[0] %} 
+        {% endif %}
+        <div class="col s12 l6 xl4 app">
+            <div class="card blue-grey darken-3">
+                <div class="row white-text center">
+                    <div class="col data-search s6">
+                        <span class="logo-container"><img data-src="{{ icon }}" class="app-logo lazyload" alt="application icon"
+                                loading="lazy"></span>
+                        <span class="card-title"><a class="tooltipped" data-position="bottom" data-tooltip="Details"
+                                href="{% if title == 'Flatpaks' %}/flatpak/{% elif title == 'Snaps' %}/snap/{% else %}/package/{% endif %}{{ pkg_name }}">{{
+                                name }}</a></span>
+                        <span class="keywords" style="display:none;">{{ pkg_name }}</span>
+                        <p>{{ description | truncate_description() }}</p>
+                    </div>                    
+                    <div class="col s6">
+                        <img data-src="{{ screenshot }}" class="{% if not 'screenshot-small' in screenshot %}materialboxed{% endif %} lazyload screenshot" alt="Appstream data screenshot link invalid" loading="lazy">
+                        <a class="btn tooltipped btn-add waves-effect waves-light green" data-position="left" data-tooltip="Add to install" href="web-pamac://{{ pkg_name }}{% if title == 'Flatpaks' %}?flatpak{% elif title == 'Snaps' %}?snap{% endif %}">
+                            <i class="material-icons">add</i>
+                        </a>
+                    </div>
                 </div>
-                <a itemprop="url" href="/package/{{ pkg_name }}" role="button" class="btn btn-primary btn-sm">Info</a>
-                <a href="web-pamac://{{ pkg_name }}" class="web-install-btn btn btn-success btn-sm" role="button" aria-disabled="true">Install</a>
             </div>
-
         </div>
         {% endfor %}
     </div>
+    {% include 'includes/dock.html' %}
+    {% include 'includes/navigation.html' %}
 </main>
-<div class="bubble-img">
-    <div class="speech-bubble">
-        Explore Applications within Manjaro. <br>
-        last updated {{ updated }}
-    </div>
-</div>
 {% endblock %}

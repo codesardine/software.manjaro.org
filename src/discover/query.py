@@ -2,23 +2,16 @@ from discover.database import Database
 from discover import models
 
 
-def pkg_last_updated():
+def last_updated():
     return models.Discover.query.with_entities(
-        models.Discover.pkg_last_updated
-    ).one()[0]
-
-def snap_last_updated():
-    return models.Discover.query.with_entities(
-        models.Discover.snap_last_updated
-    ).one()[0]
-
-def flatpak_last_updated():
-    return models.Discover.query.with_entities(
-        models.Discover.flatpak_last_updated
-    ).one()[0]
+        models.Discover.last_updated
+    ).first()[0]
 
 def all_apps():
     return models.Apps.query.all()
+
+def all_packages():
+    return models.Packages.query.all()
 
 def all_snaps():
     return models.Snaps.query.all()

@@ -10,16 +10,12 @@ class Database():
 
     def reload_tables(self):
         self.populate_pkg_tables()
-        pkg_time = strftime("%Y-%m-%d %H:%M")
         self.populate_flatpak_tables()
-        flatpak_time = strftime("%Y-%m-%d %H:%M")
         self.populate_snap_tables()
-        snap_time = strftime("%Y-%m-%d %H:%M")
+        update_time = strftime("%Y-%m-%d %H:%M")
         sql.session.add(
             models.Discover(
-                pkg_last_updated=pkg_time,
-                flatpak_last_updated=flatpak_time,
-                snap_last_updated=snap_time
+                last_updated=update_time
             )
         )
         sql.drop_all()
@@ -33,6 +29,7 @@ class Database():
             )
             if d["icon"]:
                 model = models.Apps(
+                    pkg_format="pamac",
                     app_id=d["app_id"],
                     icon=d["icon"].replace('/usr/share/app-info', '/static'),
                     launchable=d["launchable"],
@@ -60,7 +57,7 @@ class Database():
                     provides=" ".join(d["provides"]),
                     reason=d["reason"],
                     replaces=" ".join(d["replaces"]),
-                    repository=" ".join(d["repository"]),
+                    repository=d["repository"],
                     required_by=" ".join(d["required_by"]),
                     screenshots=" ".join(d["screenshots"]),
                     url=d["url"],
@@ -69,6 +66,7 @@ class Database():
 
             else:
                 model = models.Packages(
+                    pkg_format="pamac",
                     app_id=d["app_id"],
                     launchable=d["launchable"],
                     backups=" ".join(d["backups"]),
@@ -94,7 +92,7 @@ class Database():
                     provides=" ".join(d["provides"]),
                     reason=d["reason"],
                     replaces=" ".join(d["replaces"]),
-                    repository=" ".join(d["repository"]),
+                    repository=d["repository"],
                     required_by=" ".join(d["required_by"]),
                     url=d["url"],
                     version=d["version"]
@@ -110,6 +108,7 @@ class Database():
             )
             sql.session.add(
                 models.Snaps(
+                    pkg_format="snap",
                     app_id=d["app_id"],
                     icon=d["icon"],
                     launchable=d["launchable"],
@@ -144,6 +143,7 @@ class Database():
                 )
             sql.session.add(
                 models.Flatpaks(
+                    pkg_format="flatpak",
                     icon=d["icon"],
                     launchable=d["launchable"],
                     title=d["title"],

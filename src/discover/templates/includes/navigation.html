@@ -1,0 +1,27 @@
+<ul id="slide-out" class="sidenav">
+    <li>
+        <div class="user-view center">
+            <a href="https://manjaro.org" class="logo"><img src="/static/images/logo.svg"></a>
+            <h1 class="name">Discover <br> Software Center</h1>
+        </div>
+    </li>
+    <li><a class="subheader">View, Search or install Software</a></li>
+    </li>
+    {% for item in nav %}
+    <li><a href="{{ item.href }}"><i class="material-icons"><img src="/static/images{{ item.href }}.png"></i>{{
+            item.title }}</a></li>
+    {% endfor %}
+    <li>
+    <li><a class="subheader">Faqs</a></li>
+    <li><a class="modal-trigger" href="#not-working">Installing is not working?</a></li>
+    <li><a class="modal-trigger" href="#pkg-formats">What is package formats?</a></li>
+    <li><a class="modal-trigger" href="#install-localy">How do I install localy?</a></li>
+    <li><a>Last Updated {{ updated }}</a></li>
+    <li><a class="subheader">About</a></li>
+    <li>
+        <p class="discover-description">&copy Vitor Lopes and Manjaro developers. <br><br> Contribute for this
+            project on
+            <a target="_blank" href="https://gitlab.manjaro.org/webpage/manjaro-applications-discovery">gitlab</a>.
+        </p>
+    </li>
+</ul>

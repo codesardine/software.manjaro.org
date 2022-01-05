@@ -13,7 +13,7 @@ cache = Cache(app, config={
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///discover.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-sql = SQLAlchemy(app)
+sql = SQLAlchemy(app, session_options={"autoflush": False})
 scheduler = APScheduler()
 scheduler.api_enabled = False
 
