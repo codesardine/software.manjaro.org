@@ -58,6 +58,7 @@ target/
 
 # Testing
 src/discover/static/images/appstream/*
-data/cache/
+src/data/*
+src/discover/discover.db
 test.py
 .idea/
