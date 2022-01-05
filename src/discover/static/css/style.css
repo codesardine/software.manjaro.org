@@ -187,10 +187,9 @@ main {
 .single-package, .sidenav {
     background-image: url(/static/images/background.svg);
     background-repeat: no-repeat;
-    background-origin: bottom rigth;
     background-position: right bottom;
     background-size: contain;
-    background-attachment: fixed;
+    background-attachment: initial;
 }
 
 .single-package .col p {
