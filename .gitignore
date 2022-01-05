@@ -58,7 +58,8 @@ target/
 
 # Testing
 src/discover/static/images/appstream/*
-src/data/*
+data/*
+src/Manjaro/*
 src/discover/discover.db
 test.py
 .idea/
