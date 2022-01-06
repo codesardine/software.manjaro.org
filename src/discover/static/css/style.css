@@ -175,6 +175,7 @@ main {
 
 .single-package {
     background-color: #00897b;
+    height: auto;
 }
 
 .single-package .search-container .row {
