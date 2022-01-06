@@ -2,6 +2,10 @@ body {
     overflow: auto !important;
 }
 
+html, body {
+    height: 100%;
+}
+
 main {
     padding-top: 15px;
     height: 100%;
