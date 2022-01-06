@@ -80,7 +80,11 @@ main {
 }
 
 .sidenav .logo img {
-    width: 64px;
+    width: 120px;
+}
+
+.sidenav h1 {
+    margin-top: 0 !important;
 }
 
 .sidenav .logo {
