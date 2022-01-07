@@ -31,6 +31,7 @@ function matchApp(app, searchValue) {
                 let image = $(this).find("img").attr('data-src')
                 $(this).find("img").attr('src', image);
                 $(this).show()
+                console.log($(this))
             }
         })
     }
@@ -40,8 +41,16 @@ $("#autocomplete-input").focus(function() {
     $(".search-container").addClass("active")
 })
 
-$("#autocomplete-input").focusout(function() {
-    $(".search-container").removeClass("active")
+$("#autocomplete-input").focusout(function () {
+    function is_open() {
+        const active = $(".autocomplete-content").css("display")
+        if (active == "none" && !$("#autocomplete-input").is(":focus")) {
+            $(".search-container").removeClass("active")
+        } else {
+            setTimeout(is_open, 20);
+        }
+    }
+    is_open()
 })
 
 $("#clear-search").click(function() {
@@ -62,6 +71,28 @@ $('#autocomplete-input').keyup(debounce(function() {
 $(document).ready(function() {
     $('.sidenav').sidenav();
     $('.materialboxed').materialbox();
+    let data = $('#search-items').attr("data-src")
+    let search_data = JSON.parse(data);
+    $('input.autocomplete').autocomplete({
+        limit: 100,
+        data: search_data,
+        onAutocomplete: function (val) {
+            var value = $('input.autocomplete').val();
+            for (key in search_data) {
+                if (value == key) {
+                    if (location.pathname == "/snaps") {
+                        var pkg_format = "snap"
+                    } else if (location.pathname == "/flatpaks") {
+                        var pkg_format = "flatpak"
+                    } if (location.pathname == "/applications") {
+                        var pkg_format = "package"
+                    }
+                    var link = window.open(`https://discover.manjaro.org/${pkg_format}/${key}`, '_blank');
+                    link.location;
+                }
+            }
+        },
+    });
     var modals = document.querySelectorAll('.modal');
     var modalInstances = M.Modal.init(modals);
     var tooltips = document.querySelectorAll('.tooltipped');

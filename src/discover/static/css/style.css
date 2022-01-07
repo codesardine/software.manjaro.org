@@ -213,3 +213,11 @@ main {
 .single-package .container div:nth-child(3) {
     margin-bottom: 0;
 }
+
+.input-field .autocomplete-content {
+    width: calc(100% - 6.8rem) !important;
+    top: 0px !important;
+    transform: translateY(calc(-100% - 15px)) !important;
+    box-shadow: none;
+    max-height: 250px;
+}

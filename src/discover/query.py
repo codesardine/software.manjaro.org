@@ -7,16 +7,16 @@ def last_updated():
         models.Discover.last_updated
     ).first()[0]
 
-def all_apps():
+def apps():
     return models.Apps.query.all()
 
-def all_packages():
+def packages():
     return models.Packages.query.all()
 
-def all_snaps():
+def snaps():
     return models.Snaps.query.all()
 
-def all_flatpaks():
+def flatpaks():
     return models.Flatpaks.query.all()
 
 def app_by_name(name):

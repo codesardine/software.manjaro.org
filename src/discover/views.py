@@ -18,10 +18,24 @@ def root():
 @app.route("/applications")
 @cache.cached(timeout=50)
 def applications():
+    apps = query.apps()
+    pkgs = query.packages()
+    data = {}
+    for p in apps:
+        icon = p.icon.replace("//", "/")
+        if icon:
+            data[p.name] = f"{ icon }"
+        else:
+            data[p.name] = "static/images/package.svg"
+
+    for p in pkgs:
+        data[p.name] = "static/images/package.svg"
+        
     return render_template(
         "applications.html",
         updated=query.last_updated(),
-        apps=query.all_apps(),
+        apps=apps,
+        data=json.dumps(data),
         title="Discover Software Center",
         nav=navigation(),
         description="View, Search or install Software independently of packaging format."
@@ -85,10 +99,20 @@ def flatpak(name):
 @app.route("/snaps")
 @cache.cached(timeout=50)
 def snaps():
+    apps = query.snaps()
+    data = {}
+    for p in apps:
+        icon = p.icon
+        if icon:
+            data[p.name] = f"{ icon }"
+        else:
+            data[p.name] = "static/images/package.svg"
+
     return render_template(
         "applications.html",
         updated=query.last_updated(),
-        apps=query.all_snaps(),
+        apps=apps,
+        data=json.dumps(data),
         title="Snaps",
         nav=navigation(),
         description="Explore snaps available in Manjaro linux."
@@ -98,10 +122,20 @@ def snaps():
 @app.route("/flatpaks")
 @cache.cached(timeout=50)
 def flatpaks():
+    apps = query.flatpaks()
+    data = {}
+    for p in apps:
+        icon = p.icon
+        if icon:
+            data[p.name] = f"{ icon }"
+        else:
+            data[p.name] = "static/images/package.svg"
+
     return render_template(
         "applications.html",
         updated=query.last_updated(),
-        apps=query.all_flatpaks(),
+        apps=apps,
+        data=json.dumps(data),
         title="Flatpaks",
         nav=navigation(),
         description="Explore flatpaks available in Manjaro linux."
@@ -122,25 +156,25 @@ def sitemap():
             ("https://discover.manjaro.org/flatpaks", thirty_days)
     ]
 
-    for pkg in query.all_apps():
+    for pkg in query.apps():
         urls.append(
             (f"https://discover.manjaro.org/package/{pkg.name}",
              thirty_days)
             )
 
-    for pkg in query.all_packages():
+    for pkg in query.packages():
         urls.append(
             (f"https://discover.manjaro.org/package/{pkg.name}",
              thirty_days)
             )
 
-    for pkg in query.all_snaps():
+    for pkg in query.snaps():
         urls.append(
             (f"https://discover.manjaro.org/snap/{pkg.name}",
              thirty_days)
         )
 
-    for pkg in query.all_flatpaks():
+    for pkg in query.flatpaks():
         urls.append(
             (f"https://discover.manjaro.org/flatpak/{pkg.name}",
              thirty_days)
