@@ -31,7 +31,6 @@ function matchApp(app, searchValue) {
                 let image = $(this).find("img").attr('data-src')
                 $(this).find("img").attr('src', image);
                 $(this).show()
-                console.log($(this))
             }
         })
     }
@@ -71,28 +70,30 @@ $('#autocomplete-input').keyup(debounce(function() {
 $(document).ready(function() {
     $('.sidenav').sidenav();
     $('.materialboxed').materialbox();
-    let data = $('#search-items').attr("data-src")
-    let search_data = JSON.parse(data);
-    $('input.autocomplete').autocomplete({
-        limit: 100,
-        data: search_data,
-        onAutocomplete: function (val) {
-            var value = $('input.autocomplete').val();
-            for (key in search_data) {
-                if (value == key) {
-                    if (location.pathname == "/snaps") {
-                        var pkg_format = "snap"
-                    } else if (location.pathname == "/flatpaks") {
-                        var pkg_format = "flatpak"
-                    } if (location.pathname == "/applications") {
-                        var pkg_format = "package"
+    let searchData = $('#search-items').attr("data-src")
+    if (searchData) {
+        let data = JSON.parse(searchData);
+        $('input.autocomplete').autocomplete({
+            limit: 100,
+            data: data,
+            onAutocomplete: function (val) {
+                var value = $('input.autocomplete').val();
+                for (key in data) {
+                    if (value == key) {
+                        if (location.pathname == "/snaps") {
+                            var pkg_format = "snap"
+                        } else if (location.pathname == "/flatpaks") {
+                            var pkg_format = "flatpak"
+                        } if (location.pathname == "/applications") {
+                            var pkg_format = "package"
+                        }
+                        var link = window.open(`https://discover.manjaro.org/${pkg_format}/${key}`, '_blank');
+                        link.location;
                     }
-                    var link = window.open(`https://discover.manjaro.org/${pkg_format}/${key}`, '_blank');
-                    link.location;
                 }
-            }
-        },
-    });
+            },
+        });
+    }
     var modals = document.querySelectorAll('.modal');
     var modalInstances = M.Modal.init(modals);
     var tooltips = document.querySelectorAll('.tooltipped');
