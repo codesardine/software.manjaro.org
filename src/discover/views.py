@@ -36,7 +36,7 @@ def applications():
         updated=query.last_updated(),
         apps=apps,
         data=json.dumps(data),
-        title="Discover Software Center",
+        title="Software Center",
         nav=navigation(),
         description="View, Search or install Software independently of packaging format."
         )
