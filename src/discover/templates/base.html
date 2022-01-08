@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% block head %}
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Exo+2&display=swap" rel="stylesheet">
+    <title>{{ title }}</title>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='images/favicon.png') }}">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/apple-icon.png') }}">
     <meta name="description" content="{{ description }}">
-    <title>{{ title }}</title>
-
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" crossorigin="anonymous">
+    <link rel="stylesheet"  href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> 
     <meta name="google-site-verification" content="v6PClftSd5zHZAuSJyRpCl1fewbsYfYDp2-opMdPPXE" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> {% endblock %}
+    {% block head %}{% endblock %}
 </head>
 <body class="{% if title %}{{ title.lower() | replace(' & ', '-') | replace(' ', '-') }}{% endif %}">
     <script type="text/javascript">
@@ -40,6 +39,7 @@
     </script>
     {% include 'includes/info-modals.html' %}
     {% block content %} {% endblock %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="{{ url_for('static', filename='js/discover.js') }}"></script>
 </body>
 </html>

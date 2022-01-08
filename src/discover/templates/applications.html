@@ -1,4 +1,11 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}{% block content %}
+{% block head %}
+  {% for app in apps %}
+    {% if app.screenshots.split(" ")[0] %}
+      <link rel="prefetch" href="{{ app.screenshots.split(" ")[0] }}">
+    {% endif %}
+  {% endfor %}
+{% endblock %}
 <main class="grey darken-4">
     <div id="search-items" class="row" data-src="{{ data }}">
         {% for app in apps %}
