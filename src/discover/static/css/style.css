@@ -45,6 +45,12 @@ main {
     position: absolute;
 }
 
+.single-package .btn-add {
+    right: 0;
+    bottom: 0;
+    position: relative;
+}
+
 .card .col:first-child {
     background-color: transparent !important;
     background-image: linear-gradient(to left, #00897b, #00695c);
