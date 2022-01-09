@@ -179,15 +179,20 @@ main {
     height: auto;
 }
 
+.maintenance .search-container .row,
 .single-package .search-container .row {
     height: 69px !important;
     background-color: #f5f5f5;
 }
 
+.maintenance .search-container,
 .single-package .search-container {
     width: 54px;
 }
 
+.maintenance .search-container input,
+.maintenance .search-container label,
+.maintenance .search-container #clear-search,
 .single-package .search-container input,
 .single-package .search-container label,
 .single-package .search-container #clear-search {
