@@ -1,5 +1,7 @@
-{% extends 'base.html' %} {% block content %}
-<main class="single-package">
+{% extends 'base.html' %}
+{% block bodyClass %}single-package{% endblock %}
+{% block content %}
+<main>
     <div class="container">
         {% set name = pkg["app_name"] %}
         {% if not name %} 
@@ -9,7 +11,11 @@
         {% if not icon %} 
         {% set icon = "/static/images/package.svg" %} 
         {% endif %} 
-        {% set screenshots = pkg["screenshots"].split(" ") %}
+        {% if pkg["screenshots"] != None %}
+          {% set screenshots = pkg["screenshots"].split(" ") %}
+        {% else %}
+          {% set screenshots = pkg["screenshots"] %}
+        {% endif %}
         {% set licenses = pkg["license"].split(" ") %} 
         {% set pkg_name = pkg["name"] %} 
         {% set version = pkg["version"] %}
@@ -21,6 +27,7 @@
         <div class="center">
             <h1 class="white-text"><img src="{{ icon }}" class="single-icon" alt="package image">{{ name }}</h1>
         </div>
+        {% if screenshots %}
         <div class="row">
             <div class="col s12">
                 <div class="carousel carousel-slider center">
@@ -30,6 +37,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
         <div class="row">
             <div class="col s12 l8">
                 <p class="grey lighten-5">
@@ -86,4 +94,5 @@
     {% include 'includes/dock.html' %}
     {% include 'includes/navigation.html' %}
 </main>
+<img class="background" src="/static/images/background.svg">
 {% endblock %}

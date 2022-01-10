@@ -75,7 +75,7 @@ def package(name):
 
         if a or p is not None:
             if not hasattr(pkg, "screenshots") or not pkg.screenshots:
-                pkg.screenshots = "/static/images/no-screenshot.png"
+                pkg.screenshots = None
             pkg.optdepends = json.loads(pkg.optdepends)
             return render_template(
                 "single-package.html",
@@ -96,6 +96,8 @@ def snap(name):
         return redirect("/maintenance", 302, Response=None)
     else:
         pkg = query.snap_by_name(name)
+        if not hasattr(pkg, "screenshots") or not pkg.screenshots:
+                pkg.screenshots = None
         return render_template(
             "single-package.html",
             updated=query.last_updated(),
@@ -113,6 +115,8 @@ def flatpak(name):
         return redirect("/maintenance", 302, Response=None)
     else:
         pkg = query.flatpak_by_name(name)
+        if not hasattr(pkg, "screenshots") or not pkg.screenshots:
+                pkg.screenshots = None
         return render_template(
             "single-package.html",
             updated=query.last_updated(),

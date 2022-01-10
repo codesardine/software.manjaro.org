@@ -17,7 +17,7 @@
     <meta name="google-site-verification" content="v6PClftSd5zHZAuSJyRpCl1fewbsYfYDp2-opMdPPXE" />
     {% block head %}{% endblock %}
 </head>
-<body class="{% if title %}{{ title.lower() | replace(' & ', '-') | replace(' ', '-') }}{% endif %}">
+<body class="{% block bodyClass %}{% endblock %} {% if title %}{{ title.lower() | replace(' & ', '-') | replace(' ', '-') }}{% endif %}">
     <script type="text/javascript">
         var _paq = window._paq || [];
         _paq.push(['disableCookies']);

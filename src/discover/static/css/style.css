@@ -3,13 +3,8 @@ body {
     background-color: #212121;
 }
 
-html, body {
-    height: 100%;
-}
-
 main {
     padding-top: 15px;
-    height: 100%;
     padding-bottom: 64px;
 }
 
@@ -182,8 +177,12 @@ main {
 
 .single-package {
     background-color: #00897b;
-    height: auto;
 }
+
+.maintenance, .single-package {
+    height: ;
+}
+
 
 .maintenance .search-container .row,
 .single-package .search-container .row {
@@ -205,12 +204,20 @@ main {
     display: none;
 }
 
-.single-package, .sidenav {
+.sidenav {
     background-image: url(/static/images/background.svg);
     background-repeat: no-repeat;
     background-position: right bottom;
     background-size: contain;
     background-attachment: initial;
+}
+
+.background {
+    position: fixed;
+    height: 50%;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
 }
 
 .single-package .col p {
