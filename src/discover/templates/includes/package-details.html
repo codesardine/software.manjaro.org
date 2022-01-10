@@ -9,14 +9,15 @@
             {% if pkg["packager"] %}
               {% set packager = pkg["packager"].split("<")[0].split(" (")[0] %}
               {% set packager_email = pkg["packager"].split("<")[1].replace(">", "") %}
-              Packager: <span>{{ packager }}</span>
               {% if "@manjaro" in packager_email %}
-                <br>
-                <a target="_blank" href="https://gitlab.manjaro.org/search?utf8=%E2%9C%93&search={{ pkg['name'] }}">Package source</a>
+                Packager: <span>{{ packager }}, Manjaro</span>
+                <br>Package
+                <a target="_blank" href="https://gitlab.manjaro.org/search?utf8=%E2%9C%93&search={{ pkg['name'] }}">Source</a>
                 <br><br>
               {% else %}
-                <br>
-                <a target="_blank" href="https://github.com/archlinux/svntogit-packages/blob/packages/{{ pkg['name'] }}/trunk/PKGBUILD">Package source</a>
+                Packager: <span>{{ packager }}, ArchLinux</span>
+                <br>Package
+                <a target="_blank" href="https://github.com/archlinux/svntogit-packages/blob/packages/{{ pkg['name'] }}/trunk/PKGBUILD">Source</a>
                 <br><br>
               {% endif %}
             {% endif %}
