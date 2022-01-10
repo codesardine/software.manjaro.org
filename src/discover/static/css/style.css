@@ -239,3 +239,8 @@ main {
     box-shadow: none;
     max-height: 250px;
 }
+
+.carousel .indicators {
+    top: 0;
+    bottom: auto;
+}
