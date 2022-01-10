@@ -8,16 +8,16 @@ def last_updated():
     ).first()[0]
 
 def apps():
-    return models.Apps.query.all()
+    return models.Apps.query.order_by(models.Apps.title).all()
 
 def packages():
     return models.Packages.query.all()
 
 def snaps():
-    return models.Snaps.query.all()
+    return models.Snaps.query.order_by(models.Snaps.name).all()
 
 def flatpaks():
-    return models.Flatpaks.query.all()
+    return models.Flatpaks.query.order_by(models.Flatpaks.title).all()
 
 def app_by_name(name):
     return models.Apps.query.filter_by(name=name).first()
