@@ -244,3 +244,9 @@ main {
     top: 0;
     bottom: auto;
 }
+
+.materialboxed {
+    position: absolute;
+    right: 0;
+    left: 50%;
+}
