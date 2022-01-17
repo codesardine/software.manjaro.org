@@ -51,7 +51,7 @@
                         <button data-target="details" class="pkg-details-btn waves-effect waves-light btn-small modal-trigger">
                             Details
                         </button>
-                        <a class="btn btn-small tooltipped btn-add waves-effect waves-light green" data-position="top" data-tooltip="Add to install"
+                        <a class="btn btn-small tooltipped btn-add waves-effect waves-light green" data-position="top" data-tooltip="Install"
                             href="web-pamac://{{ pkg_name }}{% if pkg['pkg_format'] == 'flatpak' %}?flatpak{% elif pkg['pkg_format'] == 'snap' %}?snap{% endif %}">
                             <i class="material-icons">add</i>
                         </a>
