@@ -3,9 +3,18 @@ body {
     background-color: #212121;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 main {
     padding-top: 15px;
     padding-bottom: 64px;
+    user-select: none;
+}
+
+code {
+    user-select: text;
 }
 
 .screenshot:not(.screenshot.active) {
@@ -248,6 +257,13 @@ main {
     left: 65%;
     right: 0;
     border-bottom-left-radius: 50px;
+}
+
+#btn-up {
+    position: fixed;
+    bottom: 10px;
+    right: 5px;
+    z-index: 99;
 }
 
 .materialboxed {

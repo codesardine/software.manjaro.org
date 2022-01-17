@@ -44,7 +44,7 @@
                     Description<br><br>{{ description }}
                 </p>
             </div>
-            <div class="col s12 l4">            
+            <div class="col s12 l4 details">            
                 <p class="grey lighten-5">
                     {% if pkg["pkg_format"] == "pamac" %}
                     <span class="center" style="display: block;margin-bottom: 15px;">
@@ -57,7 +57,7 @@
                         </a>
                     </span>
                     {% endif %}
-                    <span class="small">
+                    <span>
                         Licenses: <span class="text-info">
                             {% for license in licenses %} 
                               {% if "http" in license %}
@@ -76,7 +76,7 @@
                         {% endif %} 
                         {{ link | safe }}
                     </span>
-                    <span class="small">
+                    <span>
                         Installing:
                         <br>
                         <code>{{ pkg["pkg_format"] }} install {{ pkg_name }}</code>
@@ -91,8 +91,8 @@
             </div>
         </div>
     </div>
-    {% include 'includes/dock.html' %}
-    {% include 'includes/navigation.html' %}
 </main>
+{% include 'includes/dock.html' %}
+{% include 'includes/navigation.html' %}
 <img class="background" src="/static/images/background.svg">
 {% endblock %}

@@ -58,6 +58,12 @@ document.querySelector("#clear-search").addEventListener('click', function() {
     lazyLoad()
 })
 
+if (document.querySelector("#btn-up")) {
+    document.querySelector("#btn-up").addEventListener('click', function () {
+        window.scroll(0, 0)
+    })
+}
+
 document.querySelector('#autocomplete-input').addEventListener('keyup', debounce(function () {
     let searchValue = this.value.toLocaleLowerCase()
     matchApp(searchValue)
