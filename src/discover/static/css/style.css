@@ -243,6 +243,11 @@ main {
 .carousel .indicators {
     top: 0;
     bottom: auto;
+    box-shadow: -1px 1px 10px #212121;
+    background-color: rgba(0, 137, 123, 0.90);
+    left: 65%;
+    right: 0;
+    border-bottom-left-radius: 50px;
 }
 
 .materialboxed {
