@@ -2,26 +2,34 @@
 {% block bodyClass %}maintenance{% endblock %}
 {% block content %}
 <style>
-    body {
-        background-image: url(/static/images/maintenance.jpg);
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: cover;
+    body, main, html {
         height: 100%;
     }
 
     .info h1 {
-        background: rgba(0,0,0, .5);
-        padding: 10px;
-        width: 100%;
+        font-weight: bold;
+        margin-left: 20px;
+        text-align: left;
+    }
+
+    .sidenav, .search-container {
+        display: none;
+    }
+
+    .info span {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: -10px;
+        position: absolute;
+        margin-left: 4px;
+    }
+
+    .info h1 {
+        line-height: 60px;
     }
 
     .info {
         width: 100%;
-        height: 100%;
-    }
-
-    main, html {
         height: 100%;
     }
 </style>
@@ -31,9 +39,10 @@
     }
     setInterval(reload, 20000)
 </script>
-<main">
+<main>
     <div class="valign-wrapper center-align info">
-        <h1 class="white-text">Maintenance Mode<br>up again in a few minutes</h1>
+        <h1 class="white-text">Maintenance Mode<br>
+        <span>back online shortly</span></h1>
     </div>
     {% include 'includes/dock.html' %}
     {% include 'includes/navigation.html' %}

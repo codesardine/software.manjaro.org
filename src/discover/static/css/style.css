@@ -184,14 +184,9 @@ code {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.single-package {
+.single-package, .maintenance {
     background-color: #00897b;
 }
-
-.maintenance, .single-package {
-    height: ;
-}
-
 
 .maintenance .search-container .row,
 .single-package .search-container .row {
@@ -213,7 +208,7 @@ code {
     display: none;
 }
 
-.sidenav {
+.sidenav, .maintenance {
     background-image: url(/static/images/background.svg);
     background-repeat: no-repeat;
     background-position: right bottom;
