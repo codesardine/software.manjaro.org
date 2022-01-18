@@ -12,7 +12,7 @@ def navigation():
 
 @app.route("/maintenance")
 def in_maintenance_mode():
-    if app.config['IS_MAINTENANCE_MODE']:
+    if app.config['IS_MAINTENANCE_MODE_PKGS'] or app.config['IS_MAINTENANCE_MODE_SNAPS'] or app.config['IS_MAINTENANCE_MODE_FLATPAKS']:
         return render_template(
             "maintenance-mode.html",
             title="Software Center",
@@ -24,7 +24,7 @@ def in_maintenance_mode():
 
 @app.route("/")
 def root():
-    if app.config['IS_MAINTENANCE_MODE']: 
+    if app.config['IS_MAINTENANCE_MODE_PKGS']: 
         return redirect("/maintenance", 302, Response=None)
     else:
         return redirect("/applications", 302, Response=None)
@@ -33,7 +33,7 @@ def root():
 @app.route("/applications")
 @cache.cached(timeout=50)
 def applications():
-    if app.config['IS_MAINTENANCE_MODE']: 
+    if app.config['IS_MAINTENANCE_MODE_PKGS']: 
         return redirect("/maintenance", 302, Response=None)
     else:
         apps = query.apps()
@@ -60,7 +60,7 @@ def applications():
 @app.route("/package/<name>")
 @cache.cached(timeout=40)
 def package(name):
-    if app.config['IS_MAINTENANCE_MODE']: 
+    if app.config['IS_MAINTENANCE_MODE_PKGS']: 
         return redirect("/maintenance", 302, Response=None)
     else:
         p = query.pkg_by_name(name)
@@ -89,7 +89,7 @@ def package(name):
 @app.route("/snap/<name>")
 @cache.cached(timeout=40)
 def snap(name):
-    if app.config['IS_MAINTENANCE_MODE']: 
+    if app.config['IS_MAINTENANCE_MODE_SNAPS']: 
         return redirect("/maintenance", 302, Response=None)
     else:
         pkg = query.snap_by_name(name)
@@ -108,7 +108,7 @@ def snap(name):
 @app.route("/flatpak/<name>")
 @cache.cached(timeout=40)
 def flatpak(name):
-    if app.config['IS_MAINTENANCE_MODE']: 
+    if app.config['IS_MAINTENANCE_MODE_FLATPAKS']: 
         return redirect("/maintenance", 302, Response=None)
     else:
         pkg = query.flatpak_by_name(name)
@@ -127,7 +127,7 @@ def flatpak(name):
 @app.route("/snaps")
 @cache.cached(timeout=50)
 def snaps():
-    if app.config['IS_MAINTENANCE_MODE']: 
+    if app.config['IS_MAINTENANCE_MODE_SNAPS']: 
         return redirect("/maintenance", 302, Response=None)
     else:
         apps = query.snaps()
@@ -149,7 +149,7 @@ def snaps():
 @app.route("/flatpaks")
 @cache.cached(timeout=50)
 def flatpaks():
-    if app.config['IS_MAINTENANCE_MODE']: 
+    if app.config['IS_MAINTENANCE_MODE_FLATPAKS']: 
         return redirect("/maintenance", 302, Response=None)
     else:
         apps = query.flatpaks()
@@ -176,7 +176,7 @@ def error_404(error404):
 
 @app.route('/sitemap.xml', methods=['GET'])
 def sitemap():
-    if app.config['IS_MAINTENANCE_MODE']: 
+    if app.config['IS_MAINTENANCE_MODE_PKGS'] or app.config['IS_MAINTENANCE_MODE_SNAPS'] or app.config['IS_MAINTENANCE_MODE_FLATPAKS']: 
         return redirect("/maintenance", 302, Response=None)
     else:
         thirty_days = (date.today() - timedelta(days=30)).isoformat()

@@ -1,6 +1,6 @@
 from Manjaro.SDK import PackageManager
 from multiprocessing import Process
-from discover import models, sql
+from discover import models, sql, app
 from time import strftime
 from sqlalchemy.exc import IntegrityError
 import json
@@ -13,19 +13,19 @@ class Database():
     def reload_tables(self):
         sql.drop_all()
         sql.create_all()
-        self.populate_pkg_tables()
-        self.populate_flatpak_tables()
-        self.populate_snap_tables()
-        p = Process(target=f, args=('bob',))
-        p.start()
-        p.join()
-        update_time = strftime("%Y-%m-%d %H:%M")
         sql.session.add(
             models.Discover(
-                last_updated=update_time
+                last_updated=strftime("%Y-%m-%d %H:%M")
             )
         )
-        sql.session.commit()  
+        sql.session.commit()
+        self.populate_pkg_tables()
+        app.config['IS_MAINTENANCE_MODE_PKGS'] = False
+        self.populate_flatpak_tables()
+        app.config['IS_MAINTENANCE_MODE_FLATPAKS'] = False
+        self.populate_snap_tables()
+        app.config['IS_MAINTENANCE_MODE_SNAPS'] = False
+      
 
     def populate_pkg_tables(self):        
         for pkg in self.pamac.get_all_pkgs():
