@@ -24,11 +24,13 @@ function matchApp(searchValue) {
             el.style.display = "none"
             if (el.querySelector(".data-search").textContent.toLocaleLowerCase().includes(searchValue)) {
                 el.style.display = "block"
-                window.scrollTo(0, 0)
                 lazyLoad()
             }
         })
     }
+    setTimeout(function () {
+        window.scrollTo(0, 0)
+    }, 10);
 }
 
 document.querySelector("#autocomplete-input").addEventListener('focus', function() {
@@ -70,47 +72,44 @@ document.querySelector('#autocomplete-input').addEventListener('keyup', debounce
 }, 1200));
 
 window.addEventListener('DOMContentLoaded', function() {
-    var sidenav = document.querySelector('.sidenav');
-    var sidenavInstances = M.Sidenav.init(sidenav);
-    var modals = document.querySelectorAll('.modal');
-    var modalInstances = M.Modal.init(modals);
-    var tooltips = document.querySelectorAll('.tooltipped');
-    var tooltipInstances = M.Tooltip.init(tooltips);
-    var materialboxed = document.querySelectorAll('.materialboxed');
-    var materialboxedInstances = M.Materialbox.init(materialboxed);
-    var carousel = document.querySelectorAll('.carousel');
-    var carouselInstances = M.Carousel.init(
+    let sidenav = document.querySelector('.sidenav');
+    let sidenavInstances = M.Sidenav.init(sidenav);
+    let modals = document.querySelectorAll('.modal');
+    let modalInstances = M.Modal.init(modals);
+    let tooltips = document.querySelectorAll('.tooltipped');
+    let tooltipInstances = M.Tooltip.init(tooltips);
+    let materialboxed = document.querySelectorAll('.materialboxed');
+    let materialboxedInstances = M.Materialbox.init(materialboxed);
+    let carousel = document.querySelectorAll('.carousel');
+    let carouselInstances = M.Carousel.init(
         carousel, {
         fullWidth: true,
         indicators: true
     }
     );
     let searchData = document.querySelector('#search-items')
-    if (searchData != null) {
-        let data = JSON.parse(searchData.dataset.src);
-        var autocomplete = document.querySelector('.autocomplete');
-        var options = {
-            limit: 100,
-            data: data,
-            onAutocomplete: function (val) {
-                var value = document.querySelector('input.autocomplete').value
-                for (key in data) {
-                    if (value == key) {
-                        if (location.pathname == "/snaps") {
-                            var pkg_format = "snap"
-                        } else if (location.pathname == "/flatpaks") {
-                            var pkg_format = "flatpak"
-                        } if (location.pathname == "/applications") {
-                            var pkg_format = "package"
-                        }
-                        var link = window.open(`https://discover.manjaro.org/${pkg_format}/${key}`, '_blank');
-                        link.location;
+    let autocomplete = document.querySelector('.autocomplete');
+    let options = {
+        limit: 100,
+        data: JSON.parse(searchData.dataset.src),
+        onAutocomplete: function (val) {
+            let value = document.querySelector('input.autocomplete').value
+            for (key in data) {
+                if (value == key) {
+                    if (location.pathname == "/snaps") {
+                        var pkg_format = "snap"
+                    } else if (location.pathname == "/flatpaks") {
+                        var pkg_format = "flatpak"
+                    } if (location.pathname == "/applications") {
+                        var pkg_format = "package"
                     }
+                    let link = window.open(`https://discover.manjaro.org/${pkg_format}/${key}`, '_blank');
+                    link.location;
                 }
-            },
-        }
-        var autocompleteInstances = M.Autocomplete.init(autocomplete, options);
+            }
+        },
     }
+    let autocompleteInstances = M.Autocomplete.init(autocomplete, options);
     let lazyImages = [].slice.call(document.querySelectorAll("img.lazyload"));
     let active = false;
 
