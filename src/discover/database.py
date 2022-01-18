@@ -1,6 +1,8 @@
 from Manjaro.SDK import PackageManager
+from multiprocessing import Process
 from discover import models, sql
 from time import strftime
+from sqlalchemy.exc import IntegrityError
 import json
 
 
@@ -9,17 +11,20 @@ class Database():
         self.pamac = PackageManager.Pamac()
 
     def reload_tables(self):
+        sql.drop_all()
+        sql.create_all()
         self.populate_pkg_tables()
         self.populate_flatpak_tables()
         self.populate_snap_tables()
+        p = Process(target=f, args=('bob',))
+        p.start()
+        p.join()
         update_time = strftime("%Y-%m-%d %H:%M")
         sql.session.add(
             models.Discover(
                 last_updated=update_time
             )
         )
-        sql.drop_all()
-        sql.create_all()
         sql.session.commit()  
 
     def populate_pkg_tables(self):        
@@ -100,6 +105,10 @@ class Database():
                 )
 
             sql.session.add(model)
+            try:
+                sql.session.commit()
+            except IntegrityError:
+                sql.session.rollback()
 
     
     def populate_snap_tables(self):
@@ -134,6 +143,10 @@ class Database():
                     publisher=d["publisher"]
                     )
             )
+            try:
+                sql.session.commit()
+            except IntegrityError:
+                sql.session.rollback()
 
 
     def populate_flatpak_tables(self):
@@ -166,3 +179,7 @@ class Database():
                     version=d["version"]
                 )
             )
+            try:
+                sql.session.commit()
+            except IntegrityError:
+                sql.session.rollback()

@@ -19,7 +19,7 @@ class BaseTemplate:
     launchable        = sql.Column(sql.String(100), nullable=True)
     license           = sql.Column(sql.String(30), nullable=True)
     long_description  = sql.Column(sql.String(450), nullable=True)
-    name              = sql.Column(sql.String(20), nullable=True)
+    name              = sql.Column(sql.String(20), unique=True)
     repository        = sql.Column(sql.String(100), nullable=True)
     url               = sql.Column(sql.String(150), nullable=True)
     version           = sql.Column(sql.String(20), nullable=True)
