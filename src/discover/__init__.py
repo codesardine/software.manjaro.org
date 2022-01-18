@@ -14,7 +14,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///discover.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['IS_MAINTENANCE_MODE'] = True
 
-
 sql = SQLAlchemy(app, session_options={"autoflush": False})
 scheduler = APScheduler()
 scheduler.api_enabled = False
@@ -31,7 +30,7 @@ app.jinja_env.lstrip_blocks = True
 
 @scheduler.task("date", id="update_on_deploy", run_date=None)
 def update_on_deploy():
-    database.Database().reload_tables()
+    Utils.update_system()
     app.config['IS_MAINTENANCE_MODE'] = False
 
 @scheduler.task('interval', id='update', minutes=1440, max_instances=1)
