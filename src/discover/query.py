@@ -30,3 +30,9 @@ def snap_by_name(name):
 
 def flatpak_by_name(name):
     return models.Flatpaks.query.filter_by(name=name).first()
+
+def snap_by_title(title):
+    return models.Snaps.query.filter_by(title=title).first()
+
+def flatpak_by_title(title):
+    return models.Flatpaks.query.filter_by(title=title).first()
