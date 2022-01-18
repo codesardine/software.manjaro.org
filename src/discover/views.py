@@ -41,13 +41,10 @@ def applications():
         data = {}
         for p in apps:
             icon = p.icon.replace("//", "/")
-            if icon:
-                data[p.name] = f"{ icon }"
-            else:
-                data[p.name] = "static/images/package.svg"
+            data[p.name] = f"{ icon }"
 
         for p in pkgs:
-            data[p.name] = "static/images/package.svg"
+            data[p.name] = f"{ p.icon }"
             
         return render_template(
             "applications.html",
@@ -136,11 +133,7 @@ def snaps():
         apps = query.snaps()
         data = {}
         for p in apps:
-            icon = p.icon
-            if icon:
-                data[p.name] = f"{ icon }"
-            else:
-                data[p.name] = "static/images/package.svg"
+            data[p.name] = f"{ p.icon }"
 
         return render_template(
             "applications.html",
@@ -162,11 +155,7 @@ def flatpaks():
         apps = query.flatpaks()
         data = {}
         for p in apps:
-            icon = p.icon
-            if icon:
-                data[p.name] = f"{ icon }"
-            else:
-                data[p.name] = "static/images/package.svg"
+            data[p.name] = f"{ p.icon }"
 
         return render_template(
             "applications.html",
