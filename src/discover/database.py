@@ -27,12 +27,25 @@ class Database():
         app.config['IS_MAINTENANCE_MODE_SNAPS'] = False
       
 
-    def populate_pkg_tables(self):        
+    def populate_pkg_tables(self):   
+        ignore_list = (
+            "picom",
+            "pantheon-onboarding",
+            "wingpanel",
+            "systemsettings",
+            "kshutdown",
+            "khelpcenter",
+            "kinfocenter",
+            "gnome-control-center",
+            "discover",
+            "deepin-control-center",
+            "lxappearance-gtk3"
+        )     
         for pkg in self.pamac.get_all_pkgs():
             d = self.pamac.get_pkg_details(
                 pkg.get_name()
             )
-            if d["icon"]:
+            if d["icon"] and d["name"] not in ignore_list:
                 model = models.Apps(
                     pkg_format="pamac",
                     app_id=d["app_id"],
