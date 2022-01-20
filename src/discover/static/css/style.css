@@ -96,6 +96,7 @@ code {
 
 .sidenav .logo img {
     width: 120px;
+    filter: drop-shadow(1px 1px 1px white) drop-shadow(-1px -1px 1px white);
 }
 
 .sidenav h1 {
@@ -104,10 +105,12 @@ code {
 
 .sidenav .logo {
     display: block;
+    width: fit-content;
+    margin: 0 auto;
 }
 
 .sidenav .subheader {
-    border-top: 1px dashed #009688;
+    color:  #009688 !important;
 }
 
 .discover-description {
@@ -116,62 +119,9 @@ code {
     line-height: initial;
 }
 
-#clear-search {
-    position: absolute;
-    margin-top: -43px;
-    margin-left: 46px;
-}
-
-.search-container {
-    will-change: transform, width, position;
-    width: 134px;
-    position: fixed;
-    bottom: 0;
-    z-index: 99;
-    background: white;
-    margin: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: all 0.3s;
-    transition-delay: 0.2s;
-    max-width: 992px;
-}
-
 .search-container a,
 .search-container i {
     cursor: pointer;
-}
-
-.search-container.active {
-    width: 100%;
-}
-
-.search-container .row {
-    margin-bottom: 0;
-}
-
-.search-container .input-field {
-    margin-bottom: 0;
-}
-
-.input-field .prefix~input,
-.input-field .prefix~textarea,
-.input-field .prefix~label,
-.input-field .prefix~.validate~label,
-.input-field .prefix~.helper-text,
-.input-field .prefix~.autocomplete-content {
-    margin-left: 6rem;
-    width: 92%;
-    width: calc(100% - 5.5rem);
-}
-
-.input-field.col .prefix~label,
-.input-field.col .prefix~.validate~label {
-    width: calc(100% - 6rem);
-}
-
-.input-field .prefix~label {
-    margin-left: 6rem;
 }
 
 .single-icon {
@@ -194,27 +144,14 @@ code {
     background-color: #f5f5f5;
 }
 
-.maintenance .search-container,
-.single-package .search-container {
-    width: 54px;
-}
-
-.maintenance .search-container input,
-.maintenance .search-container label,
-.maintenance .search-container #clear-search,
-.single-package .search-container input,
-.single-package .search-container label,
-.single-package .search-container #clear-search {
-    display: none;
-}
-
-.sidenav, .maintenance {
+.maintenance {
     background-image: url(/static/images/background.svg);
     background-repeat: no-repeat;
     background-position: right bottom;
     background-size: contain;
     background-attachment: initial;
 }
+
 
 .background {
     position: fixed;
@@ -234,14 +171,6 @@ code {
 
 .single-package .container div:nth-child(3) {
     margin-bottom: 0;
-}
-
-.input-field .autocomplete-content {
-    width: calc(100% - 6.8rem) !important;
-    top: 0px !important;
-    transform: translateY(calc(-100% - 15px)) !important;
-    box-shadow: none;
-    max-height: 250px;
 }
 
 .carousel .indicators {
@@ -265,4 +194,79 @@ code {
     position: absolute;
     right: 0;
     left: 50%;
+}
+
+.toggle-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translate(318px, -50%);
+    background-color: #212121;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    padding-right: 5px;
+    color: #fafafa;
+    height: 60px;
+    cursor: pointer;
+}
+
+.sidenav.open .toggle-arrow span{
+    transform: rotate(180deg);
+}
+
+.toggle-arrow span {
+    font-size: 60px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.sidenav a {
+    font-size: 16px;
+}
+
+.sidenav i:not(.subheader) {
+    color: #4fc3f7 !important;
+}
+
+.sidenav a:not(.git):not(.subheader),
+.sidenav p,
+.sidenav h1,
+.sidenav .input-field i,
+.sidenav .input-field input {
+    color: #fafafa  !important;
+}
+
+.sidenav h1 {
+    font-size: 20px !important;
+}
+
+.sidenav * {
+    font-weight: bold !important;
+}
+
+.overflow-scroll {
+    overflow: scroll;
+    height: 100vh;
+}
+
+.sidenav {
+    overflow: visible;
+    width: 320px;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease-in-out;
+}
+
+.sidenav.open {
+    transform: translateX(0);
+}
+
+#clear-search {
+    cursor: pointer;
+} 
+
+.autocomplete-content img {
+    width: 40px !important;
+    height: 40px !important;
+}
+
+.user-view {
+    padding-top: 5px !important;
 }

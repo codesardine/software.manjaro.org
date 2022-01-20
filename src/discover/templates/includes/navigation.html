@@ -1,27 +1,41 @@
-<ul id="slide-out" class="sidenav">
+<ul id="slide-out" class="sidenav grey darken-4">
+    <div class="overflow-scroll">
     <li>
         <div class="user-view center">
+            <div class="input-field">
+                <a class="sidenav-trigger text-lighten-2"></a>
+                <input type="text" id="autocomplete-input" class="autocomplete">
+                <label id="autocomplete-label" for="autocomplete-input">
+                    <i class="material-icons">search</i>
+                    <i class="material-icons tooltipped" id="clear-search" data-position="rigth" data-tooltip="Clear Search">close</i>
+                </label>
+            </div>
             <a href="https://manjaro.org" class="logo"><img src="/static/images/mascout.png"></a>
             <h1 class="name">Software Center</h1>
         </div>
     </li>
-    <li><a class="subheader">View, Search or install Software</a></li>
+    <li><a class="subheader">VIEW, SEARCH OR INSTALL</a></li>
     </li>
     {% for item in nav %}
     <li><a href="{{ item.href }}"><i class="material-icons"><img src="/static/images{{ item.href }}.png"></i>{{
             item.title }}</a></li>
     {% endfor %}
+    <li><a class="subheader">FAQS</a></li>
+    <li></i><a class="modal-trigger" href="#not-working"><i class="material-icons">help</i>Installing is not working?</a></li>
+    <li><a class="modal-trigger" href="#pkg-formats"><i class="material-icons">help</i>What are package formats?</a></li>
+    <li><a class="modal-trigger" href="#install-locally"><i class="material-icons">help</i>How do I install locally?</a></li>
+    <li><a>Updated at {{ updated }}</a></li>
+    <li><a class="subheader">ABOUT</a></li>
     <li>
-    <li><a class="subheader">Faqs</a></li>
-    <li><a class="modal-trigger" href="#not-working">Installing is not working?</a></li>
-    <li><a class="modal-trigger" href="#pkg-formats">What are package formats?</a></li>
-    <li><a class="modal-trigger" href="#install-locally">How do I install locally?</a></li>
-    <li><a>Last Updated {{ updated }}</a></li>
-    <li><a class="subheader">About</a></li>
-    <li>
-        <p class="discover-description">&copy Vitor Lopes and Manjaro developers. <br><br> Contribute for this
+        <p class="discover-description">&copy Vitor Lopes and Manjaro Developers. <br><br> Contribute for this
             project on
-            <a target="_blank" href="https://github.com/Manjaro-WebDad/manjaro-applications-discovery">Github</a>.
+            <a target="_blank" class="git" href="https://github.com/Manjaro-WebDad/manjaro-applications-discovery">Github</a>.
         </p>
     </li>
+        <a data-target="slide-out"
+        class="toggle-arrow">
+        <span class="material-icons">
+            double_arrow
+        </span></a>
+    </div>
 </ul>
