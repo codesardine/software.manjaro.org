@@ -173,6 +173,10 @@ code {
     margin-bottom: 0;
 }
 
+.single-package .input-field {
+    display: none;
+}
+
 .carousel .indicators {
     top: 0;
     bottom: auto;
@@ -198,15 +202,16 @@ code {
 
 .toggle-arrow {
     position: absolute;
-    top: 50%;
-    transform: translate(318px, -50%);
+    top: 12px;
+    transform: translateX(318px);
     background-color: #212121;
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
-    padding-right: 5px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    padding-right: 2px;
     color: #fafafa;
     height: 60px;
     cursor: pointer;
+    user-select: none;
 }
 
 .sidenav.open .toggle-arrow span{
@@ -215,7 +220,7 @@ code {
 
 .toggle-arrow span {
     font-size: 60px;
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.3s ease-in-out;
 }
 
 .sidenav a {
@@ -251,7 +256,7 @@ code {
     overflow: visible;
     width: 320px;
     transform: translateX(-100%);
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.3s ease-in-out;
 }
 
 .sidenav.open {
@@ -267,6 +272,24 @@ code {
     height: 40px !important;
 }
 
+.autocomplete-content {
+    width: 278px !important;
+}
+
 .user-view {
     padding-top: 5px !important;
+}
+
+@media only screen and (min-width: 600px) {
+    .software-center main,
+    .flatpaks main,
+    .snaps main {
+        transition: margin-left 0.3s ease-in-out;
+    }
+
+    .software-center main.nav-open,
+    .flatpaks main.nav-open,
+    .snaps main.nav-open {
+        margin-left: 320px;
+    }
 }

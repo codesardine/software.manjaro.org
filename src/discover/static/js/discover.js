@@ -49,12 +49,14 @@ if (document.querySelector("#btn-up")) {
 }
 
 document.querySelector(".toggle-arrow").addEventListener('click', function () {
-    let el = document.querySelector(".sidenav")
-    if (el.classList.contains("open")) {
-        el.classList.remove("open")
+    let content = document.querySelector("main")
+    let sidenav = document.querySelector(".sidenav")
+    if (sidenav.classList.contains("open")) {
+        sidenav.classList.remove("open")
+        content.classList.remove("nav-open")
     } else {
-        el.classList.add("open")
-    }
+        sidenav.classList.add("open")
+        content.classList.add("nav-open")    }
 })
 
 document.querySelector('#autocomplete-input').addEventListener('keyup', debounce(function () {
