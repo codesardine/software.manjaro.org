@@ -1,9 +1,18 @@
 from Manjaro.SDK import PackageManager
-from multiprocessing import Process
 from discover import models, sql, app
 from time import strftime
 from sqlalchemy.exc import IntegrityError
 import json
+import multiprocessing
+
+
+
+def process(func):
+    def proc(*args):
+      p = multiprocessing.Process(target=func(*args))
+      p.start()
+      p.join()        
+    return proc
 
 
 class Database():
@@ -27,6 +36,7 @@ class Database():
         app.config['IS_MAINTENANCE_MODE_SNAPS'] = False
       
 
+    @process
     def populate_pkg_tables(self):   
         ignore_list = (
             "picom",
@@ -124,6 +134,7 @@ class Database():
                 sql.session.rollback()
 
     
+    @process
     def populate_snap_tables(self):
         for pkg in self.pamac.get_all_snaps():
             d = self.pamac.get_snap_details(
@@ -161,7 +172,8 @@ class Database():
             except IntegrityError:
                 sql.session.rollback()
 
-
+    
+    @process
     def populate_flatpak_tables(self):
         for pkg in self.pamac.get_all_flatpaks():
             d = self.pamac.get_flatpak_details(pkg)
