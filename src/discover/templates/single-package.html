@@ -46,17 +46,17 @@
             </div>
             <div class="col s12 l4 details">            
                 <p class="grey lighten-5">
-                    {% if pkg["pkg_format"] == "pamac" %}
                     <span class="center" style="display: block;margin-bottom: 15px;">
+                        {% if pkg["pkg_format"] == "native" %}
                         <button data-target="details" class="pkg-details-btn tooltipped waves-effect waves-light btn-small modal-trigger" data-position="top" data-tooltip="Details">
                             <i class="material-icons">info</i>
                         </button>
-                        <a class="btn btn-small tooltipped btn-add waves-effect waves-light" data-position="top" data-tooltip="Install"
-                            href="web-pamac://{{ pkg_name }}{% if pkg['pkg_format'] == 'flatpak' %}?flatpak{% elif pkg['pkg_format'] == 'snap' %}?snap{% endif %}">
+                        {% endif %}
+                        <button class="btn btn-small tooltipped btn-add waves-effect waves-light" data-position="top" data-tooltip="Install"
+                        data-pkg="{{ pkg_name }}" data-title="{{ name }}" data-format="{{ pkg['pkg_format'] }}" onclick="addApp(this)">
                             <i class="material-icons">add</i>
-                        </a>
+                        </button>
                     </span>
-                    {% endif %}
                     <span>
                         Licenses: <span class="text-info">
                             {% for license in licenses %} 
@@ -66,7 +66,7 @@
                                 {{ license.replace("LicenseRef-", "").replace("-only", "") }} 
                               {% endif %}
                             {% endfor %} </span>
-                        <br> Version: <span class="text-info">{{ version }}</span>
+                        <br>{% if pkg["pkg_format"] == "native" %}<a target="_blank" href='https://manjaro.org/branch-compare/?query={{ pkg_name }}'>Compare</a>{% endif %} Version: <span class="text-info">{{ version }}</span>
                         <br> {% if pkg["download_size"] !=0 %}
                         Download Size: <span class="text-info">{{ pkg["download_size"] }}</span>
                         <br> {% endif %} 
@@ -79,19 +79,18 @@
                     <span>
                         Installing:
                         <br>
-                        <code>{{ pkg["pkg_format"] }} install {{ pkg_name }}</code>
+                        <code>{% if pkg["pkg_format"] == "native" %}pamac{% else %}{{ pkg["pkg_format"] }}{% endif %} install {{ pkg_name }}</code>
                         <br><br> Removing:
                         <br>
-                        <code>{{ pkg["pkg_format"] }} remove {{ pkg_name }}</code>
+                        <code>{% if pkg["pkg_format"] == "native" %}pamac{% else %}{{ pkg["pkg_format"] }}{% endif %} remove {{ pkg_name }}</code>
                     </span>
                 </p>
-                {% if pkg["pkg_format"] == "pamac" %}
+                {% if pkg["pkg_format"] == "native" %}
                 {% include 'includes/package-details.html' %}
                 {% endif %}
             </div>
         </div>
     </div>
-    {% include 'includes/navigation.html' %}
 </main>
 <img class="background" src="/static/images/background.svg">
 {% endblock %}

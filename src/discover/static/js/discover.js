@@ -33,38 +33,113 @@ function matchApp(searchValue) {
     }, 10);
 }
 
-document.querySelector("#clear-search").addEventListener('click', function() {
-    document.querySelector("#autocomplete-input").value = ""
-    let app = document.querySelectorAll(".app")
-    app.forEach(function (el) {
-        el.style.display = "block"
-    });
-    lazyLoad()
-})
-
-if (document.querySelector("#btn-up")) {
-    document.querySelector("#btn-up").addEventListener('click', function () {
-        window.scroll(0, 0)
-    })
+function install(el) {
+   let packages = {
+       "snap": JSON.parse(sessionStorage["snap"]),
+       "flatpak": JSON.parse(sessionStorage["flatpak"]),
+       "native": JSON.parse(sessionStorage["native"])
+   }
+   let buildUrl = [];
+   for (let format in packages) {
+       for (let p of packages[format]) {
+        buildUrl.push(format + "=" + p)
+       }
+   }
+   url = buildUrl.join("&")
+   url = "web-pamac://" + url
+   el.href = url
+   let array = new Array()
+   sessionStorage.setItem("snap", [JSON.stringify(array)])
+   sessionStorage.setItem("flatpak", [JSON.stringify(array)])
+   sessionStorage.setItem("native", [JSON.stringify(array)])
+   rebuildInstall()
 }
 
-document.querySelector(".toggle-arrow").addEventListener('click', function () {
-    let content = document.querySelector("main")
-    let sidenav = document.querySelector(".sidenav")
-    if (sidenav.classList.contains("open")) {
-        sidenav.classList.remove("open")
-        content.classList.remove("nav-open")
+function rebuildInstall() {
+    let formats = ["native", "snap", "flatpak"]
+    let install = document.querySelector("#install-list")
+    let total_items = install.querySelector("#items-count")
+    let items_count = 0
+    for (format of formats) {
+        let data = JSON.parse(sessionStorage[`${format}`])
+        var pkg_format = install.querySelector(`#${format}`)
+        if (data.length != 0) {
+            pkg_format.innerHTML = ""
+            items_count += data.length
+        } else {
+            pkg_format.innerHTML = ""
+            pkg_format.insertAdjacentHTML('beforeend', "<p>None Selected</p>")
+        }
+        for (pkg of data) {
+            let template = `
+                <p>
+                <label>
+                    <input class="install-checkbox" data-pkg="${pkg}" data-format="${format}" data-title="" type="checkbox" checked="checked" onclick="remove_install(this)" />
+                    <span>${pkg}</span>
+                </label>
+                </p>
+                `
+                pkg_format.insertAdjacentHTML('beforeend', template)
+        }
+    }
+    total_items.textContent = items_count
+    if (items_count != 0) {
+        install.style.display = "block"
     } else {
-        sidenav.classList.add("open")
-        content.classList.add("nav-open")    }
-})
+        install.style.display = "none"
+    }
+}
 
-document.querySelector('#autocomplete-input').addEventListener('keyup', debounce(function () {
-    let searchValue = this.value.toLocaleLowerCase()
-    matchApp(searchValue)
-}, 1200));
+function remove_install(el) {
+    if (!el.checked) {
+        let data = JSON.parse(sessionStorage[`${el.dataset.format}`])
+        let newData = data.filter(function(f) { return f !== `${el.dataset.pkg}` })
+        sessionStorage.setItem(el.dataset.format, JSON.stringify(newData))
+        M.toast({html: `<span class="pink-text">${el.dataset.pkg}&nbsp</span> removed from install.`, displayLength: 1200})
+        rebuildInstall()
+    }
+}
+
+function addApp(el) {
+    let pkg = el.dataset.pkg
+    let data = JSON.parse(sessionStorage[`${el.dataset.format}`])
+    if (!data.includes(pkg)) {
+        data.push(`${pkg}`)
+        sessionStorage.setItem(`${el.dataset.format}`, JSON.stringify(data))
+        M.toast({html: `<span class="pink-text">${pkg}&nbsp</span> added to install.`, displayLength: 1200})
+    } else {
+        M.toast({html: `<span class="pink-text">${pkg}&nbsp</span> already in install list.`, displayLength: 1200})
+    }
+
+   rebuildInstall()
+}
+
+function pulse() {
+    this.classList.remove("pulse")
+}
 
 window.addEventListener('DOMContentLoaded', function() {
+    if (document.querySelector("#btn-up")) {
+        document.querySelector("#btn-up").addEventListener('click', function () {
+            window.scroll(0, 0)
+        })
+    }
+    
+    let content = document.querySelector("main")
+    let sidenav = document.querySelector(".sidenav")
+    document.querySelector(".toggle-arrow").addEventListener('click', function () {
+        if (sidenav.classList.contains("open")) {
+            sidenav.classList.remove("open")
+            content.classList.remove("nav-open")
+        } else {
+            sidenav.classList.add("open")
+            content.classList.add("nav-open")    }
+    })
+    document.querySelector("main").addEventListener("click", function() {
+        collapsibleInstance.close()
+        sidenav.classList.remove("open")
+        content.classList.remove("nav-open")
+    })
     let modals = document.querySelectorAll('.modal');
     let modalInstances = M.Modal.init(modals);
     let tooltips = document.querySelectorAll('.tooltipped');
@@ -76,31 +151,67 @@ window.addEventListener('DOMContentLoaded', function() {
         carousel, {
         fullWidth: true,
         indicators: true
-    }
-    );
-    let searchData = document.querySelector('#search-items')
-    let autocomplete = document.querySelector('.autocomplete');
-    let options = {
-        limit: 100,
-        data: JSON.parse(searchData.dataset.src),
-        onAutocomplete: function (val) {
-            let value = document.querySelector('input.autocomplete').value
-            for (key in options.data) {
-                if (value == key) {
-                    if (location.pathname == "/snaps") {
-                        var pkg_format = "snap"
-                    } else if (location.pathname == "/flatpaks") {
-                        var pkg_format = "flatpak"
-                    } if (location.pathname == "/applications") {
-                        var pkg_format = "package"
+    });
+
+    var collapsible = document.querySelector('.collapsible');
+    var collapsibleInstance = M.Collapsible.init(collapsible, {
+    accordion: false
+    });
+
+    collapsible.querySelector("#install-btn").addEventListener("click", pulse)
+    collapsible.querySelector("#install-btn").addEventListener("touchstart", pulse)
+    document.querySelector(".toggle-arrow").addEventListener("click", pulse)
+    document.querySelector(".toggle-arrow").addEventListener("touchstart", pulse)
+
+    if (!document.body.classList.contains("single-package")) {
+        document.querySelector('#search').addEventListener('keyup', debounce(function () {
+            let searchValue = this.value.toLocaleLowerCase()
+            matchApp(searchValue)
+        }, 1200))
+
+        document.querySelector("#clear-search").addEventListener('click', function() {
+            document.querySelector("#search").value = ""
+            let app = document.querySelectorAll(".app")
+            app.forEach(function (el) {
+                el.style.display = "block"
+            });
+            lazyLoad()
+        })
+        let searchData = document.querySelector('#search-items')
+        let autocomplete = document.querySelector('.autocomplete');
+        let options = {
+            limit: 100,
+            data: JSON.parse(searchData.dataset.src),
+            onAutocomplete: function (val) {
+                let value = document.querySelector('input.autocomplete').value
+                for (key in options.data) {
+                    if (value == key) {
+                        if (location.pathname == "/snaps") {
+                            var pkg_format = "snap"
+                        } else if (location.pathname == "/flatpaks") {
+                            var pkg_format = "flatpak"
+                        } if (location.pathname == "/applications") {
+                            var pkg_format = "package"
+                        }
+                        let link = window.open(`/${pkg_format}/${key}`, "_blank");
+                        link.location;
                     }
-                    let link = window.open(`https://discover.manjaro.org/${pkg_format}/${key}`, '_blank');
-                    link.location;
                 }
+            },
+        }
+        let autocompleteInstances = M.Autocomplete.init(autocomplete, options);
+        let btn = document.querySelector(".autocomplete-content")
+        btn.classList.add("hide")
+        document.querySelector("#pkg-visibility").addEventListener("click", function() {
+            if (this.textContent == "visibility") {
+                this.textContent = "visibility_off"
+                btn.classList.add("hide")
+            } else {
+                this.textContent = "visibility"
+                btn.classList.remove("hide")
             }
-        },
+        })
     }
-    let autocompleteInstances = M.Autocomplete.init(autocomplete, options);
     let lazyImages = [].slice.call(document.querySelectorAll("img.lazyload"));
     let active = false;
 
@@ -130,4 +241,14 @@ window.addEventListener('DOMContentLoaded', function() {
     window.addEventListener("resize", lazyLoad);
     window.addEventListener("orientationchange", lazyLoad);
     window.addEventListener('pageshow', lazyLoad);
+    
+    let pkg_formats = ["snap", "flatpak", "native"]
+    for (format of pkg_formats) {
+        if (sessionStorage.getItem(format) === null) {
+            let array = new Array()
+            sessionStorage.setItem(format, JSON.stringify(array))
+        } else {
+            rebuildInstall()
+        }
+    }
 })

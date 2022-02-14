@@ -47,7 +47,7 @@ class Database():
             )
             if d["icon"] and d["name"] not in ignore_list:
                 model = models.Apps(
-                    pkg_format="pamac",
+                    pkg_format="native",
                     app_id=d["app_id"],
                     icon=d["icon"].replace('/usr/share/app-info', '/static'),
                     launchable=d["launchable"],
@@ -60,7 +60,7 @@ class Database():
                     description=d["description"],
                     download_size=d["download_size"],
                     groups=" ".join(d["groups"]),
-                    ha_signature=d["ha_signature"],
+                    #ha_signature=d["ha_signature"],
                     pkg_id=d["pkg_id"],
                     install_date=d["install_date"],
                     installed_size=d["installed_size"],
@@ -84,7 +84,7 @@ class Database():
 
             else:
                 model = models.Packages(
-                    pkg_format="pamac",
+                    pkg_format="native",
                     app_id=d["app_id"],
                     icon="static/images/package.svg",
                     launchable=d["launchable"],
@@ -96,7 +96,7 @@ class Database():
                     description=d["description"],
                     download_size=d["download_size"],
                     groups=" ".join(d["groups"]),
-                    ha_signature=d["ha_signature"],
+                    #ha_signature=d["ha_signature"],
                     pkg_id=d["pkg_id"],
                     install_date=d["install_date"],
                     installed_size=d["installed_size"],

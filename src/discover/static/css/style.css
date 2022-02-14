@@ -8,9 +8,12 @@ html {
 }
 
 main {
-    padding-top: 15px;
     padding-bottom: 64px;
     user-select: none;
+}
+
+.navbar-fixed {
+    margin-bottom: 15px;
 }
 
 code {
@@ -60,11 +63,9 @@ code {
     background-image: linear-gradient(to left, #00897b, #00695c);
     text-align: center;
     height: 246px;
-    padding-left: 22px;
-    padding-top: 14px;
 }
 
-.card .col:last-child {
+.card .col.screenshot {
     padding-left: 0;
 }
 
@@ -110,7 +111,7 @@ code {
 }
 
 .sidenav .subheader {
-    color:  #009688 !important;
+    color:  #1de9b6 !important;
 }
 
 .discover-description {
@@ -173,10 +174,6 @@ code {
     margin-bottom: 0;
 }
 
-.single-package .input-field {
-    display: none;
-}
-
 .carousel .indicators {
     top: 0;
     bottom: auto;
@@ -197,19 +194,19 @@ code {
 .materialboxed {
     position: absolute;
     right: 0;
-    left: 50%;
+    left: 65%;
 }
 
 .toggle-arrow {
     position: absolute;
-    top: 12px;
+    top: 0;
     transform: translateX(318px);
     background-color: #212121;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
     padding-right: 2px;
     color: #fafafa;
-    height: 60px;
+    height: 64px;
     cursor: pointer;
     user-select: none;
 }
@@ -219,7 +216,7 @@ code {
 }
 
 .toggle-arrow span {
-    font-size: 60px;
+    font-size: 65px;
     transition: transform 0.3s ease-in-out;
 }
 
@@ -233,9 +230,7 @@ code {
 
 .sidenav a:not(.git):not(.subheader),
 .sidenav p,
-.sidenav h1,
-.sidenav .input-field i,
-.sidenav .input-field input {
+.sidenav h1 {
     color: #fafafa  !important;
 }
 
@@ -272,8 +267,38 @@ code {
     height: 40px !important;
 }
 
+.autocomplete {
+    padding-left: 150px !important;
+}
+
+.label-icon i:last-child {
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+.autocomplete:not(:active) {
+    color: white;
+}
+
 .autocomplete-content {
-    width: 278px !important;
+    width: 100% !important; 
+}
+
+.hide {
+    display: none !important;
+}
+
+nav .input-field label.active i {
+  color: inherit !important;
+}
+
+.label-icon {
+    margin-top: -10px;
+    margin-left: 80px;
+}
+
+.label-icon i:first-child {
+    float: left;
 }
 
 .user-view {
@@ -292,4 +317,68 @@ code {
     .snaps main.nav-open {
         margin-left: 320px;
     }
+}
+
+.collapsible {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 999;
+    display: none;
+    border: none;
+    user-select: none;
+    margin-top: 0;
+}
+
+.collapsible-body {
+    background-color: white;
+    padding-top: 0;
+    max-height: calc(90vh + 9px);
+    overflow: scroll;
+}
+
+#install-btn {
+    top: -2px;
+}
+
+#install-btn i {
+    margin-left: 1px;
+}
+
+#install-list {
+    box-shadow: none;
+}
+
+.collapsible-header {
+    border-bottom: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    height: 64px;
+    padding-top: 19px;
+    box-shadow: none;
+}
+
+.collapsible-header #items-count {
+    margin-top: 2px;
+    margin-left: 14px;
+}
+
+.collapsible-body p {
+    color: rgba(0,0,0,0.42);
+}
+
+#items-count {
+    margin-right: 60px;
+}
+
+.data-search.valign-wrapper {
+    justify-content: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.data-search.valign-wrapper div {
+    padding-left: 10px;
+    padding-right: 10px;
 }

@@ -1,6 +1,22 @@
-{% extends 'base.html' %}{% block content %}
-{% include 'includes/navigation.html' %}
+{% extends 'base.html' %}{% block content %}        
 <main class="grey darken-4">
+    <div class="navbar-fixed">
+        <nav class="navbar-fixed blue-grey darken-4">
+          <div class="nav-wrapper">
+            <form>
+              <div class="input-field">
+                <input id="search" type="search" class="autocomplete" autocomplete="off">
+                <label class="label-icon" for="search">
+                    <i class="material-icons">search</i>
+                    <i id="pkg-visibility" class="material-icons tooltipped" data-position="rigth" data-tooltip="Show/Hide Packages">visibility_off</i>
+                </label>
+                <i class="material-icons tooltipped" id="clear-search" data-position="rigth" data-tooltip="Clear Search">close</i>
+              </div>
+            </form>
+          </div>
+        </nav>
+    </div>
+
     <div id="search-items" class="row" data-src="{{ data }}">
         {% for app in apps %}
         {% set name = app.title %}
@@ -10,8 +26,10 @@
         <div class="col s12 l6 xl4 app">
             <div class="card blue-grey darken-3">
                 <div class="row white-text center">
-                    <div class="col data-search s6">
-                        <span class="logo-container">
+                    {% set screenshot = app.screenshots.split(" ")[0] %}
+                    <div class="col data-search valign-wrapper {% if screenshot %}s8{% else %}s12{% endif %}">
+                        <div>
+                        <span class="logo-container center-align">
                             <img onerror="this.src='/static/images/package.svg'" data-src="{{ icon }}" class="app-logo lazyload" alt="icon" loading="lazy">
                         </span>
                         <span class="card-title">
@@ -28,16 +46,16 @@
                             </span>
                         <span class="keywords" style="display:none;">{{ pkg_name }}</span>
                         <p>{{ description | truncate_description() }}</p>
-                    </div>                    
-                    <div class="col s6">
-                        {% if app.screenshots.split(" ")[0] %}
-                        {% set screenshot = app.screenshots.split(" ")[0] %}
+                        </div>
+                    </div>     
+                    {% if screenshot %}               
+                    <div class="col s4 screenshot">
                             <img onerror="this.style.display='none'" data-src="{{ screenshot }}" class="materialboxed lazyload screenshot" alt="screenshot" loading="lazy">
-                        {% endif %}
-                        <a class="btn tooltipped btn-add waves-effect waves-light green" data-position="left" data-tooltip="Add to install" href="web-pamac://{{ pkg_name }}{% if title == 'Flatpaks' %}?flatpak{% elif title == 'Snaps' %}?snap{% endif %}">
-                            <i class="material-icons">add</i>
-                        </a>
                     </div>
+                    {% endif %}
+                    <button class="btn tooltipped btn-add waves-effect waves-light green" data-position="left" data-tooltip="Add to install" data-pkg="{{ pkg_name }}" data-title="{{ name }}" data-format="{{ app['pkg_format'] }}" onclick="addApp(this)">
+                        <i class="material-icons">add</i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -46,5 +64,5 @@
 </main>
 <button id="btn-up" data-position="left" data-tooltip="Top" class="blue-grey tooltipped darken-4 btn-floating btn-large waves-effect waves-light">
 <i class="material-icons">arrow_upward</i>
-</button>
+</button>   
 {% endblock %}
