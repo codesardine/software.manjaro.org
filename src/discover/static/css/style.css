@@ -200,11 +200,10 @@ code {
 .toggle-arrow {
     position: absolute;
     top: 0;
-    transform: translateX(280px);
+    left: 280px;
     background-color: #212121;
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
-    padding-right: 2px;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
     color: #fafafa;
     height: 64px;
     cursor: pointer;
@@ -216,8 +215,7 @@ code {
 }
 
 .toggle-arrow span {
-    font-size: 65px;
-    transition: transform 0.3s ease-in-out;
+    font-size: 64px;
 }
 
 .sidenav a {
@@ -401,9 +399,9 @@ nav .input-field label.active i:last-child {
 
 @media only screen and (max-width: 600px) {
     .toggle-arrow span {
-        font-size: 60px;
+        font-size: 56px;
     }
     .toggle-arrow {
-        height: 60px;
+        height: 56px;
     }
 }

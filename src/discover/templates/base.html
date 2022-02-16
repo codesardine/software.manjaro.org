@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{{ title }}</title>
-    <meta charset="utf-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" crossorigin="anonymous">
+    <link rel="stylesheet"  href="https://fonts.googleapis.com/icon?family=Material+Icons" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='images/favicon.png') }}">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/apple-icon.png') }}">
+    <title>{{ title }}</title>
+    <meta charset="utf-8">
     <meta name="description" content="{{ description }}">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" crossorigin="anonymous">
-    <link rel="stylesheet"  href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> 
     <meta name="google-site-verification" content="v6PClftSd5zHZAuSJyRpCl1fewbsYfYDp2-opMdPPXE" />
     {% block head %}{% endblock %}
