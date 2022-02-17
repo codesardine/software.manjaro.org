@@ -163,7 +163,7 @@ window.addEventListener('DOMContentLoaded', function() {
     document.querySelector(".toggle-arrow").addEventListener("click", pulse)
     document.querySelector(".toggle-arrow").addEventListener("touchstart", pulse)
 
-    if (!document.body.classList.contains("single-package")) {
+    if (document.body.classList.contains("search")) {
         document.querySelector('#search').addEventListener('keyup', debounce(function () {
             let searchValue = this.value.toLocaleLowerCase()
             matchApp(searchValue)
