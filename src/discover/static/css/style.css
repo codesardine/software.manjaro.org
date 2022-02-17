@@ -200,7 +200,7 @@ code {
 .toggle-arrow {
     position: absolute;
     top: 0;
-    left: 280px;
+    transform: translateX(280px);
     background-color: #212121;
     border-top-right-radius: 40px;
     border-bottom-right-radius: 40px;
@@ -248,7 +248,7 @@ code {
 .sidenav {
     overflow: visible;
     width: 280px;
-    transform: translateX(-280px) !important;
+    transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
 }
 
@@ -256,13 +256,8 @@ code {
     padding: 0 10px;
 }
 
-.sidenav.open ~ main {
-    position: absolute;
-    right: 0;
-}
-
 .sidenav.open {
-    transform: translateX(0px) !important;
+    transform: translateX(0);
 }
 
 #clear-search {
@@ -328,13 +323,13 @@ nav .input-field label.active i:last-child {
     .software-center main,
     .flatpaks main,
     .snaps main {
-        transition: left 0.3s ease-in-out;
+        transition: margin-left 0.3s ease-in-out;
     }
 
     .software-center main.nav-open,
     .flatpaks main.nav-open,
     .snaps main.nav-open {
-        left: 280px;
+        margin-left: 280px;
     }
 }
 
