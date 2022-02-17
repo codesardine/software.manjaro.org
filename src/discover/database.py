@@ -36,7 +36,7 @@ class Database():
         app.config['IS_MAINTENANCE_MODE_SNAPS'] = False
       
 
-    #@process
+    @process
     def populate_pkg_tables(self):   
         ignore_list = (
             "picom",
@@ -134,7 +134,7 @@ class Database():
                 sql.session.rollback()
 
     
-    #@process
+    @process
     def populate_snap_tables(self):
         for pkg in self.pamac.get_all_snaps():
             d = self.pamac.get_snap_details(
@@ -173,7 +173,7 @@ class Database():
                 sql.session.rollback()
 
     
-    #@process
+    @process
     def populate_flatpak_tables(self):
         for pkg in self.pamac.get_all_flatpaks():
             d = self.pamac.get_flatpak_details(pkg)
