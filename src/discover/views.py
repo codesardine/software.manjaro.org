@@ -188,32 +188,32 @@ def sitemap():
         return redirect("/maintenance", 302, Response=None)
     else:
         thirty_days = (date.today() - timedelta(days=30)).isoformat()
-        urls = [("https://discover.manjaro.org/applications", thirty_days),
-                ("https://discover.manjaro.org/snaps", thirty_days),
-                ("https://discover.manjaro.org/flatpaks", thirty_days)
+        urls = [("https://software.manjaro.org/applications", thirty_days),
+                ("https://software.manjaro.org/snaps", thirty_days),
+                ("https://software.manjaro.org/flatpaks", thirty_days)
         ]
 
         for pkg in query.apps():
             urls.append(
-                (f"https://discover.manjaro.org/package/{pkg.name}",
+                (f"https://software.manjaro.org/package/{pkg.name}",
                 thirty_days)
                 )
 
         for pkg in query.packages():
             urls.append(
-                (f"https://discover.manjaro.org/package/{pkg.name}",
+                (f"https://software.manjaro.org/package/{pkg.name}",
                 thirty_days)
                 )
 
         for pkg in query.snaps():
             urls.append(
-                (f"https://discover.manjaro.org/snap/{pkg.name}",
+                (f"https://software.manjaro.org/snap/{pkg.name}",
                 thirty_days)
             )
 
         for pkg in query.flatpaks():
             urls.append(
-                (f"https://discover.manjaro.org/flatpak/{pkg.name}",
+                (f"https://software.manjaro.org/flatpak/{pkg.name}",
                 thirty_days)
             )
 

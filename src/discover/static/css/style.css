@@ -248,7 +248,7 @@ code {
 .sidenav {
     overflow: visible;
     width: 280px;
-    transform: translateX(-100%);
+    transform: translateX(-280px) !important;
     transition: transform 0.3s ease-in-out;
 }
 
@@ -256,8 +256,13 @@ code {
     padding: 0 10px;
 }
 
+.sidenav.open ~ main {
+    position: absolute;
+    right: 0;
+}
+
 .sidenav.open {
-    transform: translateX(0);
+    transform: translateX(0px) !important;
 }
 
 #clear-search {
@@ -323,13 +328,13 @@ nav .input-field label.active i:last-child {
     .software-center main,
     .flatpaks main,
     .snaps main {
-        transition: margin-left 0.3s ease-in-out;
+        transition: left 0.3s ease-in-out;
     }
 
     .software-center main.nav-open,
     .flatpaks main.nav-open,
     .snaps main.nav-open {
-        margin-left: 280px;
+        left: 280px;
     }
 }
 
