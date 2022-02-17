@@ -40,8 +40,6 @@ def applications():
         pkgs = query.packages()
         data = {}
         for p in apps:
-            icon = p.icon.replace("//", "/")
-            data[p.name] = f"{ icon }"
             if not p.screenshots:
                 f = query.flatpak_by_title(p.title)
                 if f is not None and f.screenshots:
