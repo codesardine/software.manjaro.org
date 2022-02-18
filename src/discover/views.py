@@ -40,6 +40,7 @@ def applications():
         pkgs = query.packages()
         data = {}
         for p in apps:
+            #TODO move screenshot search to database
             if not p.screenshots:
                 f = query.flatpak_by_title(p.title)
                 if f is not None and f.screenshots:
@@ -138,14 +139,10 @@ def snaps():
     else:
         apps = query.snaps()
         data = {}
-        for p in apps:
-            data[p.name] = f"{ p.icon }"
-
         return render_template(
             "applications.html",
             updated=query.last_updated(),
             apps=apps,
-            data=json.dumps(data),
             title="Snaps",
             nav=navigation(),
             description="Explore snaps available in Manjaro linux."
@@ -160,14 +157,10 @@ def flatpaks():
     else:
         apps = query.flatpaks()
         data = {}
-        for p in apps:
-            data[p.name] = f"{ p.icon }"
-
         return render_template(
             "applications.html",
             updated=query.last_updated(),
             apps=apps,
-            data=json.dumps(data),
             title="Flatpaks",
             nav=navigation(),
             description="Explore flatpaks available in Manjaro linux."

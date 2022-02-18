@@ -179,9 +179,16 @@ window.addEventListener('DOMContentLoaded', function() {
         })
         let searchData = document.querySelector('#search-items')
         let autocomplete = document.querySelector('.autocomplete');
+        function parseData() {
+            let data = searchData.dataset.src
+            if (!data) {
+                data = "{}"
+            }
+            return JSON.parse(data)
+        }
         let options = {
             limit: 100,
-            data: JSON.parse(searchData.dataset.src),
+            data: parseData(),
             onAutocomplete: function (val) {
                 let value = document.querySelector('input.autocomplete').value
                 for (key in options.data) {

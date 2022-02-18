@@ -300,19 +300,16 @@ nav .input-field label.active i:first-child {
 
 nav .input-field label i:last-child {
     display: none;
+    margin-top: -2px;
   }
 
-nav .input-field label.active i:last-child {
+.software-center nav .input-field label.active i:last-child {
     display: block;
   }
 
 .label-icon {
     margin-top: -10px;
     margin-left: 80px;
-}
-
-.label-icon i:first-child {
-    float: left;
 }
 
 .user-view {
