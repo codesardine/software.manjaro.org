@@ -114,6 +114,17 @@ function addApp(el) {
    rebuildInstall()
 }
 
+function remove404Images(el) {
+    let colToRemove = el.parentElement.parentElement
+    let row = colToRemove.parentElement
+    let colToEnlarge = row.querySelector(".col")
+    if (colToEnlarge.classList.contains("s8")) {
+        colToEnlarge.classList.remove("s8")
+        colToEnlarge.classList.add("s12")        
+    }
+    colToRemove.remove()
+}
+
 function pulse() {
     this.classList.remove("pulse")
 }

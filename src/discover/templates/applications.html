@@ -52,7 +52,7 @@
                     </div>     
                     {% if screenshot %}               
                     <div class="col s4 screenshot">
-                            <img onerror="this.style.display='none'" data-src="{{ screenshot }}" class="materialboxed lazyload screenshot" alt="screenshot" loading="lazy">
+                            <img onerror="remove404Images(this)" data-src="{{ screenshot }}" class="materialboxed lazyload screenshot" alt="screenshot" loading="lazy">
                     </div>
                     {% endif %}
                     <button class="btn tooltipped btn-add waves-effect waves-light green" data-position="left" data-tooltip="Add to install" data-pkg="{{ pkg_name }}" data-title="{{ name }}" data-format="{{ app['pkg_format'] }}" onclick="addApp(this)">
