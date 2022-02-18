@@ -1,6 +1,6 @@
 function debounce(fn, threshold) {
     var timeout;
-    threshold = threshold || 600;
+    threshold = threshold || 300;
     return function debounced() {
         clearTimeout(timeout);
         var args = arguments;
