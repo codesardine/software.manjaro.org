@@ -49,11 +49,11 @@
                 <p class="grey lighten-5">
                     <span class="center" style="display: block;margin-bottom: 15px;">
                         {% if pkg["pkg_format"] == "native" %}
-                        <button data-target="details" class="pkg-details-btn tooltipped waves-effect waves-light btn-small modal-trigger" data-position="top" data-tooltip="Details">
+                        <button data-target="details" class="pkg-details-btn tooltipped waves-effect waves-light btn-small modal-trigger light-blue darken-2" data-position="top" data-tooltip="Details">
                             <i class="material-icons">info</i>
                         </button>
                         {% endif %}
-                        <button class="btn btn-small tooltipped btn-add waves-effect waves-light" data-position="top" data-tooltip="Install"
+                        <button class="btn btn-small tooltipped btn-add waves-effect waves-light deep-purple darken-1" data-position="top" data-tooltip="Install"
                         data-pkg="{{ pkg_name }}" data-title="{{ name }}" data-format="{{ pkg['pkg_format'] }}" onclick="addApp(this)">
                             <i class="material-icons">add</i>
                         </button>
