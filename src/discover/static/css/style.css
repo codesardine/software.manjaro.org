@@ -405,4 +405,7 @@ nav .input-field label i:last-child {
     .toggle-arrow {
         height: 56px;
     }
+    .single-package .indicators {
+        display: none !important;
+    }
 }
