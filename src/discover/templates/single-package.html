@@ -3,9 +3,10 @@
 {% block content %}
 <main>
     <div class="container">
-        {% set name = pkg["app_name"] %}
-        {% if not name %} 
-        {% set name = pkg["name"] %} 
+        {% if pkg.title %} 
+        {% set name = pkg.title %}
+        {% else %}
+        {% set name = pkg.name %} 
         {% endif %} 
         {% set icon = pkg["icon"] %} 
         {% if not icon %} 
