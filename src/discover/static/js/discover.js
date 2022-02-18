@@ -35,9 +35,9 @@ function matchApp(searchValue) {
 
 function install(el) {
    let packages = {
-       "snap": JSON.parse(sessionStorage["snap"]),
-       "flatpak": JSON.parse(sessionStorage["flatpak"]),
-       "native": JSON.parse(sessionStorage["native"])
+       "snap": JSON.parse( localStorage["snap"]),
+       "flatpak": JSON.parse( localStorage["flatpak"]),
+       "native": JSON.parse( localStorage["native"])
    }
    let buildUrl = [];
    for (let format in packages) {
@@ -49,9 +49,9 @@ function install(el) {
    url = "web-pamac://" + url
    el.href = url
    let array = new Array()
-   sessionStorage.setItem("snap", [JSON.stringify(array)])
-   sessionStorage.setItem("flatpak", [JSON.stringify(array)])
-   sessionStorage.setItem("native", [JSON.stringify(array)])
+    localStorage.setItem("snap", [JSON.stringify(array)])
+    localStorage.setItem("flatpak", [JSON.stringify(array)])
+    localStorage.setItem("native", [JSON.stringify(array)])
    rebuildInstall()
 }
 
@@ -61,7 +61,7 @@ function rebuildInstall() {
     let total_items = install.querySelector("#items-count")
     let items_count = 0
     for (format of formats) {
-        let data = JSON.parse(sessionStorage[`${format}`])
+        let data = JSON.parse( localStorage[`${format}`])
         var pkg_format = install.querySelector(`#${format}`)
         if (data.length != 0) {
             pkg_format.innerHTML = ""
@@ -92,9 +92,9 @@ function rebuildInstall() {
 
 function remove_install(el) {
     if (!el.checked) {
-        let data = JSON.parse(sessionStorage[`${el.dataset.format}`])
+        let data = JSON.parse( localStorage[`${el.dataset.format}`])
         let newData = data.filter(function(f) { return f !== `${el.dataset.pkg}` })
-        sessionStorage.setItem(el.dataset.format, JSON.stringify(newData))
+         localStorage.setItem(el.dataset.format, JSON.stringify(newData))
         M.toast({html: `<span class="pink-text">${el.dataset.pkg}&nbsp</span> removed from install.`, displayLength: 1200})
         rebuildInstall()
     }
@@ -102,10 +102,10 @@ function remove_install(el) {
 
 function addApp(el) {
     let pkg = el.dataset.pkg
-    let data = JSON.parse(sessionStorage[`${el.dataset.format}`])
+    let data = JSON.parse( localStorage[`${el.dataset.format}`])
     if (!data.includes(pkg)) {
         data.push(`${pkg}`)
-        sessionStorage.setItem(`${el.dataset.format}`, JSON.stringify(data))
+         localStorage.setItem(`${el.dataset.format}`, JSON.stringify(data))
         M.toast({html: `<span class="pink-text">${pkg}&nbsp</span> added to install.`, displayLength: 1200})
     } else {
         M.toast({html: `<span class="pink-text">${pkg}&nbsp</span> already in install list.`, displayLength: 1200})
@@ -262,9 +262,9 @@ window.addEventListener('DOMContentLoaded', function() {
     
     let pkg_formats = ["snap", "flatpak", "native"]
     for (format of pkg_formats) {
-        if (sessionStorage.getItem(format) === null) {
+        if ( localStorage.getItem(format) === null) {
             let array = new Array()
-            sessionStorage.setItem(format, JSON.stringify(array))
+             localStorage.setItem(format, JSON.stringify(array))
         } else {
             rebuildInstall()
         }
