@@ -96,7 +96,7 @@ class Database():
                 model = models.Packages(
                     pkg_format="native",
                     app_id=d["app_id"],
-                    icon="static/images/package.svg",
+                    icon="/static/images/package.svg",
                     launchable=d["launchable"],
                     backups=" ".join(d["backups"]),
                     build_date=d["build_date"],
@@ -141,7 +141,7 @@ class Database():
                 pkg.get_name()
             )
             if not d["icon"]:
-                d["icon"] = "static/images/package.svg"
+                d["icon"] = "/static/images/package.svg"
             sql.session.add(
                 models.Snaps(
                     pkg_format="snap",
@@ -183,7 +183,7 @@ class Database():
                     "/static/flatpak-icons"
                 )
             else:
-                d["icon"] = "static/images/package.svg"
+                d["icon"] = "/static/images/package.svg"
             sql.session.add(
                 models.Flatpaks(
                     pkg_format="flatpak",
