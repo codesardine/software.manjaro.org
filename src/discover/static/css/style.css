@@ -204,7 +204,7 @@ code {
 .toggle-arrow {
     position: absolute;
     top: 0;
-    transform: translateX(280px);
+    transform: translateX(270px);
     background-color: #212121;
     border-top-right-radius: 40px;
     border-bottom-right-radius: 40px;
@@ -212,6 +212,7 @@ code {
     height: 64px;
     cursor: pointer;
     user-select: none;
+    z-index: -1;
 }
 
 .sidenav.open .toggle-arrow span{
@@ -273,10 +274,6 @@ code {
     height: 40px !important;
 }
 
-.autocomplete {
-    padding-left: 120px !important;
-}
-
 .label-icon i:last-child {
     cursor: pointer;
 }
@@ -286,7 +283,7 @@ code {
 }
 
 .autocomplete-content {
-    width: 100% !important; 
+    width: 100% !important;
 }
 
 .hide {
@@ -311,11 +308,6 @@ nav .input-field label i:last-child {
     display: block;
   }
 
-.label-icon {
-    margin-top: -10px;
-    margin-left: 80px;
-}
-
 .user-view {
     padding-top: 5px !important;
 }
@@ -331,6 +323,15 @@ nav .input-field label i:last-child {
     .flatpaks main.nav-open,
     .snaps main.nav-open {
         margin-left: 280px;
+    }
+
+    .label-icon {
+        margin-top: -10px;
+        margin-left: 64px;
+    }
+
+    .autocomplete {
+        padding-left: 100px !important;
     }
 }
 
@@ -407,5 +408,14 @@ nav .input-field label i:last-child {
     }
     .single-package .indicators {
         display: none !important;
+    }
+
+    .label-icon {
+        margin-top: -10px;
+        margin-left: 54px;
+    }
+
+    .autocomplete {
+        padding-left: 90px !important;
     }
 }
