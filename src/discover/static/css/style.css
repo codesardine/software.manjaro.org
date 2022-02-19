@@ -204,7 +204,7 @@ code {
 .toggle-arrow {
     position: absolute;
     top: 0;
-    transform: translateX(270px);
+    transform: translateX(276px);
     background-color: #212121;
     border-top-right-radius: 40px;
     border-bottom-right-radius: 40px;
@@ -332,6 +332,10 @@ nav .input-field label i:last-child {
 
     .autocomplete {
         padding-left: 100px !important;
+    }
+
+    .single-package .row .col:first-child p {
+        min-height: 300px;
     }
 }
 
