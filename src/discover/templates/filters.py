@@ -1,8 +1,8 @@
 import json
 
-def truncate_description(long_description: str, characters: int = 120):
+def truncate_description(long_description: str, characters: int = 80):
     """ 
-    desc: truncate long description strings to 120 char 
+    desc: truncate long description strings to 80 char 
     usage: {{ description | truncate_description(characters=20)
     """
     if long_description:
