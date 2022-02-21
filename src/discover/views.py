@@ -7,7 +7,8 @@ import json
 def navigation():
     return {'title': 'Applications', 'href': '/applications'},\
            {'title': 'Snaps', 'href': '/snaps'}, \
-           {'title': 'Flatpaks', 'href': '/flatpaks'}
+           {'title': 'Flatpaks', 'href': '/flatpaks'}, \
+           {'title': 'Appimages', 'href': '/appimages'}
 
 
 @app.route("/maintenance")
@@ -138,7 +139,6 @@ def snaps():
         return redirect("/maintenance", 302, Response=None)
     else:
         apps = query.snaps()
-        data = {}
         return render_template(
             "applications.html",
             updated=query.last_updated(),
@@ -156,7 +156,6 @@ def flatpaks():
         return redirect("/maintenance", 302, Response=None)
     else:
         apps = query.flatpaks()
-        data = {}
         return render_template(
             "applications.html",
             updated=query.last_updated(),
@@ -164,6 +163,42 @@ def flatpaks():
             title="Flatpaks",
             nav=navigation(),
             description="Explore flatpaks available in Manjaro linux."
+        )
+
+
+@app.route("/appimages")
+@cache.cached(timeout=50)
+def appimages():
+    if app.config['IS_MAINTENANCE_MODE_APPIMAGES']: 
+        return redirect("/maintenance", 302, Response=None)
+    else:
+        apps = query.appimages()    
+        return render_template(
+            "applications.html",
+            updated=query.last_updated(),
+            apps=apps,
+            title="Appimage",
+            nav=navigation(),
+            description="Explore Appimages available in Manjaro linux."
+        )
+
+
+@app.route("/appimage/<name>")
+@cache.cached(timeout=40)
+def appimage(name):
+    if app.config['IS_MAINTENANCE_MODE_APPIMAGES']: 
+        return redirect("/maintenance", 302, Response=None)
+    else:    
+        pkg = query.appimage_by_name(name)
+        if not hasattr(pkg, "screenshots") or not pkg.screenshots:
+                pkg.screenshots = None
+        return render_template(
+            "single-package.html",
+            updated=query.last_updated(),
+            pkg=pkg,
+            title=pkg.title,
+            nav=navigation(),
+            description=pkg.description
         )
 
 
@@ -175,13 +210,17 @@ def error_404(error404):
 
 @app.route('/sitemap.xml', methods=['GET'])
 def sitemap():
-    if app.config['IS_MAINTENANCE_MODE_PKGS'] or app.config['IS_MAINTENANCE_MODE_SNAPS'] or app.config['IS_MAINTENANCE_MODE_FLATPAKS']: 
+    if app.config['IS_MAINTENANCE_MODE_PKGS'] \
+        or app.config['IS_MAINTENANCE_MODE_SNAPS'] \
+        or app.config['IS_MAINTENANCE_MODE_FLATPAKS'] \
+        or app.config['IS_MAINTENANCE_MODE_APPIMAGES']: 
         return redirect("/maintenance", 302, Response=None)
     else:
         thirty_days = (date.today() - timedelta(days=30)).isoformat()
         urls = [("https://software.manjaro.org/applications", thirty_days),
                 ("https://software.manjaro.org/snaps", thirty_days),
-                ("https://software.manjaro.org/flatpaks", thirty_days)
+                ("https://software.manjaro.org/flatpaks", thirty_days),
+                ("https://software.manjaro.org/appimages", thirty_days)
         ]
 
         for pkg in query.apps():
@@ -205,6 +244,12 @@ def sitemap():
         for pkg in query.flatpaks():
             urls.append(
                 (f"https://software.manjaro.org/flatpak/{pkg.name}",
+                thirty_days)
+            )
+
+        for pkg in query.appimages():
+            urls.append(
+                (f"https://software.manjaro.org/appimage/{pkg.name}",
                 thirty_days)
             )
 

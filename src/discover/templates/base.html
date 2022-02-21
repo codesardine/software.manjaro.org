@@ -38,7 +38,7 @@
     </script>
     {% include 'includes/info-modals.html' %}
     {% include 'includes/navigation.html' %}
-    {% block content %} {% endblock %}
+    {% block content %}{% endblock %}
     <script>
         function getOS() {
             var userAgent = window.navigator.userAgent,
@@ -84,8 +84,8 @@
                     
                 </span>
                 <span>
-                    <h6>Native</h6>
-                    <form id="native" action="#"><p>None Selected</p></form>
+                    <h6>Package</h6>
+                    <form id="package" action="#"><p>None Selected</p></form>
                 </span>
                 <span>
                     <h6>Snap</h6>
@@ -94,6 +94,10 @@
                 <span>
                     <h6>Flatpak</h6>
                     <form id="flatpak" action="#"><p>None Selected</p></form>
+                </span>
+                <span>
+                    <h6>Appimage</h6>
+                    <form id="appimage" action="#"><p>None Selected</p></form>
                 </span>
             </div>
         </li>

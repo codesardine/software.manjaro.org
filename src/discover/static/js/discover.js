@@ -35,9 +35,10 @@ function matchApp(searchValue) {
 
 function install(el) {
    let packages = {
-       "snap": JSON.parse( localStorage["snap"]),
-       "flatpak": JSON.parse( localStorage["flatpak"]),
-       "native": JSON.parse( localStorage["native"])
+       "snap": JSON.parse(localStorage["snap"]),
+       "flatpak": JSON.parse(localStorage["flatpak"]),
+       "package": JSON.parse(localStorage["package"]),
+       "appimage": JSON.parse(localStorage["appimage"])
    }
    let buildUrl = [];
    for (let format in packages) {
@@ -49,19 +50,20 @@ function install(el) {
    url = "web-pamac://" + url
    el.href = url
    let array = new Array()
-    localStorage.setItem("snap", [JSON.stringify(array)])
-    localStorage.setItem("flatpak", [JSON.stringify(array)])
-    localStorage.setItem("native", [JSON.stringify(array)])
+   localStorage.setItem("snap", [JSON.stringify(array)])
+   localStorage.setItem("flatpak", [JSON.stringify(array)])
+   localStorage.setItem("package", [JSON.stringify(array)])
+   localStorage.setItem("appimage", [JSON.stringify(array)])
    rebuildInstall()
 }
 
 function rebuildInstall() {
-    let formats = ["native", "snap", "flatpak"]
+    let formats = ["package", "snap", "flatpak", "appimage"]
     let install = document.querySelector("#install-list")
     let total_items = install.querySelector("#items-count")
     let items_count = 0
-    for (format of formats) {
-        let data = JSON.parse( localStorage[`${format}`])
+    for (let format of formats) {
+        let data = JSON.parse(localStorage.getItem(format))
         var pkg_format = install.querySelector(`#${format}`)
         if (data.length != 0) {
             pkg_format.innerHTML = ""
@@ -92,9 +94,9 @@ function rebuildInstall() {
 
 function remove_install(el) {
     if (!el.checked) {
-        let data = JSON.parse( localStorage[`${el.dataset.format}`])
+        let data = JSON.parse(localStorage[`${el.dataset.format}`])
         let newData = data.filter(function(f) { return f !== `${el.dataset.pkg}` })
-         localStorage.setItem(el.dataset.format, JSON.stringify(newData))
+        localStorage.setItem(el.dataset.format, JSON.stringify(newData))
         M.toast({html: `<span class="pink-text">${el.dataset.pkg}&nbsp</span> removed from install.`, displayLength: 1200})
         rebuildInstall()
     }
@@ -102,10 +104,11 @@ function remove_install(el) {
 
 function addApp(el) {
     let pkg = el.dataset.pkg
-    let data = JSON.parse( localStorage[`${el.dataset.format}`])
+    console.log(el.dataset.format)
+    let data = JSON.parse(localStorage[`${el.dataset.format}`])
     if (!data.includes(pkg)) {
         data.push(`${pkg}`)
-         localStorage.setItem(`${el.dataset.format}`, JSON.stringify(data))
+        localStorage.setItem(`${el.dataset.format}`, JSON.stringify(data))
         M.toast({html: `<span class="pink-text">${pkg}&nbsp</span> added to install.`, displayLength: 1200})
     } else {
         M.toast({html: `<span class="pink-text">${pkg}&nbsp</span> already in install list.`, displayLength: 1200})
@@ -205,13 +208,15 @@ window.addEventListener('DOMContentLoaded', function() {
                 for (key in options.data) {
                     if (value == key) {
                         if (location.pathname == "/snaps") {
-                            var pkg_format = "snap"
+                            var format = "snap"
                         } else if (location.pathname == "/flatpaks") {
-                            var pkg_format = "flatpak"
-                        } if (location.pathname == "/applications") {
-                            var pkg_format = "package"
+                            var format = "flatpak"
+                        } else if (location.pathname == "/applications") {
+                            var format = "package"
+                        } else if (location.pathname == "/appimage") {
+                            var format = "appimage"
                         }
-                        let link = window.open(`/${pkg_format}/${key}`, "_blank");
+                        let link = window.open(`/${format}/${key}`, "_blank");
                         link.location;
                     }
                 }
@@ -260,11 +265,11 @@ window.addEventListener('DOMContentLoaded', function() {
     window.addEventListener("orientationchange", lazyLoad);
     window.addEventListener('pageshow', lazyLoad);
     
-    let pkg_formats = ["snap", "flatpak", "native"]
-    for (format of pkg_formats) {
-        if ( localStorage.getItem(format) === null) {
+    let pkg_formats = ["snap", "flatpak", "package", "appimage"]
+    for (let format of pkg_formats) {
+        if (localStorage.getItem(format) === null) {
             let array = new Array()
-             localStorage.setItem(format, JSON.stringify(array))
+            localStorage.setItem(format, JSON.stringify(array))
         } else {
             rebuildInstall()
         }

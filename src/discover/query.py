@@ -1,4 +1,3 @@
-from discover.database import Database
 from discover import models
 
 
@@ -18,6 +17,12 @@ def snaps():
 
 def flatpaks():
     return models.Flatpaks.query.order_by(models.Flatpaks.title).all()
+
+def appimages():
+    return models.Appimages.query.order_by(models.Appimages.title).all()
+
+def appimage_by_name(name):
+    return models.Appimages.query.filter_by(name=name).first()
 
 def app_by_name(name):
     return models.Apps.query.filter_by(name=name).first()

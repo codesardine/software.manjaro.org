@@ -24,6 +24,7 @@
         {% set name = app.title %}
         {% set pkg_name = app.name %}
         {% set icon = app.icon %} 
+        {% set format = app.format %}
         {% set description = app.description %} 
         <div class="col s12 l4 xl3 app">
             <div class="card blue-grey darken-3">
@@ -35,15 +36,8 @@
                             <img onerror="this.src='/static/images/package.svg'" data-src="{{ icon }}" class="app-logo lazyload" alt="icon" loading="lazy">
                         </span>
                         <span class="card-title">
-                            {% if title == 'Flatpaks' %}
-                              {% set pkg_ref = "/flatpak/" %}
-                            {% elif title == 'Snaps' %}
-                              {% set pkg_ref = "/snap/" %}
-                            {% else %}
-                              {% set pkg_ref = "/package/" %}
-                            {% endif %}
                             <a class="tooltipped" data-position="bottom" data-tooltip="Details"
-                                href="{{ pkg_ref }}{{ pkg_name }}">{{ name }}
+                                href="/{{ format }}/{{ pkg_name }}">{{ name }}
                             </a>
                             </span>
                         <span class="keywords" style="display:none;">{{ pkg_name }}</span>
@@ -55,7 +49,7 @@
                             <img onerror="remove404Images(this)" data-src="{{ screenshot }}" class="materialboxed lazyload screenshot" alt="screenshot" loading="lazy">
                     </div>
                     {% endif %}
-                    <button class="btn tooltipped btn-add waves-effect waves-light deep-purple darken-1" data-position="left" data-tooltip="Add to install" data-pkg="{{ pkg_name }}" data-title="{{ name }}" data-format="{{ app['pkg_format'] }}" onclick="addApp(this)">
+                    <button class="btn tooltipped btn-add waves-effect waves-light deep-purple darken-1" data-position="left" data-tooltip="Add to install" data-pkg="{{ pkg_name }}" data-title="{{ name }}" data-format="{{ format }}" onclick="addApp(this)">
                         <i class="material-icons">add</i>
                     </button>
                 </div>

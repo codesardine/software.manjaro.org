@@ -17,6 +17,7 @@
         {% else %}
           {% set screenshots = pkg["screenshots"] %}
         {% endif %}
+        {% set format = pkg["format"] %}
         {% set licenses = pkg["license"].split(" ") %} 
         {% set pkg_name = pkg["name"] %} 
         {% set version = pkg["version"] %}
@@ -48,13 +49,13 @@
             <div class="col s12 l4 details">            
                 <p class="grey lighten-5">
                     <span class="center" style="display: block;margin-bottom: 15px;">
-                        {% if pkg["pkg_format"] == "native" %}
+                        {% if format == "package" %}
                         <button data-target="details" class="pkg-details-btn tooltipped waves-effect waves-light btn-small modal-trigger light-blue darken-2" data-position="top" data-tooltip="Details">
                             <i class="material-icons">info</i>
                         </button>
                         {% endif %}
                         <button class="btn btn-small tooltipped btn-add waves-effect waves-light deep-purple darken-1" data-position="top" data-tooltip="Install"
-                        data-pkg="{{ pkg_name }}" data-title="{{ name }}" data-format="{{ pkg['pkg_format'] }}" onclick="addApp(this)">
+                        data-pkg="{{ pkg_name }}" data-title="{{ name }}" data-format="{{ format }}" onclick="addApp(this)">
                             <i class="material-icons">add</i>
                         </button>
                     </span>
@@ -66,8 +67,12 @@
                               {% else %}
                                 {{ license.replace("LicenseRef-", "").replace("-only", "") }} 
                               {% endif %}
-                            {% endfor %} </span>
-                        <br>{% if pkg["pkg_format"] == "native" %}<a target="_blank" href='https://manjaro.org/branch-compare/?query={{ pkg_name }}'>Compare</a>{% endif %} Version: <span class="text-info">{{ version }}</span>
+                            {% endfor %} 
+                        </span>
+                        <br>
+                        {% if format == "package" %}
+                          <a target="_blank" href='https://manjaro.org/branch-compare/?query={{ pkg_name }}'>Compare</a>
+                        {% endif %} Version: <span class="text-info">{{ version }}</span>
                         <br> {% if pkg["download_size"] !=0 %}
                         Download Size: <span class="text-info">{{ pkg["download_size"] }}</span>
                         <br> {% endif %} 
@@ -80,13 +85,23 @@
                     <span>
                         Installing:
                         <br>
-                        <code>{% if pkg["pkg_format"] == "native" %}pamac{% else %}{{ pkg["pkg_format"] }}{% endif %} install {{ pkg_name }}</code>
+                        <code>
+                            {% if format == "package" %}
+                              pamac
+                            {% else %}
+                              {{ format }}
+                            {% endif %} install {{ pkg_name }}</code>
                         <br><br> Removing:
                         <br>
-                        <code>{% if pkg["pkg_format"] == "native" %}pamac{% else %}{{ pkg["pkg_format"] }}{% endif %} remove {{ pkg_name }}</code>
+                        <code>
+                            {% if format == "package" %}
+                            pamac
+                            {% else %}
+                              {{ format }}
+                            {% endif %} remove {{ pkg_name }}</code>
                     </span>
                 </p>
-                {% if pkg["pkg_format"] == "native" %}
+                {% if format == "package" %}
                 {% include 'includes/package-details.html' %}
                 {% endif %}
             </div>

@@ -7,7 +7,7 @@ class ScreenshotsTemplate:
 
 class BaseTemplate:
     id                = sql.Column(sql.Integer, primary_key=True)
-    pkg_format        = sql.Column(sql.String(20), nullable=False)
+    format            = sql.Column(sql.String(20), nullable=False)
     app_id            = sql.Column(sql.String(100), nullable=True)
     icon              = sql.Column(sql.String(110), nullable=True)
     title             = sql.Column(sql.String(100), nullable=True)
@@ -62,6 +62,10 @@ class Snaps(sql.Model, BaseTemplate, ScreenshotsTemplate):
     
 
 class Flatpaks(sql.Model, BaseTemplate, ScreenshotsTemplate):
+    pass
+
+
+class Appimages(sql.Model, PackageTemplate, ScreenshotsTemplate):
     pass
 
 

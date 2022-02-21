@@ -15,6 +15,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['IS_MAINTENANCE_MODE_PKGS'] = True
 app.config['IS_MAINTENANCE_MODE_SNAPS'] = True
 app.config['IS_MAINTENANCE_MODE_FLATPAKS'] = True
+app.config['IS_MAINTENANCE_MODE_APPIMAGES'] = True
 
 sql = SQLAlchemy(app, session_options={"autoflush": False})
 scheduler = APScheduler()

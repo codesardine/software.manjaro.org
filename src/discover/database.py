@@ -6,7 +6,6 @@ import json
 import multiprocessing
 
 
-
 def process(func):
     def proc(*args):
       p = multiprocessing.Process(target=func(*args))
@@ -18,6 +17,7 @@ def process(func):
 class Database():
     def __init__(self):
         self.pamac = PackageManager.Pamac()
+        self.package_icon = "/static/images/package.svg"
 
     def reload_tables(self):
         sql.drop_all()
@@ -28,6 +28,8 @@ class Database():
             )
         )
         sql.session.commit()
+        self.populate_appimage_tables()
+        app.config['IS_MAINTENANCE_MODE_APPIMAGES'] = False
         self.populate_pkg_tables()
         app.config['IS_MAINTENANCE_MODE_PKGS'] = False
         self.populate_flatpak_tables()
@@ -57,7 +59,7 @@ class Database():
             )
             if d["icon"] and d["name"] not in ignore_list:
                 model = models.Apps(
-                    pkg_format="native",
+                    format="package",
                     app_id=d["app_id"],
                     icon=d["icon"].replace('/usr/share/app-info', '/static'),
                     launchable=d["launchable"],
@@ -94,9 +96,9 @@ class Database():
 
             else:
                 model = models.Packages(
-                    pkg_format="native",
+                    format="package",
                     app_id=d["app_id"],
-                    icon="/static/images/package.svg",
+                    icon=self.package_icon,
                     launchable=d["launchable"],
                     backups=" ".join(d["backups"]),
                     build_date=d["build_date"],
@@ -141,10 +143,10 @@ class Database():
                 pkg.get_name()
             )
             if not d["icon"]:
-                d["icon"] = "/static/images/package.svg"
+                d["icon"] = self.package_icon
             sql.session.add(
                 models.Snaps(
-                    pkg_format="snap",
+                    format="snap",
                     app_id=d["app_id"],
                     icon=d["icon"],
                     launchable=d["launchable"],
@@ -183,10 +185,10 @@ class Database():
                     "/static/flatpak-icons"
                 )
             else:
-                d["icon"] = "/static/images/package.svg"
+                d["icon"] = self.package_icon
             sql.session.add(
                 models.Flatpaks(
-                    pkg_format="flatpak",
+                    format="flatpak",
                     icon=d["icon"],
                     launchable=d["launchable"],
                     title=d["title"],
@@ -199,6 +201,31 @@ class Database():
                     long_description=d["long_description"],
                     name=d["name"],
                     repository=" ".join(d["repository"]),
+                    screenshots=" ".join(d["screenshots"]),
+                    url=d["url"],
+                    version=d["version"]
+                )
+            )
+            try:
+                sql.session.commit()
+            except IntegrityError:
+                sql.session.rollback()
+
+
+    @process
+    def populate_appimage_tables(self):
+        from discover.appimage import appimages
+        for d in appimages(): 
+            if not d["icon"]:
+                d["icon"] = self.package_icon        
+            sql.session.add(
+                models.Appimages(
+                    format="appimage",
+                    icon=d["icon"],
+                    title=d["title"],
+                    description=d["description"],
+                    license=d["license"],
+                    name=d["name"],
                     screenshots=" ".join(d["screenshots"]),
                     url=d["url"],
                     version=d["version"]
