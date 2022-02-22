@@ -18,9 +18,13 @@
           {% set screenshots = pkg["screenshots"] %}
         {% endif %}
         {% set format = pkg["format"] %}
-        {% set licenses = pkg["license"].split(" ") %} 
+        {% if pkg["license"] != None %}
+          {% set licenses = pkg["license"].split(" ") %} 
+        {% endif %}
         {% set pkg_name = pkg["name"] %} 
-        {% set version = pkg["version"] %}
+        {% if pkg["version"] != None %}
+          {% set version = pkg["version"] %}
+        {% endif %}
         {% if pkg["long_description"] %}
         {% set description = pkg["long_description"] %}
         {% else %}
@@ -42,12 +46,15 @@
         {% endif %}
         <div class="row">
             <div class="col s12 l8">
-                <p class="grey lighten-5">
-                    Description<br><br>{{ description }}
+                <p class="grey lighten-5 description">
+                  <span>Description</span>
+                </br></br>
+                  {{ description }}
                 </p>
             </div>
             <div class="col s12 l4 details">            
                 <p class="grey lighten-5">
+                  {% if format != "appimage" %}
                     <span class="center" style="display: block;margin-bottom: 15px;">
                         {% if format == "package" %}
                         <button data-target="details" class="pkg-details-btn tooltipped waves-effect waves-light btn-small modal-trigger light-blue darken-2" data-position="top" data-tooltip="Details">
@@ -59,6 +66,8 @@
                             <i class="material-icons">add</i>
                         </button>
                     </span>
+                    {% endif %}
+                    {% if licenses %}
                     <span>
                         Licenses: <span class="text-info">
                             {% for license in licenses %} 
@@ -70,18 +79,31 @@
                             {% endfor %} 
                         </span>
                         <br>
+                    {% endif %}
+                    {% if "http" in pkg["repository"] %}
+                    <a target="_blank" href='{{ pkg["repository"] }}'>Repository</a>
+                    <br><br>
+                    {% else %}
+                    Repository: <span class="text-info">{{ pkg["repository"] }}</span>
+                    <br>
+                    {% endif %}
                         {% if format == "package" %}
                           <a target="_blank" href='https://manjaro.org/branch-compare/?query={{ pkg_name }}'>Compare</a>
-                        {% endif %} Version: <span class="text-info">{{ version }}</span>
-                        <br> {% if pkg["download_size"] !=0 %}
+                    {% endif %} 
+                    {% if version %}
+                        Version: <span class="text-info">{{ version }}</span>
+                        <br>
+                    {% endif %} 
+                    {% if pkg["download_size"] %}
                         Download Size: <span class="text-info">{{ pkg["download_size"] }}</span>
                         <br> {% endif %} 
                         {% if pkg["url"] and "mailto" not in pkg["url"] %}
                         <a target="_blank" href="{{ pkg['url'] }}">{{ pkg["url"] }}</a>
                         <br><br>
-                        {% endif %} 
+                    {% endif %} 
                         {{ link | safe }}
                     </span>
+                    {% if format != "appimage" %}
                     <span>
                         Installing:
                         <br>
@@ -100,9 +122,10 @@
                               {{ format }}
                             {% endif %} remove {{ pkg_name }}</code>
                     </span>
+                    {% endif %}
                 </p>
                 {% if format == "package" %}
-                {% include 'includes/package-details.html' %}
+                 {% include 'includes/package-details.html' %}
                 {% endif %}
             </div>
         </div>

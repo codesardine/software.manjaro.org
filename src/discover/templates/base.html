@@ -16,7 +16,7 @@
     <meta name="google-site-verification" content="v6PClftSd5zHZAuSJyRpCl1fewbsYfYDp2-opMdPPXE" />
     {% block head %}{% endblock %}
 </head>
-<body class="{% block bodyClass %}{% endblock %} {% if title %}{{ title.lower() | replace(' & ', '-') | replace(' ', '-') }}{% endif %}">
+<body class="{% block bodyClass %}{% endblock %}">
    <script type="text/javascript">
         var _paq = window._paq || [];
         _paq.push(['disableCookies']);
@@ -78,28 +78,8 @@
           <div class="collapsible-header blue-grey darken-4"><i class="material-icons">archive</i>Software
             <span id="items-count" class="new badge red">4</span>
             <a href="#" onclick="install(this)" id="install-btn" data-position="left" data-tooltip="install" class="pulse tooltipped waves-effect waves-light btn-small btn-floating"><i class="material-icons">install_desktop</i></a>
-        </div>
-            <div class="collapsible-body">
-                <span style="text-align: center;">
-                    
-                </span>
-                <span>
-                    <h6>Package</h6>
-                    <form id="package" action="#"><p>None Selected</p></form>
-                </span>
-                <span>
-                    <h6>Snap</h6>
-                    <form id="snap" action="#"><p>None Selected</p></form>
-                </span>
-                <span>
-                    <h6>Flatpak</h6>
-                    <form id="flatpak" action="#"><p>None Selected</p></form>
-                </span>
-                <span>
-                    <h6>Appimage</h6>
-                    <form id="appimage" action="#"><p>None Selected</p></form>
-                </span>
-            </div>
+          </div>
+          <div class="collapsible-body"></div>
         </li>
     </ul>
 </body>

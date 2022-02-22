@@ -159,7 +159,7 @@ class Database():
                     license=d["license"],
                     long_description=d["long_description"],
                     name=d["name"],
-                    repository=" ".join(d["repository"]),
+                    repository=d["repository"],
                     screenshots=" ".join(d["screenshots"]),
                     url=d["url"],
                     version=d["version"],
@@ -200,7 +200,7 @@ class Database():
                     license=d["license"],
                     long_description=d["long_description"],
                     name=d["name"],
-                    repository=" ".join(d["repository"]),
+                    repository=d["repository"],
                     screenshots=" ".join(d["screenshots"]),
                     url=d["url"],
                     version=d["version"]
@@ -228,7 +228,8 @@ class Database():
                     name=d["name"],
                     screenshots=" ".join(d["screenshots"]),
                     url=d["url"],
-                    version=d["version"]
+                    version=d["version"],
+                    repository=d["repository"]
                 )
             )
             try:

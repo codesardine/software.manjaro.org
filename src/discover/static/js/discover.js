@@ -64,25 +64,39 @@ function rebuildInstall() {
     let items_count = 0
     for (let format of formats) {
         let data = JSON.parse(localStorage.getItem(format))
-        var pkg_format = install.querySelector(`#${format}`)
         if (data.length != 0) {
-            pkg_format.innerHTML = ""
+            let container = `
+            <span class="${format}">
+                <h6>${format.replace(/^\w/, (first) => first.toUpperCase())}</h6>
+                <form id="${format}" action="#"></form>
+            </span>
+            `
             items_count += data.length
-        } else {
+            let drop_down = document.querySelector(".collapsible-body")
+            let template_container = document.querySelector(`.${format}`)
+            if (!template_container) {
+                drop_down.insertAdjacentHTML('beforeend', container)
+            }
+            let pkg_format = install.querySelector(`#${format}`)
             pkg_format.innerHTML = ""
-            pkg_format.insertAdjacentHTML('beforeend', "<p>None Selected</p>")
-        }
-        for (pkg of data) {
-            let template = `
-                <p>
-                <label>
-                    <input class="install-checkbox" data-pkg="${pkg}" data-format="${format}" data-title="" type="checkbox" checked="checked" onclick="remove_install(this)" />
-                    <span>${pkg}</span>
-                </label>
-                </p>
-                `
+            for (pkg of data) {
+                let template = `
+                    <p>
+                    <label>
+                        <input class="install-checkbox" data-pkg="${pkg}" data-format="${format}" data-title="" type="checkbox" checked="checked" onclick="remove_install(this)" />
+                        <span>${pkg}</span>
+                    </label>
+                    </p>
+                    `
                 pkg_format.insertAdjacentHTML('beforeend', template)
+            }
+        } else {
+            let template_container = document.querySelector(`.${format}`)
+            if (template_container) {
+                template_container.remove()
+            }
         }
+        
     }
     total_items.textContent = items_count
     if (items_count != 0) {
@@ -104,7 +118,6 @@ function remove_install(el) {
 
 function addApp(el) {
     let pkg = el.dataset.pkg
-    console.log(el.dataset.format)
     let data = JSON.parse(localStorage[`${el.dataset.format}`])
     if (!data.includes(pkg)) {
         data.push(`${pkg}`)

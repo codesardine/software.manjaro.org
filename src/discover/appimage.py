@@ -1,14 +1,13 @@
 from urllib.request import urlopen
 import json, re
 
+
 def get_appimage(provider):
-    if provider == "appimage.github.io":
-        url = f"https://{provider}/feed.json"
-        response = urlopen(url)
-        if response.status == 200:
-            data = json.loads(response.read())
-            items = data["items"]
-            return items
+    response = urlopen(provider + "/feed.json")
+    if response.status == 200:
+        data = json.loads(response.read())
+        items = data["items"]
+        return items
 
 
 def strip_html(html):
@@ -20,20 +19,22 @@ def strip_html(html):
 def appimages():
     data_url = "https://raw.githubusercontent.com/AppImage/appimage.github.io/master/database/"
     git_url = "https://github.com/"
+    provider = "https://appimage.github.io"
     appimage = []
-    for app in get_appimage("appimage.github.io"):
+    for app in get_appimage(provider):
         app_data = {}
         try:
             links = app["links"]
             if app["license"]:
                 app_data["license"] = app["license"]
             else:
-                app_data["license"] = "unknown"
+                app_data["license"] = None
 
             app_data["name"] = links[0]["url"].replace("/", ".")
-            app_data["version"] = "unknown"
-            app_data["url"] = git_url + links[0]["url"]
+            app_data["version"] = None
+            app_data["url"] = git_url + links[0]["url"] + "/releases"
             app_data["format"] = "appimage"
+            app_data["repository"] = "https://github.com/AppImage/appimage.github.io"
             app_data["title"] = app["name"].replace("_", " ").replace(".", " ").replace("-", " ")
             
             try:

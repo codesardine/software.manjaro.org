@@ -167,7 +167,11 @@ code {
 }
 
 .single-package .col p {
-    padding: 10px;
+    padding: 1rem;
+}
+
+.single-package .col .description span {
+    font-size: 1.5rem;
 }
 
 .single-package .container div:nth-child(3) .col p:first-child {
@@ -304,27 +308,11 @@ nav .input-field label i:last-child {
     margin-top: -2px;
   }
 
-.software-center nav .input-field label.active i:last-child {
-    display: block;
-  }
-
 .user-view {
     padding-top: 5px !important;
 }
 
 @media only screen and (min-width: 600px) {
-    .software-center main,
-    .flatpaks main,
-    .snaps main {
-        transition: margin-left 0.3s ease-in-out;
-    }
-
-    .software-center main.nav-open,
-    .flatpaks main.nav-open,
-    .snaps main.nav-open {
-        margin-left: 280px;
-    }
-
     .label-icon {
         margin-top: -10px;
         margin-left: 64px;
@@ -332,10 +320,6 @@ nav .input-field label i:last-child {
 
     .autocomplete {
         padding-left: 100px !important;
-    }
-
-    .single-package .row .col:first-child p {
-        min-height: 300px;
     }
 }
 
@@ -355,6 +339,7 @@ nav .input-field label i:last-child {
     padding-top: 0;
     max-height: calc(90vh + 9px);
     overflow: scroll;
+    padding-bottom: 0;
 }
 
 #install-btn {
