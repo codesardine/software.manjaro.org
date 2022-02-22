@@ -1,10 +1,6 @@
 from discover import sql
 
 
-class ScreenshotsTemplate:
-    screenshots = sql.Column(sql.String(150), nullable=True)
-    
-
 class BaseTemplate:
     id                = sql.Column(sql.Integer, primary_key=True)
     pkg_format        = sql.Column(sql.String(20), nullable=False)
@@ -23,6 +19,7 @@ class BaseTemplate:
     repository        = sql.Column(sql.String(100), nullable=True)
     url               = sql.Column(sql.String(150), nullable=True)
     version           = sql.Column(sql.String(20), nullable=True)
+    screenshots       = sql.Column(sql.String(150), nullable=True)
 
 
 class PackageTemplate(BaseTemplate):
@@ -41,31 +38,34 @@ class PackageTemplate(BaseTemplate):
     provides      = sql.Column(sql.String(150), nullable=True)
     reason        = sql.Column(sql.String(150), nullable=True)
     replaces      = sql.Column(sql.String(150), nullable=True)
-    repository    = sql.Column(sql.String(150), nullable=True)
     required_by   = sql.Column(sql.String(150), nullable=True)
         
 
 class Packages(sql.Model, PackageTemplate):
+    __tablename__ = 'Packages'
     pass    
 
 
-class Apps(sql.Model, PackageTemplate, ScreenshotsTemplate):
+class Apps(sql.Model, PackageTemplate):
+    __tablename__ = 'Apps'
     pass
     
 
-class Snaps(sql.Model, BaseTemplate, ScreenshotsTemplate):
-    channel    = sql.Column(sql.String(150), nullable=True)
-    channels   = sql.Column(sql.String(150), nullable=True)
-    confined   = sql.Column(sql.String(150), nullable=True)
-    publisher  = sql.Column(sql.String(150), nullable=True)
-    repository = sql.Column(sql.String(150), nullable=True)
+class Snaps(sql.Model, BaseTemplate):
+    __tablename__ = 'Snaps'
+    channel       = sql.Column(sql.String(150), nullable=True)
+    channels      = sql.Column(sql.String(150), nullable=True)
+    confined      = sql.Column(sql.String(150), nullable=True)
+    publisher     = sql.Column(sql.String(150), nullable=True)
     
 
-class Flatpaks(sql.Model, BaseTemplate, ScreenshotsTemplate):
+class Flatpaks(sql.Model, BaseTemplate):
+    __tablename__ = 'Flatpak'
     pass
 
 
 class Discover(sql.Model):
-    id           = sql.Column(sql.Integer, primary_key=True)
-    last_updated = sql.Column(sql.String(100), nullable=True)
+    __tablename__ = 'Discover'
+    id            = sql.Column(sql.Integer, primary_key=True)
+    last_updated  = sql.Column(sql.String(100), nullable=True)
     
