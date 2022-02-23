@@ -30,7 +30,7 @@
             <div class="card blue-grey darken-3">
                 <div class="row white-text center">
                     {% set screenshot = app.screenshots.split(" ")[0] %}
-                    <div class="col data-search valign-wrapper {% if screenshot %}s8{% else %}s12{% endif %}">
+                    <div class="col data-search {% if screenshot %}s8{% else %}s12{% endif %}">
                         <div>
                         <span class="logo-container center-align">
                             <img onerror="this.src='/static/images/package.svg'" data-src="{{ icon }}" class="app-logo lazyload" alt="icon" loading="lazy">

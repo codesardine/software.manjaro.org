@@ -13,7 +13,7 @@ def packages():
     return models.Packages.query.all()
 
 def snaps():
-    return models.Snaps.query.order_by(models.Snaps.name).all()
+    return models.Snaps.query.order_by(models.Snaps.title).all()
 
 def flatpaks():
     return models.Flatpaks.query.order_by(models.Flatpaks.title).all()

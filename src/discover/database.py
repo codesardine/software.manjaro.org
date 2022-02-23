@@ -139,40 +139,44 @@ class Database():
     @process
     def populate_snap_tables(self):
         for pkg in self.pamac.get_all_snaps():
-            d = self.pamac.get_snap_details(
-                pkg.get_name()
-            )
-            if not d["icon"]:
-                d["icon"] = self.package_icon
-            sql.session.add(
-                models.Snaps(
-                    format="snap",
-                    app_id=d["app_id"],
-                    icon=d["icon"],
-                    launchable=d["launchable"],
-                    title=d["title"],
-                    description=d["description"],
-                    download_size=d["download_size"],
-                    install_date=d["install_date"],
-                    installed_size=d["installed_size"],
-                    installed_version=d["installed_version"],
-                    license=d["license"],
-                    long_description=d["long_description"],
-                    name=d["name"],
-                    repository=d["repository"],
-                    screenshots=" ".join(d["screenshots"]),
-                    url=d["url"],
-                    version=d["version"],
-                    channel=d["channel"],
-                    channels=" ".join(d["channels"]),
-                    confined=d["confined"],
-                    publisher=d["publisher"]
-                    )
-            )
             try:
-                sql.session.commit()
-            except IntegrityError:
-                sql.session.rollback()
+                d = self.pamac.get_snap_details(
+                    pkg.get_name()
+                )
+                title = d["title"]
+                if not d["icon"]:
+                    d["icon"] = "/static/images/package.svg"
+                sql.session.add(
+                    models.Snaps(
+                        format="snap",
+                        app_id=d["app_id"],
+                        icon=d["icon"],
+                        launchable=d["launchable"],
+                        title=d["title"],
+                        description=d["description"],
+                        download_size=d["download_size"],
+                        install_date=d["install_date"],
+                        installed_size=d["installed_size"],
+                        installed_version=d["installed_version"],
+                        license=d["license"],
+                        long_description=d["long_description"],
+                        name=d["name"],
+                        repository=d["repository"],
+                        screenshots=" ".join(d["screenshots"]),
+                        url=d["url"],
+                        version=d["version"],
+                        channel=d["channel"],
+                        channels=" ".join(d["channels"]),
+                        confined=d["confined"],
+                        publisher=d["publisher"]
+                        )
+                )
+                try:
+                    sql.session.commit()
+                except IntegrityError:
+                    sql.session.rollback()
+            except KeyError:
+                pass
 
     
     @process
