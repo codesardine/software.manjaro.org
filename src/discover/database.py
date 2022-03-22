@@ -1,17 +1,8 @@
-from Manjaro.SDK import PackageManager
+from Manjaro.SDK import PackageManager, Utils
 from discover import models, sql, app
 from time import strftime
 from sqlalchemy.exc import IntegrityError
 import json
-import multiprocessing
-
-
-def process(func):
-    def proc(*args):
-      p = multiprocessing.Process(target=func(*args))
-      p.start()
-      p.join()        
-    return proc
 
 
 class Database():
@@ -19,6 +10,7 @@ class Database():
         self.pamac = PackageManager.Pamac()
         self.package_icon = "/static/images/package.svg"
 
+    @Utils._async
     def reload_tables(self):
         sql.drop_all()
         sql.create_all()
@@ -38,7 +30,7 @@ class Database():
         app.config['IS_MAINTENANCE_MODE_SNAPS'] = False
       
 
-    @process
+    @Utils._async
     def populate_pkg_tables(self):   
         ignore_list = (
             "picom",
@@ -72,7 +64,6 @@ class Database():
                     description=d["description"],
                     download_size=d["download_size"],
                     groups=" ".join(d["groups"]),
-                    #ha_signature=d["ha_signature"],
                     pkg_id=d["pkg_id"],
                     install_date=d["install_date"],
                     installed_size=d["installed_size"],
@@ -108,7 +99,6 @@ class Database():
                     description=d["description"],
                     download_size=d["download_size"],
                     groups=" ".join(d["groups"]),
-                    #ha_signature=d["ha_signature"],
                     pkg_id=d["pkg_id"],
                     install_date=d["install_date"],
                     installed_size=d["installed_size"],
@@ -136,7 +126,7 @@ class Database():
                 sql.session.rollback()
 
     
-    @process
+    @Utils._async
     def populate_snap_tables(self):
         for pkg in self.pamac.get_all_snaps():
             try:
@@ -179,7 +169,7 @@ class Database():
                 pass
 
     
-    @process
+    @Utils._async
     def populate_flatpak_tables(self):
         for pkg in self.pamac.get_all_flatpaks():
             d = self.pamac.get_flatpak_details(pkg)
@@ -216,7 +206,7 @@ class Database():
                 sql.session.rollback()
 
 
-    @process
+    @Utils._async
     def populate_appimage_tables(self):
         from discover.appimage import appimages
         for d in appimages(): 

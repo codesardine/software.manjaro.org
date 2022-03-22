@@ -30,7 +30,6 @@ class PackageTemplate(BaseTemplate):
     conflits      = sql.Column(sql.String(150), nullable=True)
     depends       = sql.Column(sql.String(150), nullable=True)
     groups        = sql.Column(sql.String(150), nullable=True)
-    ha_signature  = sql.Column(sql.String(150), nullable=True)
     makedepends   = sql.Column(sql.String(150), nullable=True)
     optdepends    = sql.Column(sql.String(150), nullable=True)
     optionalfor   = sql.Column(sql.String(150), nullable=True)
