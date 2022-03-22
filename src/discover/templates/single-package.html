@@ -54,7 +54,6 @@
             </div>
             <div class="col s12 l4 details">            
                 <p class="grey lighten-5">
-                  {% if format != "appimage" %}
                     <span class="center" style="display: block;margin-bottom: 15px;">
                         {% if format == "package" %}
                         <button data-target="details" class="pkg-details-btn tooltipped waves-effect waves-light btn-small modal-trigger light-blue darken-2" data-position="top" data-tooltip="Details">
@@ -66,7 +65,6 @@
                             <i class="material-icons">add</i>
                         </button>
                     </span>
-                    {% endif %}
                     {% if licenses %}
                     <span>
                         Licenses: <span class="text-info">
