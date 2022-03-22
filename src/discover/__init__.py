@@ -10,7 +10,7 @@ cache = Cache(app, config={
     "CACHE_DEFAULT_TIMEOUT": 3600
 })
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///discover.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///../data/discover.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['IS_MAINTENANCE_MODE_PKGS'] = True
 app.config['IS_MAINTENANCE_MODE_SNAPS'] = True
