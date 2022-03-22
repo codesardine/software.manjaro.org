@@ -133,7 +133,6 @@ class Database():
                 d = self.pamac.get_snap_details(
                     pkg.get_name()
                 )
-                title = d["title"]
                 if not d["icon"]:
                     d["icon"] = "/static/images/package.svg"
                 sql.session.add(
