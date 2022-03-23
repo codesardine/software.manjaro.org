@@ -60,10 +60,12 @@
                             <i class="material-icons">info</i>
                         </button>
                         {% endif %}
+                        {% if format != "appimage" %}
                         <button class="btn btn-small tooltipped btn-add waves-effect waves-light deep-purple darken-1" data-position="top" data-tooltip="Install"
                         data-pkg="{{ pkg_name }}" data-title="{{ name }}" data-format="{{ format }}" onclick="addApp(this)">
                             <i class="material-icons">add</i>
                         </button>
+                        {% endif %}
                     </span>
                     {% if licenses %}
                     <span>
