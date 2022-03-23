@@ -10,7 +10,7 @@ class Database():
         self.pamac = PackageManager.Pamac()
         self.package_icon = "/static/images/package.svg"
 
-    @Utils._async
+    #@Utils._async
     def reload_tables(self):
         sql.drop_all()
         sql.create_all()
@@ -30,7 +30,7 @@ class Database():
         app.config['IS_MAINTENANCE_MODE_SNAPS'] = False
       
 
-    @Utils._async
+    #@Utils._async
     def populate_pkg_tables(self):   
         ignore_list = (
             "picom",
@@ -126,7 +126,7 @@ class Database():
                 sql.session.rollback()
 
     
-    @Utils._async
+    #@Utils._async
     def populate_snap_tables(self):
         for pkg in self.pamac.get_all_snaps():
             try:
@@ -168,7 +168,7 @@ class Database():
                 pass
 
     
-    @Utils._async
+    #@Utils._async
     def populate_flatpak_tables(self):
         for pkg in self.pamac.get_all_flatpaks():
             d = self.pamac.get_flatpak_details(pkg)
@@ -205,7 +205,7 @@ class Database():
                 sql.session.rollback()
 
 
-    @Utils._async
+    #@Utils._async
     def populate_appimage_tables(self):
         from discover.appimage import appimages
         for d in appimages(): 
