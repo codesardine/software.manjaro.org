@@ -11,7 +11,7 @@ class Database():
         self.package_icon = "/static/images/package.svg"
 
     def reload_tables(self):
-        sql.drop_all(
+        sql.drop_all()
         sql.create_all()
         sql.session.add(
             models.Discover(
