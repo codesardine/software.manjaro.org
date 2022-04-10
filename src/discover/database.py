@@ -10,16 +10,20 @@ class Database():
         self.pamac = PackageManager.Pamac()
         self.package_icon = "/static/images/package.svg"
 
-    @Utils._async
     def reload_tables(self):
-        sql.drop_all()
+        sql.drop_all(
         sql.create_all()
         sql.session.add(
             models.Discover(
                 last_updated=strftime("%Y-%m-%d %H:%M")
             )
         )
-        sql.session.commit()
+        try:
+            sql.session.commit()
+        except IntegrityError:
+            sql.session.rollback()
+        finally:
+            sql.session.close()
         self.populate_appimage_tables()
         app.config['IS_MAINTENANCE_MODE_APPIMAGES'] = False
         self.populate_pkg_tables()
@@ -30,7 +34,6 @@ class Database():
         app.config['IS_MAINTENANCE_MODE_SNAPS'] = False
       
 
-    @Utils._async
     def populate_pkg_tables(self):   
         ignore_list = (
             "picom",
@@ -124,9 +127,10 @@ class Database():
                 sql.session.commit()
             except IntegrityError:
                 sql.session.rollback()
+            finally:
+                sql.session.close()
 
     
-    @Utils._async
     def populate_snap_tables(self):
         for pkg in self.pamac.get_all_snaps():
             try:
@@ -164,11 +168,12 @@ class Database():
                     sql.session.commit()
                 except IntegrityError:
                     sql.session.rollback()
+                finally:
+                    sql.session.close()
             except KeyError:
                 pass
 
     
-    @Utils._async
     def populate_flatpak_tables(self):
         for pkg in self.pamac.get_all_flatpaks():
             d = self.pamac.get_flatpak_details(pkg)
@@ -203,9 +208,10 @@ class Database():
                 sql.session.commit()
             except IntegrityError:
                 sql.session.rollback()
+            finally:
+                sql.session.close()
 
 
-    @Utils._async
     def populate_appimage_tables(self):
         from discover.appimage import appimages
         for d in appimages(): 
@@ -229,3 +235,5 @@ class Database():
                 sql.session.commit()
             except IntegrityError:
                 sql.session.rollback()
+            finally:
+                sql.session.close()
