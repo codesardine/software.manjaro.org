@@ -53,6 +53,7 @@
                     <button class="btn tooltipped btn-add waves-effect waves-light deep-purple darken-1" data-position="left" data-tooltip="Add to install" data-pkg="{{ pkg_name }}" data-title="{{ name }}" data-format="{{ format }}" onclick="addApp(this)">
                         <i class="material-icons">add</i>
                     </button>
+                    {% elseif format != "package" %}
                     {% endif %}
                 </div>
             </div>

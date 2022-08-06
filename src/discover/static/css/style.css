@@ -330,7 +330,7 @@ nav .input-field label i:last-child {
 @media only screen and (min-width: 600px) {
     .label-icon {
         margin-top: -10px;
-        margin-left: 64px;
+        margin-left: 80px;
     }
 
     .autocomplete {
