@@ -319,7 +319,6 @@ nav .input-field label.active i:first-child {
 
 
 nav .input-field label i:last-child {
-    display: none;
     margin-top: -2px;
   }
 
@@ -334,7 +333,7 @@ nav .input-field label i:last-child {
     }
 
     .autocomplete {
-        padding-left: 100px !important;
+        padding-left: 120px !important;
     }
 }
 

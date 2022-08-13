@@ -28,6 +28,15 @@ function matchApp(searchValue) {
             }
         })
     }
+    let data = document.querySelector("#search-items").dataset.src
+    if (data) {
+        const pkgsBtn = document.querySelector("#pkg-visibility")
+        if (document.querySelector("#search").value.length != 0) {
+            pkgsBtn.classList.remove("hide")
+        } else {
+            pkgsBtn.classList.add("hide")
+        }
+    }
     setTimeout(function () {
         window.scrollTo(0, 0)
     }, 10);
@@ -210,7 +219,7 @@ window.addEventListener('DOMContentLoaded', function() {
             let data = searchData.dataset.src
             if (!data) {
                 data = "{}"
-            }
+            } 
             return JSON.parse(data)
         }
         let options = {
@@ -277,6 +286,15 @@ window.addEventListener('DOMContentLoaded', function() {
     window.addEventListener("resize", lazyLoad);
     window.addEventListener("orientationchange", lazyLoad);
     window.addEventListener('pageshow', lazyLoad);
+    document.addEventListener("click", function(event) {
+        console.log(document.querySelector("#search").value)
+        const pkgsBtn = document.querySelector("#pkg-visibility")
+        if (event.target.id != "search" || document.querySelector("#search").value.length === 0) {
+            pkgsBtn.classList.add("hide")
+        } else if (event.target.id == "search"){
+            pkgsBtn.classList.remove("hide")
+        }
+    })
     
     let pkg_formats = ["snap", "flatpak", "package", "appimage"]
     for (let format of pkg_formats) {
