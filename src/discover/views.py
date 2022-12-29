@@ -1,6 +1,5 @@
 from discover import app, cache, query
-from Manjaro.SDK import PackageManager
-from flask import render_template, redirect, make_response, url_for, request
+from flask import render_template, redirect, make_response
 from datetime import date, timedelta
 import json
 

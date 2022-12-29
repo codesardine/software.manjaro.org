@@ -1,5 +1,3 @@
-import json
-
 def truncate_description(long_description: str, characters: int = 80):
     """ 
     desc: truncate long description strings to 80 char 
