@@ -29,7 +29,7 @@ function matchApp(searchValue) {
         })
     }
     let data = document.querySelector("#search-items").dataset.src
-    if (data) {
+    if (data.length != 0) {
         const pkgsBtn = document.querySelector("#pkg-visibility")
         if (document.querySelector("#search").value.length != 0) {
             pkgsBtn.classList.remove("hide")
@@ -289,9 +289,11 @@ window.addEventListener('DOMContentLoaded', function() {
     document.addEventListener("click", function(event) {
         console.log(document.querySelector("#search").value)
         const pkgsBtn = document.querySelector("#pkg-visibility")
+        let data = document.querySelector("#search-items").dataset.src
+
         if (event.target.id != "search" || document.querySelector("#search").value.length === 0) {
             pkgsBtn.classList.add("hide")
-        } else if (event.target.id == "search"){
+        } else if (event.target.id == "search" && data.length != 0){
             pkgsBtn.classList.remove("hide")
         }
     })
