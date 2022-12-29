@@ -12,16 +12,13 @@ cache = Cache(app, config={
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///../data/discover.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['IS_MAINTENANCE_MODE_PKGS'] = True
-app.config['IS_MAINTENANCE_MODE_SNAPS'] = True
-app.config['IS_MAINTENANCE_MODE_FLATPAKS'] = True
-app.config['IS_MAINTENANCE_MODE_APPIMAGES'] = True
 
 sql = SQLAlchemy(app, session_options={"autoflush": False})
 scheduler = APScheduler()
 scheduler.api_enabled = False
 
-from discover import views, Utils
+from discover import views
+from discover import Utils
 from discover.templates import filters
 
 app.jinja_env.filters['truncate_description'] = filters.truncate_description
@@ -30,14 +27,15 @@ app.jinja_env.filters['split_version'] = filters.split_version
 
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
-
-@scheduler.task("date", id="update_on_deploy", run_date=None)
-def update_on_deploy():
-    Utils.update_system()
+Utils.update_system()
 
 @scheduler.task('interval', id='update', minutes=1440, max_instances=1)
 def update():
-    Utils.update_system()
+   Utils.update_system()
     
 scheduler.init_app(app)
 scheduler.start()
+
+
+
+

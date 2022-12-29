@@ -1,9 +1,9 @@
-from Manjaro.SDK import PackageManager, Utils
-from discover import models, sql, app
+from Manjaro.SDK import PackageManager
+from discover import models, sql
 from time import strftime
-from sqlalchemy.exc import IntegrityError
 import json
-
+import asyncio
+import time
 
 class Database():
     def __init__(self):
@@ -11,6 +11,17 @@ class Database():
         self.package_icon = "/static/images/package.svg"
 
     def reload_tables(self):
+        self.start = time.perf_counter()
+
+        async def populate_database(self):
+            await asyncio.gather(
+               self.populate_appimage_tables(),
+               self.populate_pkg_tables(),
+               self.populate_flatpak_tables(),
+               self.populate_snap_tables()
+            )
+
+        asyncio.run(populate_database(self))
         sql.drop_all()
         sql.create_all()
         sql.session.add(
@@ -18,23 +29,10 @@ class Database():
                 last_updated=strftime("%Y-%m-%d %H:%M")
             )
         )
-        try:
-            sql.session.commit()
-        except IntegrityError:
-            sql.session.rollback()
-        finally:
-            sql.session.close()
-        self.populate_appimage_tables()
-        app.config['IS_MAINTENANCE_MODE_APPIMAGES'] = False
-        self.populate_pkg_tables()
-        app.config['IS_MAINTENANCE_MODE_PKGS'] = False
-        self.populate_flatpak_tables()
-        app.config['IS_MAINTENANCE_MODE_FLATPAKS'] = False
-        self.populate_snap_tables()
-        app.config['IS_MAINTENANCE_MODE_SNAPS'] = False
+        sql.session.commit()
+        sql.session.close()
       
-
-    def populate_pkg_tables(self):   
+    async def populate_pkg_tables(self):   
         ignore_list = (
             "picom",
             "pantheon-onboarding",
@@ -74,7 +72,7 @@ class Database():
                     license=d["license"],
                     long_description=d["long_description"],
                     makedepends=" ".join(d["makedepends"]),
-                    name=d["name"],
+                    name=pkg.get_name(),
                     optdepends=json.dumps(d["optdepends"]),
                     optionalfor=" ".join(d["optionalfor"]),
                     packager=d["packager"],
@@ -122,59 +120,48 @@ class Database():
                     version=d["version"]
                 )
 
-            sql.session.add(model)
-            try:
-                sql.session.commit()
-            except IntegrityError:
-                sql.session.rollback()
-            finally:
-                sql.session.close()
+            sql.session.add(model)   
+        end = time.perf_counter()  
+        print("pks: ",self.start, end)
+     
 
-    
-    def populate_snap_tables(self):
+    async def populate_snap_tables(self):
         for pkg in self.pamac.get_all_snaps():
-            try:
-                d = self.pamac.get_snap_details(
-                    pkg.get_name()
-                )
-                if not d["icon"]:
-                    d["icon"] = "/static/images/package.svg"
-                sql.session.add(
-                    models.Snaps(
-                        format="snap",
-                        app_id=d["app_id"],
-                        icon=d["icon"],
-                        launchable=d["launchable"],
-                        title=d["title"],
-                        description=d["description"],
-                        download_size=d["download_size"],
-                        install_date=d["install_date"],
-                        installed_size=d["installed_size"],
-                        installed_version=d["installed_version"],
-                        license=d["license"],
-                        long_description=d["long_description"],
-                        name=d["name"],
-                        repository=d["repository"],
-                        screenshots=" ".join(d["screenshots"]),
-                        url=d["url"],
-                        version=d["version"],
-                        channel=d["channel"],
-                        channels=" ".join(d["channels"]),
-                        confined=d["confined"],
-                        publisher=d["publisher"]
-                        )
-                )
-                try:
-                    sql.session.commit()
-                except IntegrityError:
-                    sql.session.rollback()
-                finally:
-                    sql.session.close()
-            except KeyError:
-                pass
+            d = self.pamac.get_snap_details(
+                pkg.get_name()
+            )
+            if not d["icon"]:
+                d["icon"] = "/static/images/package.svg"
+            sql.session.add(
+                models.Snaps(
+                    format="snap",
+                    app_id=d["app_id"],
+                    icon=d["icon"],
+                    launchable=d["launchable"],
+                    title=d["title"],
+                    description=d["description"],
+                    download_size=d["download_size"],
+                    install_date=d["install_date"],
+                    installed_size=d["installed_size"],
+                    installed_version=d["installed_version"],
+                    license=d["license"],
+                    long_description=d["long_description"],
+                    name=d["name"],
+                    repository=d["repository"],
+                    screenshots=" ".join(d["screenshots"]),
+                    url=d["url"],
+                    version=d["version"],
+                    channel=d["channel"],
+                    channels=" ".join(d["channels"]),
+                    confined=d["confined"],
+                    publisher=d["publisher"]
+                    )
+            )
+        end = time.perf_counter()  
+        print("snaps: ",self.start, end)
 
-    
-    def populate_flatpak_tables(self):
+
+    async def populate_flatpak_tables(self):
         for pkg in self.pamac.get_all_flatpaks():
             d = self.pamac.get_flatpak_details(pkg)
             if d["icon"]:
@@ -204,17 +191,12 @@ class Database():
                     version=d["version"]
                 )
             )
-            try:
-                sql.session.commit()
-            except IntegrityError:
-                sql.session.rollback()
-            finally:
-                sql.session.close()
+        end = time.perf_counter()  
+        print("flatpaks: ",self.start, end)
 
 
-    def populate_appimage_tables(self):
-        from discover.appimage import appimages
-        for d in appimages(): 
+    async def populate_appimage_tables(self):
+        for d in self.pamac.get_all_appimages(): 
             if not d["icon"]:
                 d["icon"] = self.package_icon        
             sql.session.add(
@@ -231,9 +213,6 @@ class Database():
                     repository=d["repository"]
                 )
             )
-            try:
-                sql.session.commit()
-            except IntegrityError:
-                sql.session.rollback()
-            finally:
-                sql.session.close()
+        end = time.perf_counter()  
+        print("appimages: ",self.start, end)
+
