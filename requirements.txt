@@ -1,0 +1,6 @@
+flask
+gevent
+flask-caching
+gunicorn
+flask-sqlalchemy
+flask_apscheduler
