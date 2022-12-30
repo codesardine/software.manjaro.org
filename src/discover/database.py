@@ -1,9 +1,10 @@
 from Manjaro.SDK import PackageManager
-from discover import models, sql
+from discover import models
 from time import strftime
 import json
 import asyncio
 import time
+
 
 class Database():
     def __init__(self):
@@ -22,15 +23,15 @@ class Database():
             )
 
         asyncio.run(populate_database(self))
-        sql.drop_all()
-        sql.create_all()
-        sql.session.add(
+        models.sql.drop_all()
+        models.sql.create_all()
+        models.sql.session.add(
             models.Discover(
                 last_updated=strftime("%Y-%m-%d %H:%M")
             )
         )
-        sql.session.commit()
-        sql.session.close()
+        models.sql.session.commit()
+        models.sql.session.close()
       
     async def populate_pkg_tables(self):   
         ignore_list = (
@@ -120,7 +121,7 @@ class Database():
                     version=d["version"]
                 )
 
-            sql.session.add(model)   
+            models.sql.session.add(model)   
         end = time.perf_counter()  
         print("pks: ",self.start, end)
      
@@ -132,7 +133,7 @@ class Database():
             )
             if not d["icon"]:
                 d["icon"] = "/static/images/package.svg"
-            sql.session.add(
+            models.sql.session.add(
                 models.Snaps(
                     format="snap",
                     app_id=d["app_id"],
@@ -171,7 +172,7 @@ class Database():
                 )
             else:
                 d["icon"] = self.package_icon
-            sql.session.add(
+            models.sql.session.add(
                 models.Flatpaks(
                     format="flatpak",
                     icon=d["icon"],
@@ -199,7 +200,7 @@ class Database():
         for d in self.pamac.get_all_appimages(): 
             if not d["icon"]:
                 d["icon"] = self.package_icon        
-            sql.session.add(
+            models.sql.session.add(
                 models.Appimages(
                     format="appimage",
                     icon=d["icon"],

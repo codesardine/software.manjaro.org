@@ -1,7 +1,14 @@
-from discover import app, cache, query
+from discover import app, query
 from flask import render_template, redirect, make_response
 from datetime import date, timedelta
 import json
+from flask_caching import Cache
+
+cache = Cache(app, config={
+    "CACHE_TYPE": "filesystem",
+    'CACHE_DIR': './data/cache',
+    "CACHE_DEFAULT_TIMEOUT": 3600
+})
 
 def navigation():
     return {'title': 'Applications', 'href': '/applications'},\

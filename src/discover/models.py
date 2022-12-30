@@ -1,4 +1,6 @@
-from discover import sql
+from flask_sqlalchemy import SQLAlchemy
+from discover import app
+sql = SQLAlchemy(app, session_options={"autoflush": False})
 
 
 class BaseTemplate:

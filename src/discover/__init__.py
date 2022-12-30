@@ -1,19 +1,11 @@
 from flask import Flask
-from flask_caching import Cache
 from flask_apscheduler import APScheduler
-from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-cache = Cache(app, config={
-    "CACHE_TYPE": "filesystem",
-    'CACHE_DIR': './data/cache',
-    "CACHE_DEFAULT_TIMEOUT": 3600
-})
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///../data/discover.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-sql = SQLAlchemy(app, session_options={"autoflush": False})
 scheduler = APScheduler()
 scheduler.api_enabled = False
 
