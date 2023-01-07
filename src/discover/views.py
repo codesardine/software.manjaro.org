@@ -1,7 +1,7 @@
 from discover import app, query
-from flask import render_template, redirect, make_response
+from flask import render_template, redirect, make_response, jsonify, request
 from datetime import date, timedelta
-import json
+import json, re
 from flask_caching import Cache
 
 cache = Cache(app, config={
@@ -21,6 +21,75 @@ def navigation():
 def root():
      return redirect("/applications", 302, Response=None)
 
+@app.route("/search.json")
+def search():
+    def record(url, title, description, _type):
+        return {
+        "url": url,
+        "title": title,
+        "description": re.sub(' {2,}', ' ', description.replace("\n", "")),
+        "is_doc": False,
+        "type": _type
+        }
+        
+    term = request.args.get('query')
+    appimages = query.appimages()
+    apps = query.apps()
+    pkgs = query.packages()
+    flatpaks = query.flatpaks()
+    snaps = query.snaps()
+    search_results = []
+    for item in appimages:
+        _type = "appimage"
+        url = f"https://software.manjaro.org/{_type}/"
+        if term in item.title or term in item.name or term in item.description:
+            search_results.append(record(
+                f"{url}{item.name}", item.title, item.description, _type
+            ))
+    
+    for item in pkgs:
+        _type = "package"
+        url = f"https://software.manjaro.org/{_type}/"
+        def update(title, description, _type):
+            search_results.append(record(
+                f"{url}{item.name}", title, description, _type
+            ))
+
+        if not item.description:
+            item.description = ""
+        if not item.title:
+            item.title = item.name        
+            
+        if term in item.title or term in item.name or term in item.description:
+            search_results.append(record(
+                f"{url}{item.name}", item.title, item.description, _type
+            ))    
+
+    for item in apps:
+        _type = "package"
+        url = f"https://software.manjaro.org/{_type}/"
+        if term in item.title or term in item.name or term in item.description:
+            search_results.append(record(
+                f"{url}{item.name}", item.title, item.description, _type
+            ))
+    
+    for item in flatpaks:
+        _type = "flatpak"
+        url = f"https://software.manjaro.org/{_type}/"
+        if term in item.title or term in item.name or term in item.description:
+            search_results.append(record(
+                f"{url}{item.name}", item.title, item.description, _type
+            ))
+
+    for item in snaps:
+        _type = "snap"
+        url = f"https://software.manjaro.org/{_type}/"
+        if term in item.title or term in item.name or term in item.description:
+            search_results.append(record(
+                f"{url}{item.name}", item.title, item.description, _type
+            ))
+
+    return jsonify(search_results)
 
 @app.route("/applications")
 @cache.cached(timeout=50)
