@@ -24,13 +24,14 @@ def root():
 
 @app.route("/search.json")
 def search():
-    def record(url, title, description, _type):
+    def record(url, title, description, _type, pkg):
         return {
         "url": url,
         "title": title,
         "description": re.sub(' {2,}', ' ', td(description.replace("\n", ""), 160)),
         "is_doc": False,
-        "type": _type
+        "type": _type,
+        "package": pkg
         }
         
     term = request.args.get('query')
@@ -45,7 +46,7 @@ def search():
         url = f"https://software.manjaro.org/{_type}/"
         if term in item.title or term in item.name or term in item.description:
             search_results.append(record(
-                f"{url}{item.name}", item.title, item.description, _type
+                f"{url}{item.name}", item.title, item.description, _type, item.name
             ))
     
     for item in pkgs:
@@ -63,7 +64,7 @@ def search():
             
         if term in item.title or term in item.name or term in item.description:
             search_results.append(record(
-                f"{url}{item.name}", item.title, item.description, _type
+                f"{url}{item.name}", item.title, item.description, _type, item.name
             ))    
 
     for item in apps:
@@ -71,7 +72,7 @@ def search():
         url = f"https://software.manjaro.org/{_type}/"
         if term in item.title or term in item.name or term in item.description:
             search_results.append(record(
-                f"{url}{item.name}", item.title, item.description, _type
+                f"{url}{item.name}", item.title, item.description, _type, item.name
             ))
     
     for item in flatpaks:
@@ -79,7 +80,7 @@ def search():
         url = f"https://software.manjaro.org/{_type}/"
         if term in item.title or term in item.name or term in item.description:
             search_results.append(record(
-                f"{url}{item.name}", item.title, item.description, _type
+                f"{url}{item.name}", item.title, item.description, _type, item.name
             ))
 
     for item in snaps:
@@ -87,7 +88,7 @@ def search():
         url = f"https://software.manjaro.org/{_type}/"
         if term in item.title or term in item.name or term in item.description:
             search_results.append(record(
-                f"{url}{item.name}", item.title, item.description, _type
+                f"{url}{item.name}", item.title, item.description, _type, item.name
             ))
 
     return jsonify(search_results)
