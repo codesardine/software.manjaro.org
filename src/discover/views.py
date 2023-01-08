@@ -3,6 +3,7 @@ from flask import render_template, redirect, make_response, jsonify, request
 from datetime import date, timedelta
 import json, re
 from flask_caching import Cache
+from discover.templates.filters import truncate_description as td
 
 cache = Cache(app, config={
     "CACHE_TYPE": "filesystem",
@@ -27,7 +28,7 @@ def search():
         return {
         "url": url,
         "title": title,
-        "description": re.sub(' {2,}', ' ', description.replace("\n", "")),
+        "description": re.sub(' {2,}', ' ', td(description.replace("\n", ""), 160)),
         "is_doc": False,
         "type": _type
         }
