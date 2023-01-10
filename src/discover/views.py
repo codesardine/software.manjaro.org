@@ -24,7 +24,7 @@ def root():
 
 @app.route("/search.json")
 def search():
-    def record(url, title, description, _type, pkg):
+    def save_record(url, title, description, _type, pkg):
         return {
         "url": url,
         "title": title,
@@ -33,63 +33,29 @@ def search():
         "type": _type,
         "package": pkg
         }
-        
-    term = request.args.get('query')
-    appimages = query.appimages()
-    apps = query.apps()
-    pkgs = query.packages()
-    flatpaks = query.flatpaks()
-    snaps = query.snaps()
+    term = request.args.get('query', None)
+    _type = request.args.get('type', None)
+    providers = [query.appimages(), query.apps(), query.flatpaks(), query.snaps()]
     search_results = []
-    for item in appimages:
-        _type = "appimage"
-        url = f"https://software.manjaro.org/{_type}/"
-        if term in item.title or term in item.name or term in item.description:
-            search_results.append(record(
-                f"{url}{item.name}", item.title, item.description, _type, item.name
-            ))
-    
-    for item in pkgs:
-        _type = "package"
-        url = f"https://software.manjaro.org/{_type}/"
-        def update(title, description, _type):
-            search_results.append(record(
-                f"{url}{item.name}", title, description, _type
-            ))
-
-        if not item.description:
-            item.description = ""
-        if not item.title:
-            item.title = item.name        
-            
-        if term in item.title or term in item.name or term in item.description:
-            search_results.append(record(
-                f"{url}{item.name}", item.title, item.description, _type, item.name
-            ))    
-
-    for item in apps:
-        _type = "package"
-        url = f"https://software.manjaro.org/{_type}/"
-        if term in item.title or term in item.name or term in item.description:
-            search_results.append(record(
-                f"{url}{item.name}", item.title, item.description, _type, item.name
-            ))
-    
-    for item in flatpaks:
-        _type = "flatpak"
-        url = f"https://software.manjaro.org/{_type}/"
-        if term in item.title or term in item.name or term in item.description:
-            search_results.append(record(
-                f"{url}{item.name}", item.title, item.description, _type, item.name
-            ))
-
-    for item in snaps:
-        _type = "snap"
-        url = f"https://software.manjaro.org/{_type}/"
-        if term in item.title or term in item.name or term in item.description:
-            search_results.append(record(
-                f"{url}{item.name}", item.title, item.description, _type, item.name
-            ))
+    for provider in providers:
+        for item in provider:
+            url = f"https://software.manjaro.org/{item.format}/"
+            if not item.description:
+                item.description = "No description available"
+            if not item.title:
+                item.title = item.name        
+                
+            search_fields = (item.title, item.name, item.description)
+            if any(term in field for field in search_fields):
+                search_results.append(save_record(
+                    f"{url}{item.name}", item.title, item.description, item.format, item.name
+                ))    
+    if _type:
+        type_results = []
+        for result in search_results:
+            if result["type"] == _type:
+                type_results.append(result)
+        search_results = type_results
 
     return jsonify(search_results)
 
