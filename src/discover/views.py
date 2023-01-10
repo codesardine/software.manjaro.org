@@ -17,14 +17,7 @@ def navigation():
            {'title': 'Flatpaks', 'href': '/flatpaks'}, \
            {'title': 'Appimages', 'href': '/appimages'}
 
-
-@app.route("/")
-def root():
-     return redirect("/applications", 302, Response=None)
-
-@app.route("/search.json")
-def search():
-    def save_record(url, title, description, _type, pkg):
+def save_record(url, title, description, _type, pkg):
         return {
         "url": url,
         "title": title,
@@ -33,31 +26,66 @@ def search():
         "type": _type,
         "package": pkg
         }
-    term = request.args.get('query', None)
-    _type = request.args.get('type', None)
-    providers = [query.appimages(), query.apps(), query.flatpaks(), query.snaps()]
-    search_results = []
-    for provider in providers:
-        for item in provider:
-            url = f"https://software.manjaro.org/{item.format}/"
-            if not item.description:
-                item.description = "No description available"
-            if not item.title:
-                item.title = item.name        
-                
-            search_fields = (item.title, item.name, item.description)
-            if any(term in field for field in search_fields):
-                search_results.append(save_record(
-                    f"{url}{item.name}", item.title, item.description, item.format, item.name
-                ))    
-    if _type:
-        type_results = []
-        for result in search_results:
-            if result["type"] == _type:
-                type_results.append(result)
-        search_results = type_results
 
-    return jsonify(search_results)
+@app.route("/")
+def root():
+     return redirect("/applications", 302, Response=None)
+
+@app.route("/search.json")
+def search():
+    search_query = request.args.get('query', None)
+    if search_query:
+        _type = request.args.get('type', None)
+        providers = [query.appimages(), query.apps(), query.flatpaks(), query.snaps()]
+        search_results = []
+        for provider in providers:
+            for item in provider:
+                url = f"https://software.manjaro.org/{item.format}/"
+                if not item.description:
+                    item.description = "No description available"
+                if not item.title:
+                    item.title = item.name        
+                    
+                search_fields = " ".join([item.name, item.title, item.description])
+                matches = []
+                terms = search_query.split(" ")
+                words = search_fields.split(" ")
+                for word in words:
+                    for term in terms:
+                        if term == word.lower():
+                            matches.append(True)
+                        else:
+                            matches.append(False)
+                
+                # one term match
+                if len(matches) == len(words) and True in matches:
+                    search_results.append(
+                        save_record(
+                            f"{url}{item.name}", item.title, item.description, item.format, item.name
+                        )
+                    )
+
+                # multiple terms match
+                elif len(terms) > 1:
+                    word_match = 0
+                    for match in matches:
+                        if match:
+                            word_match += 1
+                    if word_match > len(terms):
+                        search_results.append(
+                        save_record(
+                            f"{url}{item.name}", item.title, item.description, item.format, item.name
+                        )
+                    )
+
+        if _type:
+            type_results = []
+            for result in search_results:
+                if result["type"] == _type:
+                    type_results.append(result)
+            search_results = type_results
+
+        return jsonify(search_results)
 
 @app.route("/applications")
 @cache.cached(timeout=50)
