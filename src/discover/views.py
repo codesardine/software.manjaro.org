@@ -36,7 +36,27 @@ def search():
     search_query = request.args.get('query', None)
     if search_query:
         _type = request.args.get('type', None)
-        providers = [query.appimages(), query.apps(), query.flatpaks(), query.snaps()]
+        providers = []
+        if _type:
+            type_results = []
+            pkg_type = _type.split(" ")
+            for _format in pkg_type:
+                if _format == "appimage":
+                    providers.append(query.appimages())
+                if _format == "package":
+                    providers.append(query.apps())
+                    providers.append(query.packages())
+                if _format == "flatpak":
+                    providers.append(query.flatpaks())
+                if _format == "snap":
+                    providers.append(query.snaps())
+        else:
+            providers.append(query.appimages())
+            providers.append(query.flatpaks())
+            providers.append(query.snaps())
+            providers.append(query.apps())
+            providers.append(query.packages())
+
         search_results = []
         for provider in providers:
             for item in provider:
@@ -77,13 +97,6 @@ def search():
                             f"{url}{item.name}", item.title, item.description, item.format, item.name
                         )
                     )
-
-        if _type:
-            type_results = []
-            for result in search_results:
-                if result["type"] == _type:
-                    type_results.append(result)
-            search_results = type_results
 
         return jsonify(search_results)
 
