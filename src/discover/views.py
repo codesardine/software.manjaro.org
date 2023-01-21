@@ -72,7 +72,7 @@ def search():
                 words = search_fields.split(" ")
                 for word in words:
                     for term in terms:
-                        if term == word.lower():
+                        if term.lower() == word.lower():
                             matches.append(True)
                         else:
                             matches.append(False)

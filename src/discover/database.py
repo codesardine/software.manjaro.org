@@ -19,19 +19,22 @@ class Database():
                self.populate_appimage_tables(),
                self.populate_pkg_tables(),
                self.populate_flatpak_tables(),
-               self.populate_snap_tables()
+               self.populate_snap_tables(),
+               self.populate_date()
             )
 
         asyncio.run(populate_database(self))
         models.sql.drop_all()
         models.sql.create_all()
+        models.sql.session.commit()
+        models.sql.session.close()
+
+    async def populate_date(self):
         models.sql.session.add(
             models.Discover(
                 last_updated=strftime("%Y-%m-%d %H:%M")
             )
         )
-        models.sql.session.commit()
-        models.sql.session.close()
       
     async def populate_pkg_tables(self):   
         ignore_list = (
