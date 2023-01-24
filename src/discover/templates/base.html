@@ -15,62 +15,27 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> 
     <meta name="google-site-verification" content="v6PClftSd5zHZAuSJyRpCl1fewbsYfYDp2-opMdPPXE" />
     {% block head %}{% endblock %}
+    <!-- Matomo -->
+<script>
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//matomo.manjaro.org/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '2']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+  
 </head>
 <body class="{% block bodyClass %}{% endblock %}">
-   <script type="text/javascript">
-        var _paq = window._paq || [];
-        _paq.push(['disableCookies']);
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function() {
-            var u = "//matomo.manjaro.org/";
-            _paq.push(['setTrackerUrl', u + 'matomo.php']);
-            _paq.push(['setSiteId', '1']);
-            var d = document,
-                g = d.createElement('script'),
-                s = d.getElementsByTagName('script')[0];
-            g.type = 'text/javascript';
-            g.async = true;
-            g.defer = true;
-            g.src = u + 'matomo.js';
-            s.parentNode.insertBefore(g, s);
-        })();
-    </script>
     {% include 'includes/info-modals.html' %}
     {% include 'includes/navigation.html' %}
     {% block content %}{% endblock %}
-    <script>
-        function getOS() {
-            var userAgent = window.navigator.userAgent,
-                platform = window.navigator.platform,
-                macosPlatforms = ['Darwin', 'Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
-                windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
-                iosPlatforms = ['iPhone', 'iPad', 'iPod'],
-                os = null;
-
-            if (macosPlatforms.indexOf(platform) !== -1) {
-                os = 'MacOS';
-            } else if (iosPlatforms.indexOf(platform) !== -1) {
-                os = 'iOS';
-            } else if (windowsPlatforms.indexOf(platform) !== -1) {
-                os = 'Windows';
-            } else if (/Android/.test(userAgent)) {
-                os = 'Android';
-            } else if (/Ubunto/.test(userAgent)) {
-                os = 'Ubunto';
-            } else if (!os && /Linux/.test(platform)) {
-                os = 'Linux';
-            }
-            return os;
-        }
-        let os = getOS()
-        if (os != "Linux") {
-            Array.from(document.querySelectorAll(".btn-add"))
-                .forEach(function (el) {
-                    el.style.display = "none"
-                })
-        }
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="{{ url_for('static', filename='js/discover.js') }}"></script>
     <ul id="install-list" class="collapsible">
