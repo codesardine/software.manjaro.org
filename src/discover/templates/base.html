@@ -13,24 +13,19 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> 
-    <meta name="google-site-verification" content="v6PClftSd5zHZAuSJyRpCl1fewbsYfYDp2-opMdPPXE" />
     {% block head %}{% endblock %}
-    <!-- Matomo -->
 <script>
     var _paq = window._paq = window._paq || [];
-    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
     _paq.push(['trackPageView']);
     _paq.push(['enableLinkTracking']);
     (function() {
       var u="//matomo.manjaro.org/";
       _paq.push(['setTrackerUrl', u+'matomo.php']);
-      _paq.push(['setSiteId', '2']);
+      _paq.push(['setSiteId', '3']);
       var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
       g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
     })();
-  </script>
-  <!-- End Matomo Code -->
-  
+  </script>  
 </head>
 <body class="{% block bodyClass %}{% endblock %}">
     {% include 'includes/info-modals.html' %}
