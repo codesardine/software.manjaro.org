@@ -8,7 +8,9 @@
             Build Date: <span>{{ pkg["build_date"] }}</span><br>
             {% if pkg["packager"] %}
               {% set packager = pkg["packager"].split("<")[0].split(" (")[0] %}
+              {% if "<" in pkg["packager"] %}
               {% set packager_email = pkg["packager"].split("<")[1].replace(">", "") %}
+              {% endif %}
               {% if "@manjaro" in packager_email %}
                 Packager: <span>{{ packager }}, Manjaro</span>
                 <br>Package
